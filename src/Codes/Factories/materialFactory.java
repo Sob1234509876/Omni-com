@@ -6,10 +6,20 @@ import Codes.GameTypes.material;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The {@code materialFactory} factory is used for generatting massive amount of
+ * items.
+ * <p>
+ * Available flags :
+ * <p>
+ * {@code "NO_UNIFICATION"} ——
+ */
+
 public class materialFactory implements factory {
 
     String name = "NULL";
     String color = "White";
+    String description = "Nothing, not even true-vaccum!";
     material[] component;
     element[] elements = { new elementFactory()
             .setAtomSymbol("Nl")
@@ -27,6 +37,11 @@ public class materialFactory implements factory {
 
     public materialFactory setColor(String color) {
         this.color = color;
+        return this;
+    }
+
+    public materialFactory setDescription(String description) {
+        this.description = description;
         return this;
     }
 
@@ -50,14 +65,34 @@ public class materialFactory implements factory {
         return this;
     }
 
-    public material register() {
+    public int register() {
 
         int ID = Codes.Main.mainScript.Materials.size();
 
-        Codes.Main.mainScript.Materials.put(ID, new material());
+        material newMaterial;
+
+        if (elements == null) {
+            newMaterial = new material(name, color, component, flags, flagSettings);
+        } else {
+            newMaterial = new material(name, color, elements, flags, flagSettings);
+        }
+
+        Codes.Main.mainScript.Materials.put(ID, newMaterial);
+
+        return ID;
     }
 
     public material getProduct() {
+
+        material newMaterial;
+
+        if (elements == null) {
+            newMaterial = new material(name, color, component, flags, flagSettings);
+        } else {
+            newMaterial = new material(name, color, elements, flags, flagSettings);
+        }
+
+        return newMaterial;
     }
 
 }

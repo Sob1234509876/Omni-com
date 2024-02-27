@@ -51,7 +51,7 @@ public class fluidFactory implements factory {
         return this;
     }
 
-    public fluid register() {
+    public int register() {
 
         int ID = mainScript.Fluids.size();
 
@@ -62,7 +62,7 @@ public class fluidFactory implements factory {
             mainScript.Fluids.put(ID, new fluid(this.name, this.color, this.description, this.elements,
                     this.temperature, this.flags, this.flagSettings));
         }
-        return mainScript.Fluids.get(ID);
+        return ID;
 
     }
 

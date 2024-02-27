@@ -2,25 +2,29 @@ package Codes.GameTypes;
 
 import java.util.Map;
 
-public class item {
+public class machine {
 
-    public String name;
-    public String description;
+    String name;
+    String description;
 
-    public String[] flags;
-    public Map<String, String> flagSettings;
+    Map<String, recipe> bindedRecipe;
 
-    public item(
+    String[] flags;
+    Map<String, String> flagSettings;
+
+    public machine(
+
             String name,
             String description,
+
+            Map<String, recipe> bindedRecipe,
 
             String[] flags,
             Map<String, String> flagSettings) {
         this.name = name;
         this.description = description;
-
+        this.bindedRecipe = bindedRecipe;
         this.flags = flags;
         this.flagSettings = flagSettings;
     }
-
 }

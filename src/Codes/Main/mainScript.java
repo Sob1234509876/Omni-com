@@ -11,14 +11,16 @@ import Codes.Utils.Output;
 import Codes.GameTypes.element;
 import Codes.GameTypes.fluid;
 import Codes.GameTypes.item;
+import Codes.GameTypes.machine;
 import Codes.GameTypes.material;
+import Codes.GameTypes.recipe;
 
+//Paths
 import java.io.*;
 import java.nio.file.Paths;
 import java.nio.file.Path;
-//import java.nio.charset.*;
 
-//Graphics
+//GUI
 import java.awt.Frame;
 import java.awt.Panel;
 import java.awt.TextField;
@@ -32,11 +34,11 @@ public class mainScript {
     public volatile static Map<Integer, fluid> Fluids = new HashMap<Integer, fluid>();
     public volatile static Map<Integer, material> Materials = new HashMap<Integer, material>();
     public volatile static Map<Integer, element> Elements = new HashMap<Integer, element>();
+    public volatile static Map<Integer, recipe> Recipe = new HashMap<Integer, recipe>();
+    public volatile static Map<Integer, machine> Machine = new HashMap<Integer, machine>();
 
     public volatile static Properties settings = new Properties();
     public volatile static Properties langSettings = new Properties();
-
-    public static boolean debugMode = true;
 
     public static void main(String[] args) throws IOException {
 
@@ -113,11 +115,23 @@ public class mainScript {
         frame.setVisible(true);
         Output.log("Frame visible");
 
-        if (debugMode) {
+        // Use plugins
 
-            // No thing to debug!
-            // yay! (?)
+        File[] plugins = pluginsPath.toFile().listFiles();
 
+        // Filter plugins
+
+        for (File plugin : plugins) {
+            if (plugin.toPath().toString().split(".")[0] == "jar") {
+                Process cmd = Runtime.getRuntime().exec("java -jar \"" + plugin.toPath().toString() + "\"");
+                try {
+                    cmd.waitFor();
+                    cmd.destroy();
+                    // Run jar
+                } catch (Exception e) {
+                    Output.log("Plugin " + plugin + " : " + e.toString());
+                }
+            }
         }
 
     }
