@@ -55,7 +55,7 @@ public class mainScript {
         Output.log(String.format("Founded configsPath : %s", configsPath));
 
         Path pluginsPath = Paths.get(srcPath.toString(), "Plugins");
-        Output.log(String.format("Founded savePath : %s", pluginsPath));
+        Output.log(String.format("Founded pluginsPath : %s", pluginsPath));
 
         Path resourcePath = Paths.get(srcPath.toString(), "Resource");
         Output.log(String.format("Founded resourcePath : %s", resourcePath));

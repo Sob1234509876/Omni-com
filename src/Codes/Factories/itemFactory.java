@@ -45,8 +45,11 @@ public class itemFactory implements factory {
 
     public itemFactory setFlags(String[] flags) {
         this.flags = flags;
-        for (String flag : flags)
-            this.flagSettings.put(flag, null);
+        return this;
+    }
+
+    public itemFactory setFlagSettings(Map<String, String> flagSettings){
+        this.flagSettings = flagSettings;
         return this;
     }
 
