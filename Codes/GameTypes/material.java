@@ -82,10 +82,10 @@ public class material {
                 TMap.put("RAD", this.flagSettings.get("RAD"));
             }
 
-            if (flag == "DECREATE")
+            if (flag.equals("DECREATE"))
                 break;
 
-            if (flag == "LIQUID") {
+            if (flag.equals("LIQUID")) {
                 solid = false;
             }
 
