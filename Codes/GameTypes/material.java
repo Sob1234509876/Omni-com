@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Codes.Factories.elementFactory;
 import Codes.Factories.itemFactory;
 
 /* *
@@ -91,7 +90,7 @@ public class material {
 
             if (solid) { // Create solid stuffs
 
-                if (flag == "GENERATE_PLATE")
+                if (flag.equals("GENERATE_PLATE"))
 
                     ID = new itemFactory()
                             .setName(String.format("%s plate", name))
@@ -99,7 +98,7 @@ public class material {
                             .setFlags((String[]) (TFlags.toArray()))
                             .register();
 
-                else if (flag == "GENERATE_PLATE_DENSE")
+                else if (flag.equals("GENERATE_PLATE_DENSE"))
 
                     ID = new itemFactory()
                             .setName(String.format("%s plate", name))
@@ -107,7 +106,7 @@ public class material {
                             .setFlags((String[]) (TFlags.toArray()))
                             .register();
 
-                else if (flag == "GENERATE_FOIL")
+                else if (flag.equals("GENERATE_FOIL"))
 
                     ID = new itemFactory()
                             .setName(String.format("%s foil", name))
@@ -115,7 +114,7 @@ public class material {
                             .setFlags((String[]) (TFlags.toArray()))
                             .register();
 
-                else if (flag == "GENERATE_ROD")
+                else if (flag.equals("GENERATE_ROD"))
 
                     ID = new itemFactory()
                             .setName(String.format("%s rod", name))
@@ -123,7 +122,7 @@ public class material {
                             .setFlags((String[]) (TFlags.toArray()))
                             .register();
 
-                else if (flag == "GENERATE_WIRE")
+                else if (flag.equals("GENERATE_WIRE"))
 
                     ID = new itemFactory()
                             .setName(String.format("%s wire", name))
@@ -131,7 +130,7 @@ public class material {
                             .setFlags((String[]) (TFlags.toArray()))
                             .register();
 
-                else if (flag == "GENERATE_WIRE_THIN")
+                else if (flag.equals("GENERATE_WIRE_THIN"))
 
                     ID = new itemFactory()
                             .setName(String.format("%s thin wire", name))
@@ -139,7 +138,7 @@ public class material {
                             .setFlags((String[]) (TFlags.toArray()))
                             .register();
 
-                else if (flag == "GENERATE_COIL")
+                else if (flag.equals("GENERATE_COIL"))
 
                     ID = new itemFactory()
                             .setName(String.format("%s coil", name))
@@ -147,7 +146,7 @@ public class material {
                             .setFlags((String[]) (TFlags.toArray()))
                             .register();
 
-                else if (flag == "GENERATE_BOUL")
+                else if (flag.equals("GENERATE_BOUL"))
 
                     ID = new itemFactory()
                             .setName(String.format("%s doped silicon boule", name))
