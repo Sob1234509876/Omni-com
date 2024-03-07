@@ -1,4 +1,4 @@
-package Codes.GameTypes;
+package src.gts;
 
 /*
  * Element class, used in type fluid and material.

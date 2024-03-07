@@ -1,13 +1,12 @@
-package Codes.Factories;
-
-import Codes.Main.mainScript;
+package src.utils.factories;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import Codes.GameTypes.element;
-import Codes.GameTypes.fluid;
-import Codes.GameTypes.material;
+import src.gts.element;
+import src.gts.fluid;
+import src.gts.material;
+import src.main.Main;
 
 public class fluidFactory implements factory {
 
@@ -53,13 +52,13 @@ public class fluidFactory implements factory {
 
     public int register() {
 
-        int ID = mainScript.Fluids.size();
+        int ID = Main.Fluids.size();
 
         if (component == null) {
-            mainScript.Fluids.put(ID, new fluid(this.name, this.color, this.description, this.component,
+            Main.Fluids.put(ID, new fluid(this.name, this.color, this.description, this.component,
                     this.temperature, this.flags, this.flagSettings));
         } else {
-            mainScript.Fluids.put(ID, new fluid(this.name, this.color, this.description, this.elements,
+            Main.Fluids.put(ID, new fluid(this.name, this.color, this.description, this.elements,
                     this.temperature, this.flags, this.flagSettings));
         }
         return ID;

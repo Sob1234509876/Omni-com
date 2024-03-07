@@ -1,10 +1,10 @@
-package Codes.Factories;
+package src.utils.factories;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import Codes.GameTypes.item;
-import Codes.Main.mainScript;
+import src.gts.item;
+import src.main.Main;
 
 /**
  * This factory is used for creating items, items are stored in
@@ -48,16 +48,16 @@ public class itemFactory implements factory {
         return this;
     }
 
-    public itemFactory setFlagSettings(Map<String, String> flagSettings){
+    public itemFactory setFlagSettings(Map<String, String> flagSettings) {
         this.flagSettings = flagSettings;
         return this;
     }
 
     public int register() {
 
-        int ID = mainScript.Items.size();
+        int ID = Main.Items.size();
 
-        mainScript.Items.put(ID, new item(
+        Main.Items.put(ID, new item(
                 this.name,
                 this.description,
 

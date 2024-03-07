@@ -1,9 +1,9 @@
-package Codes.Factories;
+package src.utils.factories;
 
 import java.util.Map;
 
-import Codes.GameTypes.item;
-import Codes.GameTypes.recipe;
+import src.gts.item;
+import src.gts.recipe;
 
 public class recipeFactory implements factory {
 
@@ -74,9 +74,9 @@ public class recipeFactory implements factory {
     }
 
     public int register() {
-        int ID = Codes.Main.mainScript.Recipe.size();
+        int ID = src.main.Main.Recipe.size();
 
-        Codes.Main.mainScript.Recipe.put(ID, new recipe(
+        src.main.Main.Recipe.put(ID, new recipe(
                 this.name,
                 this.description,
                 this.input,

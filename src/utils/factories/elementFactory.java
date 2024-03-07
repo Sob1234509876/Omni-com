@@ -1,6 +1,6 @@
-package Codes.Factories;
+package src.utils.factories;
 
-import Codes.GameTypes.element;
+import src.gts.element;
 
 /**
  * The {@code elementFactory} class is used for creating elements, elements are
@@ -41,9 +41,9 @@ public class elementFactory implements factory {
 
     public int register() {
 
-        int ID = Codes.Main.mainScript.Elements.size();
+        int ID = src.main.Main.Elements.size();
 
-        Codes.Main.mainScript.Elements.put(ID, new element(
+        src.main.Main.Elements.put(ID, new element(
                 atomSymbol,
                 protonAmount,
                 neutronAmount));

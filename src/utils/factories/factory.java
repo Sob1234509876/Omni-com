@@ -1,4 +1,4 @@
-package Codes.Factories;
+package src.utils.factories;
 
 /**
  * The {@code factory} interface is used for uniting ingame-factories` methods

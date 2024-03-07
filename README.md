@@ -13,3 +13,9 @@ The clicker game`s git repo. have some problems, now switching to a new repo. , 
 Indev 0.2.1 :
 Added machine and recipe to game, fixed materialFactory.
 Material`s auto item creator is currently under devoloping.
+
+alpha 1.0.0 :
+Testing and debugging
+
+alpha 1.0.1 :
+Make better repo.

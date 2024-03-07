@@ -1,9 +1,9 @@
-package Codes.Factories;
+package src.utils.factories;
 
 import java.util.Map;
 
-import Codes.GameTypes.machine;
-import Codes.GameTypes.recipe;
+import src.gts.machine;
+import src.gts.recipe;
 
 public class machineFactory implements factory {
 
@@ -41,9 +41,9 @@ public class machineFactory implements factory {
     }
 
     public int register() {
-        int ID = Codes.Main.mainScript.Machine.size();
+        int ID = src.main.Main.Machine.size();
 
-        Codes.Main.mainScript.Machine.put(ID, new machine(
+        src.main.Main.Machine.put(ID, new machine(
                 name,
                 description,
                 bindedRecipe,

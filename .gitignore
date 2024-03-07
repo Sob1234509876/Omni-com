@@ -1,1 +1,7 @@
 *.log
+
+*.jar
+*.class
+
+*.bat
+cFile

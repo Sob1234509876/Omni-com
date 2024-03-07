@@ -1,4 +1,4 @@
-package Codes.GameTypes;
+package src.gts;
 
 import java.util.Map;
 

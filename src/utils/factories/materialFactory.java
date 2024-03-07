@@ -1,10 +1,10 @@
-package Codes.Factories;
-
-import Codes.GameTypes.element;
-import Codes.GameTypes.material;
+package src.utils.factories;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import src.gts.element;
+import src.gts.material;
 
 /**
  * The {@code materialFactory} factory is used for generatting massive amount of
@@ -67,7 +67,7 @@ public class materialFactory implements factory {
 
     public int register() {
 
-        int ID = Codes.Main.mainScript.Materials.size();
+        int ID = src.main.Main.Materials.size();
 
         material newMaterial;
 
@@ -77,7 +77,7 @@ public class materialFactory implements factory {
             newMaterial = new material(name, color, elements, flags, flagSettings);
         }
 
-        Codes.Main.mainScript.Materials.put(ID, newMaterial);
+        src.main.Main.Materials.put(ID, newMaterial);
 
         return ID;
     }

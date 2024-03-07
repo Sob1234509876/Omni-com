@@ -1,9 +1,13 @@
-package Codes.Utils;
+package src.utils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 
-public class Input {
+/*
+ * todo : change it to match the gui game
+ */
+
+public class input {
     public static int intInput(String ask) {
         System.out.print(ask);
         String t = new String();
