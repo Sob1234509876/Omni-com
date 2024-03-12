@@ -43,7 +43,7 @@ public class elementFactory implements factory {
 
         int ID = src.main.Main.Elements.size();
 
-        src.main.Main.Elements.put(ID, new element(
+        src.main.Main.Elements.add(new element(
                 atomSymbol,
                 protonAmount,
                 neutronAmount));

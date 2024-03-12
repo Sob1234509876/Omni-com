@@ -13,7 +13,7 @@ public class keyDetect implements KeyListener {
 
     public void keyPressed(KeyEvent k) {
 
-        PressedKey = k.getKeyCode();
+        keyDetect.PressedKey = k.getKeyCode();
 
     }
 

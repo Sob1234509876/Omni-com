@@ -43,7 +43,7 @@ public class machineFactory implements factory {
     public int register() {
         int ID = src.main.Main.Machine.size();
 
-        src.main.Main.Machine.put(ID, new machine(
+        src.main.Main.Machine.add(new machine(
                 name,
                 description,
                 bindedRecipe,

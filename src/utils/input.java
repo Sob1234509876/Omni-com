@@ -1,29 +1,29 @@
 package src.utils;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
+import src.main.Main;
 
 /*
  * todo : change it to match the gui game
  */
 
 public class input {
-    public static int intInput(String ask) {
-        System.out.print(ask);
-        String t = new String();
-        BufferedInputStream IS = new BufferedInputStream(System.in);
-        char buf = 0;
-        try {
 
-            while (buf != -1) {
-                buf = (char) IS.read();
-                t += buf;
-            }
+    public static int intInput() {
 
-        } catch (IOException e) {
-        }
-
-        return Integer.parseInt(t);
+        return Integer.parseInt(Main.in.getText());
 
     }
+
+    public static boolean boolInput() {
+
+        return Main.in.getText().equals("y") || Main.in.getText().equals("Y");
+
+    }
+
+    public static String Input() {
+
+        return Main.in.getText();
+
+    }
+
 }

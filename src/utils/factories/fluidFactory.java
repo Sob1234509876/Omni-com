@@ -55,10 +55,10 @@ public class fluidFactory implements factory {
         int ID = Main.Fluids.size();
 
         if (component == null) {
-            Main.Fluids.put(ID, new fluid(this.name, this.color, this.description, this.component,
+            Main.Fluids.add(new fluid(this.name, this.color, this.description, this.component,
                     this.temperature, this.flags, this.flagSettings));
         } else {
-            Main.Fluids.put(ID, new fluid(this.name, this.color, this.description, this.elements,
+            Main.Fluids.add(new fluid(this.name, this.color, this.description, this.elements,
                     this.temperature, this.flags, this.flagSettings));
         }
         return ID;

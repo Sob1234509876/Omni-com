@@ -2,19 +2,12 @@ package src.main;
 
 //Tools
 import java.util.Properties;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.ArrayList;
 
-import src.utils.output;
-
-import src.gts.element;
-import src.gts.fluid;
-import src.gts.item;
-import src.gts.machine;
-import src.gts.material;
-import src.gts.recipe;
-
+import src.gts.*;
+import src.gui.listeners.clickDetect;
 import src.gui.listeners.keyDetect;
+import src.gui.listeners.mouseMotionDetect;
 
 //Paths
 import java.io.*;
@@ -25,6 +18,8 @@ import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main {
 
@@ -41,18 +36,20 @@ public class Main {
 
         // Consts. & importants
 
-        public static JFrame gui = new JFrame("Omni com. co., Ltd.");
+        public static JWindow gui = new JWindow();
+        public static JPanel decoPanel = new JPanel(null);
+        public static JButton closeButton = new JButton("X");
         public static JTextArea out = new JTextArea("Hey");
         public static JTextField in = new JTextField("Ho");
 
         // gui & consts.
 
-        public volatile static Map<Integer, item> Items = new HashMap<Integer, item>();
-        public volatile static Map<Integer, fluid> Fluids = new HashMap<Integer, fluid>();
-        public volatile static Map<Integer, material> Materials = new HashMap<Integer, material>();
-        public volatile static Map<Integer, element> Elements = new HashMap<Integer, element>();
-        public volatile static Map<Integer, recipe> Recipe = new HashMap<Integer, recipe>();
-        public volatile static Map<Integer, machine> Machine = new HashMap<Integer, machine>();
+        public volatile static ArrayList<item> Items = new ArrayList<>();
+        public volatile static ArrayList<fluid> Fluids = new ArrayList<>();
+        public volatile static ArrayList<material> Materials = new ArrayList<>();
+        public volatile static ArrayList<element> Elements = new ArrayList<>();
+        public volatile static ArrayList<recipe> Recipe = new ArrayList<>();
+        public volatile static ArrayList<machine> Machine = new ArrayList<>();
 
         // ID map
 
@@ -79,9 +76,29 @@ public class Main {
 
                 init();
 
+                Thread cmdThread = new Thread(new Runnable() {
+                        public void run() {
+                                while (true) {
+                                        if (keyDetect.PressedKey == '\n') {
+                                                String outp = in.getText();
+                                                in.setText(null);
+                                                out.setText(outp);
+                                                keyDetect.PressedKey = 0;
+                                        }
+                                }
+                        }
+                }, "cmd thread");
+
+                cmdThread.start();
+
         }
 
         private static void init() {
+
+                gui.add(out);
+                gui.add(in);
+                gui.add(decoPanel);
+                decoPanel.add(closeButton);
 
                 int GUI_X = Integer.parseInt(settings.getProperty("GUI.size").split("x")[0]);
                 int GUI_Y = Integer.parseInt(settings.getProperty("GUI.size").split("x")[1]);
@@ -99,31 +116,56 @@ public class Main {
                                                 .getImage());
                 gui.setLayout(null);
                 gui.setSize(GUI_X, GUI_Y);
-                gui.setResizable(false);
-                gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gui.setLocationRelativeTo(null);
                 gui.setVisible(true);
+                gui.addMouseListener(new clickDetect());
+                gui.addMouseMotionListener(new mouseMotionDetect());
+                gui.setFocusable(true);
 
-                out.setBounds(0,
+                decoPanel.setBounds(0,
                                 0,
                                 GUI_X,
-                                GUI_Y - SIZ);
+                                SIZ);
+                decoPanel.setFont(FONT);
+                decoPanel.setBackground(new Color(FGCOLOR, false));
+                decoPanel.setForeground(new Color(BGCOLOR, false));
+                decoPanel.setBorder(BORDER);
+
+                closeButton.setBounds(0,
+                                0,
+                                2 * SIZ,
+                                SIZ);
+                closeButton.setFont(FONT);
+                closeButton.setBackground(new Color(FGCOLOR, false));
+                closeButton.setForeground(new Color(BGCOLOR, false));
+                closeButton.setBorder(BORDER);
+                closeButton.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                                System.exit(0);
+                        }
+                });
+
+                out.setBounds(0,
+                                SIZ,
+                                GUI_X,
+                                GUI_Y - 2 * SIZ);
                 out.setFont(FONT);
                 out.setBackground(new Color(BGCOLOR, false));
                 out.setForeground(new Color(FGCOLOR, false));
                 out.setBorder(BORDER);
-                out.setEditable(false);
 
                 in.setBounds(0,
-                                GUI_Y - 9 * SIZ,
+                                GUI_Y - SIZ,
                                 GUI_X,
                                 SIZ);
                 in.setFont(FONT);
                 in.setBackground(new Color(BGCOLOR, false));
                 in.setForeground(new Color(FGCOLOR, false));
                 in.setBorder(BORDER);
+                in.setEditable(true);
+                in.addKeyListener(new keyDetect());
 
-                gui.add(out);
-                gui.add(in);
         }
 
 }

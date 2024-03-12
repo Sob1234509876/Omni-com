@@ -77,7 +77,7 @@ public class materialFactory implements factory {
             newMaterial = new material(name, color, elements, flags, flagSettings);
         }
 
-        src.main.Main.Materials.put(ID, newMaterial);
+        src.main.Main.Materials.add(newMaterial);
 
         return ID;
     }

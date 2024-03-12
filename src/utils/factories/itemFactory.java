@@ -57,7 +57,7 @@ public class itemFactory implements factory {
 
         int ID = Main.Items.size();
 
-        Main.Items.put(ID, new item(
+        Main.Items.add(new item(
                 this.name,
                 this.description,
 

@@ -76,7 +76,7 @@ public class recipeFactory implements factory {
     public int register() {
         int ID = src.main.Main.Recipe.size();
 
-        src.main.Main.Recipe.put(ID, new recipe(
+        src.main.Main.Recipe.add(new recipe(
                 this.name,
                 this.description,
                 this.input,
