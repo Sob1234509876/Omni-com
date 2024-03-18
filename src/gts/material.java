@@ -7,8 +7,10 @@ import java.util.Map;
 
 import src.utils.factories.itemFactory;
 
-/* *
- * 
+/**
+ * {@code material} class, use for making formatted items
+ * <p>
+ * example : Cyberium plate & Cyberium screw; Sodium ingot & Sodium dust
  */
 
 public class material {
@@ -59,6 +61,10 @@ public class material {
         }
 
     }
+
+    /**
+     * Peice of junk
+     */
 
     public void registerItems(String[] flags, Map<String, String> flagSettings) {
 

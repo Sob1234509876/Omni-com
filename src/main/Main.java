@@ -1,32 +1,38 @@
 package src.main;
 
+///////
+//Types
+
 //Tools
 import java.util.Properties;
 import java.util.ArrayList;
 
-import src.gts.*;
-import src.gui.listeners.clickDetect;
-import src.gui.listeners.keyDetect;
-import src.gui.listeners.mouseMotionDetect;
+import java.net.URL;
+import java.net.URLClassLoader;
 
-//Paths
+import src.gts.*;
+import src.gui.listeners.keyDetect;
+import src.utils.output;
+
+//io
 import java.io.*;
+
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
+//Swing
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+///////
 
 public class Main {
 
         public static Properties settings = new Properties();
         public static Properties langSettings = new Properties();
 
-        public static final String __VERSION__ = "0.1a";
+        public static final String __VERSION__ = "1.0.3a";
         public static final Path GAME_PATH = Paths.get("").toAbsolutePath();
         public static final Path SRC_PATH = Paths.get(GAME_PATH.toString(), "src");
         public static final Path CONFIGS_PATH = Paths.get(GAME_PATH.toString(), "configs");
@@ -36,9 +42,7 @@ public class Main {
 
         // Consts. & importants
 
-        public static JWindow gui = new JWindow();
-        public static JPanel decoPanel = new JPanel(null);
-        public static JButton closeButton = new JButton("X");
+        public static JFrame gui = new JFrame("Omni com. co., Ltd. " + __VERSION__);
         public static JTextArea out = new JTextArea("Hey");
         public static JTextField in = new JTextField("Ho");
 
@@ -53,7 +57,7 @@ public class Main {
 
         // ID map
 
-        public static void main(String[] args) throws IOException {
+        public static void main(String[] args) throws Exception {
 
                 // Path Init
 
@@ -76,6 +80,8 @@ public class Main {
 
                 init();
 
+                loadPlugins();
+
                 Thread cmdThread = new Thread(new Runnable() {
                         public void run() {
                                 while (true) {
@@ -93,12 +99,14 @@ public class Main {
 
         }
 
+        /**
+         * Graphics init. (That`s all)
+         */
+
         private static void init() {
 
                 gui.add(out);
                 gui.add(in);
-                gui.add(decoPanel);
-                decoPanel.add(closeButton);
 
                 int GUI_X = Integer.parseInt(settings.getProperty("GUI.size").split("x")[0]);
                 int GUI_Y = Integer.parseInt(settings.getProperty("GUI.size").split("x")[1]);
@@ -108,6 +116,7 @@ public class Main {
                 Font FONT = new Font(settings.getProperty("GUI.font"), Font.PLAIN, SIZ);
                 MatteBorder BORDER = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(FGCOLOR, false));
 
+                gui.setVisible(true);
                 gui.setIconImage(
                                 new ImageIcon(
                                                 Paths.get(
@@ -115,41 +124,15 @@ public class Main {
                                                                 "icon.png").toString())
                                                 .getImage());
                 gui.setLayout(null);
-                gui.setSize(GUI_X, GUI_Y);
+                gui.setSize(GUI_X + 12, GUI_Y + 35);
+                gui.setResizable(false);
                 gui.setLocationRelativeTo(null);
-                gui.setVisible(true);
-                gui.addMouseListener(new clickDetect());
-                gui.addMouseMotionListener(new mouseMotionDetect());
-                gui.setFocusable(true);
-
-                decoPanel.setBounds(0,
-                                0,
-                                GUI_X,
-                                SIZ);
-                decoPanel.setFont(FONT);
-                decoPanel.setBackground(new Color(FGCOLOR, false));
-                decoPanel.setForeground(new Color(BGCOLOR, false));
-                decoPanel.setBorder(BORDER);
-
-                closeButton.setBounds(0,
-                                0,
-                                2 * SIZ,
-                                SIZ);
-                closeButton.setFont(FONT);
-                closeButton.setBackground(new Color(FGCOLOR, false));
-                closeButton.setForeground(new Color(BGCOLOR, false));
-                closeButton.setBorder(BORDER);
-                closeButton.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                                System.exit(0);
-                        }
-                });
+                gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
                 out.setBounds(0,
-                                SIZ,
+                                0,
                                 GUI_X,
-                                GUI_Y - 2 * SIZ);
+                                GUI_Y - SIZ);
                 out.setFont(FONT);
                 out.setBackground(new Color(BGCOLOR, false));
                 out.setForeground(new Color(FGCOLOR, false));
@@ -166,6 +149,52 @@ public class Main {
                 in.setEditable(true);
                 in.addKeyListener(new keyDetect());
 
+        }
+
+        /**
+         * Loads the plugins under {@code plugins} , these plugins are also known as
+         * <p>
+         * mods.
+         * 
+         * @throws Exception
+         */
+
+        private static void loadPlugins() throws Exception {
+
+                String fileName, fileEx;
+
+                output.log("Plugins loading");
+
+                URL[] url = { new URL("file:C:") };
+                URLClassLoader UCL = new URLClassLoader(url);
+                Class<?> cls;
+
+                for (File f : PLUGINS_PATH.toFile().listFiles()) {
+
+                        try {
+
+                                fileName = f.getName().split("\\.")[0];
+                                fileEx = f.getName().split("\\.")[1];
+                                if (fileEx.equals("jar")) {
+                                        url[0] = new URL("file:" + f.getAbsolutePath());
+                                        UCL = new URLClassLoader(url);
+                                        cls = UCL.loadClass(fileName + ".main.Main");
+                                        output.log(fileName + " loaded");
+
+                                        output.log(fileName + " running");
+                                        output.log("\n---" + fileName + "---");
+                                        cls.getDeclaredMethod("run").invoke(null);
+                                        System.out.println("\n------");
+                                }
+
+                        } catch (Exception e) {
+                                if (settings.getProperty("debug").equals("true")) {
+                                        e.printStackTrace();
+                                }
+                        }
+                }
+
+                UCL.close();
         }
 
 }

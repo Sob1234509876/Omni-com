@@ -17,18 +17,18 @@ import src.gts.material;
 
 public class materialFactory implements factory {
 
-    String name = "NULL";
-    String color = "White";
-    String description = "Nothing, not even true-vaccum!";
-    material[] component;
-    element[] elements = { new elementFactory()
+    private String name = "NULL";
+    private String color = "White";
+    private String description = "Nothing, not even true-vaccum!";
+    private material[] component;
+    private element[] elements = { new elementFactory()
             .setAtomSymbol("Nl")
             .setProtonAmount(0)
             .setNeutronAmount(0)
             .getProduct() };
 
-    String[] flags;
-    Map<String, String> flagSettings = new HashMap<String, String>();
+    private String[] flags;
+    private Map<String, String> flagSettings = new HashMap<String, String>();
 
     public materialFactory setName(String name) {
         this.name = name;

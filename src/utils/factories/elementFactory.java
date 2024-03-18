@@ -4,7 +4,7 @@ import src.gts.element;
 
 /**
  * The {@code elementFactory} class is used for creating elements, elements are
- * stored in {@code Codes.Main.mainScript.Elements}
+ * stored in {@code Codes.main.Main.Elements}
  * <p>
  * Current properties :
  * <blockquote>

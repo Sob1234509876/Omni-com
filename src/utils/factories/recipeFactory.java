@@ -7,31 +7,31 @@ import src.gts.recipe;
 
 public class recipeFactory implements factory {
 
-    public String name = "Create null";
-    public String description = "Nothing!";
-    public item[] input = {
+    private String name = "Create null";
+    private String description = "Nothing!";
+    private item[] input = {
             new itemFactory()
                     .setName("null")
                     .setDescription("Nothing, not even true vaccum.")
                     .getProduct()
     };
-    public item[] output = {
+    private item[] output = {
             new itemFactory()
                     .setName("null")
                     .setDescription("Nothing, not even true vaccum.")
                     .getProduct()
     };
-    public Runnable inputFun = new Runnable() {
+    private Runnable inputFun = new Runnable() {
         public void run() {
         }
     };
-    public Runnable outputFun = new Runnable() {
+    private Runnable outputFun = new Runnable() {
         public void run() {
         }
     };
 
-    public String[] flags;
-    public Map<String, String> flagSettings;
+    private String[] flags;
+    private Map<String, String> flagSettings;
 
     public recipeFactory setName(String name) {
         this.name = name;

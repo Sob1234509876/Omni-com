@@ -1,7 +1,7 @@
 package src.gts;
 
-/*
- * Element class, used in type fluid and material.
+/**
+ * {@code Element} class, used in type fluid and material.
  */
 
 public class element {

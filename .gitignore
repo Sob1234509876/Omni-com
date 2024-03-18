@@ -2,6 +2,8 @@
 
 *.jar
 *.class
+*.MF
 
 *.bat
 cFile
+cFile2

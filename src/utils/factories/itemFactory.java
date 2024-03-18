@@ -1,5 +1,7 @@
 package src.utils.factories;
 
+import java.nio.file.Path;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,11 +29,13 @@ import src.main.Main;
 
 public class itemFactory implements factory {
 
-    public String name = "defaultItem";
-    public String description;
+    private String name = "defaultItem";
+    private String description;
 
-    public String[] flags;
-    public Map<String, String> flagSettings = new HashMap<String, String>();
+    private String[] flags;
+    private Map<String, String> flagSettings = new HashMap<String, String>();
+
+    private Path docPath;
 
     public itemFactory setName(String name) {
         this.name = name;
@@ -50,6 +54,11 @@ public class itemFactory implements factory {
 
     public itemFactory setFlagSettings(Map<String, String> flagSettings) {
         this.flagSettings = flagSettings;
+        return this;
+    }
+
+    public itemFactory setDocPath(Path docPath) {
+        this.docPath = docPath;
         return this;
     }
 

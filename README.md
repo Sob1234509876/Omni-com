@@ -7,12 +7,18 @@ Link : https://www.crazygames.com/game/space-company
 Change logs :
 ===
 
+Indev : Laying the base elements of the game.
+===
+
 Indev 0.2 :
 The clicker game`s git repo. have some problems, now switching to a new repo. , logs from before maybe lost.
 
 Indev 0.2.1 :
 Added machine and recipe to game, fixed materialFactory.
 Material`s auto item creator is currently under devoloping.
+
+Alpha : Testing and start making real game
+===
 
 alpha 1.0.0 :
 Testing and debugging
@@ -22,3 +28,6 @@ Make better repo.
 
 alpha 1.0.2 :
 Redone the gui.
+
+alpha 1.1.0 :
+Know every lib is finished, it`s time to make some real game!

@@ -7,13 +7,13 @@ import src.gts.recipe;
 
 public class machineFactory implements factory {
 
-    String name;
-    String description;
+    private String name;
+    private String description;
 
-    Map<String, recipe> bindedRecipe;
+    private Map<String, recipe> bindedRecipe;
 
-    String[] flags;
-    Map<String, String> flagSettings;
+    private String[] flags;
+    private Map<String, String> flagSettings;
 
     public machineFactory setName(String name) {
         this.name = name;

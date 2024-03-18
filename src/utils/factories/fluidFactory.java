@@ -10,20 +10,20 @@ import src.main.Main;
 
 public class fluidFactory implements factory {
 
-    String name = "NULL";
-    String color = "NULL";
-    String description = "Nothing, not even true vaccum!";
-    material[] component = {};
-    element[] elements = { new elementFactory()
+    private String name = "NULL";
+    private String color = "NULL";
+    private String description = "Nothing, not even true vaccum!";
+    private material[] component = {};
+    private element[] elements = { new elementFactory()
             .setAtomSymbol("Nl")
             .setProtonAmount(0)
             .setNeutronAmount(0)
             .getProduct() };
 
-    long temperature = 0; // Zero kelvin!
+    private long temperature = 0; // Zero kelvin!
 
-    String[] flags = {};
-    Map<String, String> flagSettings = new HashMap<String, String>();
+    private String[] flags = {};
+    private Map<String, String> flagSettings = new HashMap<String, String>();
 
     public fluidFactory setName(String name) {
         this.name = name;
