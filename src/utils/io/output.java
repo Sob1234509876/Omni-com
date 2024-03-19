@@ -1,4 +1,6 @@
-package src.utils;
+package src.utils.io;
+
+import src.main.Main;
 
 import java.util.Date;
 
@@ -19,6 +21,14 @@ public class output {
     public static void clear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void write() {
+        Main.out.setText("");
+    }
+
+    public static void write(String x) {
+        Main.out.setText(x);
     }
 
 }

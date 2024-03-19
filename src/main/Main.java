@@ -12,7 +12,7 @@ import java.net.URLClassLoader;
 
 import src.gts.*;
 import src.gui.listeners.keyDetect;
-import src.utils.output;
+import src.utils.io.*;
 
 //io
 import java.io.*;
@@ -39,12 +39,13 @@ public class Main {
         public static final Path PLUGINS_PATH = Paths.get(GAME_PATH.toString(), "plugins");
         public static final Path RESOURCE_PATH = Paths.get(GAME_PATH.toString(), "resource");
         public static final Path SAVES_PATH = Paths.get(GAME_PATH.toString(), "saves");
+        public static final Path REPORT_PATH = Paths.get(GAME_PATH.toString(), "report");
 
         // Consts. & importants
 
-        public static JFrame gui = new JFrame("Omni com. co., Ltd. " + __VERSION__);
-        public static JTextArea out = new JTextArea("Hey");
-        public static JTextField in = new JTextField("Ho");
+        public static JFrame gui = new JFrame();
+        public static JTextArea out = new JTextArea();
+        public static JTextField in = new JTextField("game");
 
         // gui & consts.
 
@@ -61,41 +62,26 @@ public class Main {
 
                 // Path Init
 
-                settings.load(
-                                new FileReader(
-                                                Paths.get(
-                                                                CONFIGS_PATH.toString(),
-                                                                "Main.cfg")
-                                                                .toString()));
+                settings.load(new InputStreamReader(
+                                new FileInputStream(
+                                                Paths.get(CONFIGS_PATH.toString(),
+                                                                "Main.cfg").toString()),
+                                "utf-8"));
 
                 langSettings.load(
-                                new FileReader(
-                                                Paths.get(
-                                                                RESOURCE_PATH.toString(),
-                                                                settings.getProperty("lang")
-                                                                                + ".lang")
-                                                                .toString()));
+                                new InputStreamReader(
+                                                new FileInputStream(
+                                                                Paths.get(RESOURCE_PATH.toString(),
+                                                                                "Main",
+                                                                                settings.getProperty("lang") + ".lang")
+                                                                                .toString()),
+                                                "utf-8"));
 
                 // Setting init
 
                 init();
 
                 loadPlugins();
-
-                Thread cmdThread = new Thread(new Runnable() {
-                        public void run() {
-                                while (true) {
-                                        if (keyDetect.PressedKey == '\n') {
-                                                String outp = in.getText();
-                                                in.setText(null);
-                                                out.setText(outp);
-                                                keyDetect.PressedKey = 0;
-                                        }
-                                }
-                        }
-                }, "cmd thread");
-
-                cmdThread.start();
 
         }
 
@@ -107,6 +93,9 @@ public class Main {
 
                 gui.add(out);
                 gui.add(in);
+
+                gui.setTitle(String.format(langSettings.getProperty("title"), __VERSION__));
+                out.setText(langSettings.getProperty("default"));
 
                 int GUI_X = Integer.parseInt(settings.getProperty("GUI.size").split("x")[0]);
                 int GUI_Y = Integer.parseInt(settings.getProperty("GUI.size").split("x")[1]);
@@ -137,6 +126,7 @@ public class Main {
                 out.setBackground(new Color(BGCOLOR, false));
                 out.setForeground(new Color(FGCOLOR, false));
                 out.setBorder(BORDER);
+                out.setLineWrap(true);
 
                 in.setBounds(0,
                                 GUI_Y - SIZ,
@@ -162,12 +152,19 @@ public class Main {
         private static void loadPlugins() throws Exception {
 
                 String fileName, fileEx;
+                boolean ERR_FLAG = false;
 
                 output.log("Plugins loading");
 
                 URL[] url = { new URL("file:C:") };
                 URLClassLoader UCL = new URLClassLoader(url);
                 Class<?> cls;
+
+                PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),
+                                String.format("Crash report %d.log",
+                                                System.currentTimeMillis()))
+                                .toString()),
+                                false, "utf-8");
 
                 for (File f : PLUGINS_PATH.toFile().listFiles()) {
 
@@ -187,12 +184,25 @@ public class Main {
                                         System.out.println("\n------");
                                 }
 
+                        } catch (StringIndexOutOfBoundsException e) {
+
+                                ERR_FLAG = false;
+
                         } catch (Exception e) {
-                                if (settings.getProperty("debug").equals("true")) {
-                                        e.printStackTrace();
-                                }
+
+                                e.printStackTrace(t);
+                                t.write('\n');
+                                ERR_FLAG = true;
                         }
+
                 }
+                if (ERR_FLAG) {
+
+                        output.log("Oops, something went wrong... please check the report folder at "
+                                        + REPORT_PATH.toString() + " (False alarm warning)");
+                }
+
+                t.close();
 
                 UCL.close();
         }

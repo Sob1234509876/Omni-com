@@ -3,8 +3,9 @@ package src.gui.listeners;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
-/*
- * Use KeyDetect.PressedKey for getting current pressed key
+/**
+ * Use {@code KeyDetect.PressedKey} for getting current pressed key, do not to
+ * set it back to {@code '\0'} to prevent LOD (loop of death)
  */
 
 public class keyDetect implements KeyListener {

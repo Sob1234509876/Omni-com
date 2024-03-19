@@ -2,7 +2,6 @@ package math;
 
 /**
  * Provides some useful tools to cauculate physic and thermal dynamics (and
- * <p>
  * etc.)
  */
 
