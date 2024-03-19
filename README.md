@@ -30,4 +30,8 @@ alpha 1.0.2 :
 Redone the gui.
 
 alpha 1.1.0 :
-Know every lib is finished, it`s time to make some real game!
+Now every lib is finished, it`s time to make some real game!
+
+alpha 1.1.1 :
+The "lang" property of the configs is now useable, yay!
+Also made some GUI in the vanilla JFrame and add some random things.
