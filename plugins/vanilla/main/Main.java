@@ -1,7 +1,9 @@
 package vanilla.main;
 
+import src.utils.*;
 import src.utils.factories.*;
 import src.utils.io.*;
+import src.gts.*;
 import src.gui.listeners.*;
 
 import javax.swing.*;
@@ -17,6 +19,7 @@ import java.util.Properties;
 public class Main {
 
     public static String __VERSION__ = "1.0a";
+    public static volatile reg<item> Reg = new reg<>("vanilla");
 
     public static Properties settings = new Properties();
     public static Properties langSettings = new Properties();
@@ -44,11 +47,11 @@ public class Main {
 
     public static void run() throws Exception {
 
-        Integer i = new itemFactory()
+        Reg.set(new itemFactory()
                 .setName("ALPHA")
-                .register();
+                .getProduct(), 0);
 
-        System.out.println(src.main.Main.Items.get(i).name);
+        System.out.println(Reg.get(0).name);
         System.out.println("2024.3.18 : Alpha success (1.1.0)");
         System.out.println("Omni co., Ltd.");
 

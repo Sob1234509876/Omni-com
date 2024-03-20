@@ -5,6 +5,7 @@ import java.util.Map;
 
 import src.gts.element;
 import src.gts.material;
+import src.utils.reg;
 
 /**
  * The {@code materialFactory} factory is used for generatting massive amount of
@@ -29,6 +30,7 @@ public class materialFactory implements factory {
 
     private String[] flags;
     private Map<String, String> flagSettings = new HashMap<String, String>();
+    private reg<material> ParentOfThis;
 
     public materialFactory setName(String name) {
         this.name = name;
@@ -65,21 +67,9 @@ public class materialFactory implements factory {
         return this;
     }
 
-    public int register() {
-
-        int ID = src.main.Main.Materials.size();
-
-        material newMaterial;
-
-        if (elements == null) {
-            newMaterial = new material(name, color, component, flags, flagSettings);
-        } else {
-            newMaterial = new material(name, color, elements, flags, flagSettings);
-        }
-
-        src.main.Main.Materials.add(newMaterial);
-
-        return ID;
+    public materialFactory setParentOfThis(reg<material> ParentOfThis) {
+        this.ParentOfThis = ParentOfThis;
+        return this;
     }
 
     public material getProduct() {
@@ -87,9 +77,21 @@ public class materialFactory implements factory {
         material newMaterial;
 
         if (elements == null) {
-            newMaterial = new material(name, color, component, flags, flagSettings);
+            newMaterial = new material(
+                    this.name,
+                    this.color,
+                    this.component,
+                    this.flags,
+                    this.flagSettings,
+                    this.ParentOfThis);
         } else {
-            newMaterial = new material(name, color, elements, flags, flagSettings);
+            newMaterial = new material(
+                    this.name,
+                    this.color,
+                    this.elements,
+                    this.flags,
+                    this.flagSettings,
+                    this.ParentOfThis);
         }
 
         return newMaterial;

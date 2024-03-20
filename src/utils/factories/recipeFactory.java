@@ -4,6 +4,7 @@ import java.util.Map;
 
 import src.gts.item;
 import src.gts.recipe;
+import src.utils.reg;
 
 public class recipeFactory implements factory {
 
@@ -32,6 +33,7 @@ public class recipeFactory implements factory {
 
     private String[] flags;
     private Map<String, String> flagSettings;
+    private reg<recipe> ParentOfThis;
 
     public recipeFactory setName(String name) {
         this.name = name;
@@ -68,26 +70,14 @@ public class recipeFactory implements factory {
         return this;
     }
 
-    public recipeFactory setFlagSettings(Map<String, String> flagSettings) {
-        this.flagSettings = flagSettings;
+    public recipeFactory setParentOfThis(reg<recipe> ParentOfThis) {
+        this.ParentOfThis = ParentOfThis;
         return this;
     }
 
-    public int register() {
-        int ID = src.main.Main.Recipe.size();
-
-        src.main.Main.Recipe.add(new recipe(
-                this.name,
-                this.description,
-                this.input,
-                this.output,
-                this.inputFun,
-                this.outputFun,
-                this.flags,
-                this.flagSettings));
-
-        return ID;
-
+    public recipeFactory setFlagSettings(Map<String, String> flagSettings) {
+        this.flagSettings = flagSettings;
+        return this;
     }
 
     public recipe getProduct() {
@@ -99,6 +89,7 @@ public class recipeFactory implements factory {
                 this.inputFun,
                 this.outputFun,
                 this.flags,
-                this.flagSettings);
+                this.flagSettings,
+                this.ParentOfThis);
     }
 }

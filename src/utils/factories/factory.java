@@ -15,8 +15,6 @@ package src.utils.factories;
 
 public interface factory {
 
-    public int register();
-
     public Object getProduct();
 
 }

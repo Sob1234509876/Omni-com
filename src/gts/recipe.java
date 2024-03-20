@@ -2,6 +2,8 @@ package src.gts;
 
 import java.util.Map;
 
+import src.utils.reg;
+
 public class recipe {
 
     public String name;
@@ -14,6 +16,7 @@ public class recipe {
 
     public String[] flags;
     public Map<String, String> flagSettings;
+    public reg<recipe> ParentOfThis;
 
     public recipe(
             String name,
@@ -21,13 +24,15 @@ public class recipe {
             item[] input,
             item[] output,
             String[] flags,
-            Map<String, String> flagSettings) {
+            Map<String, String> flagSettings,
+            reg<recipe> ParentOfThis) {
         this.name = name;
         this.description = description;
         this.input = input;
         this.output = output;
         this.flags = flags;
         this.flagSettings = flagSettings;
+        this.ParentOfThis = ParentOfThis;
     }
 
     public recipe(
@@ -38,7 +43,8 @@ public class recipe {
             Runnable runFun,
             boolean flag,
             String[] flags,
-            Map<String, String> flagSettings) {
+            Map<String, String> flagSettings,
+            reg<recipe> ParentOfThis) {
         this.name = name;
         this.description = description;
         this.input = input;
@@ -49,6 +55,7 @@ public class recipe {
             this.outputFun = runFun;
         this.flags = flags;
         this.flagSettings = flagSettings;
+        this.ParentOfThis = ParentOfThis;
     }
 
     public recipe(
@@ -59,7 +66,8 @@ public class recipe {
             Runnable inputFun,
             Runnable outputFun,
             String[] flags,
-            Map<String, String> flagSettings) {
+            Map<String, String> flagSettings,
+            reg<recipe> ParentOfThis) {
         this.name = name;
         this.description = description;
         this.input = input;
@@ -68,6 +76,7 @@ public class recipe {
         this.outputFun = outputFun;
         this.flags = flags;
         this.flagSettings = flagSettings;
+        this.ParentOfThis = ParentOfThis;
     }
 
 }

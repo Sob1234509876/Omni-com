@@ -1,6 +1,7 @@
 package src.utils.factories;
 
 import src.gts.element;
+import src.utils.reg;
 
 /**
  * The {@code elementFactory} class is used for creating elements, elements are
@@ -20,9 +21,10 @@ import src.gts.element;
 
 public class elementFactory implements factory {
 
-    String atomSymbol = "Nl";
-    long protonAmount = 0;
-    long neutronAmount = 0;
+    private String atomSymbol = "Nl";
+    private long protonAmount = 0;
+    private long neutronAmount = 0;
+    private reg<element> ParentOfThis;
 
     public elementFactory setAtomSymbol(String atomSymbol) {
         this.atomSymbol = atomSymbol;
@@ -39,23 +41,17 @@ public class elementFactory implements factory {
         return this;
     }
 
-    public int register() {
-
-        int ID = src.main.Main.Elements.size();
-
-        src.main.Main.Elements.add(new element(
-                atomSymbol,
-                protonAmount,
-                neutronAmount));
-
-        return ID;
+    public elementFactory setParentOfThis(reg<element> ParentOfThis) {
+        this.ParentOfThis = ParentOfThis;
+        return this;
     }
 
     public element getProduct() {
         return new element(
-                atomSymbol,
-                protonAmount,
-                neutronAmount);
+                this.atomSymbol,
+                this.protonAmount,
+                this.neutronAmount,
+                this.ParentOfThis);
     }
 
 }

@@ -5,12 +5,10 @@ package src.main;
 
 //Tools
 import java.util.Properties;
-import java.util.ArrayList;
 
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import src.gts.*;
 import src.gui.listeners.keyDetect;
 import src.utils.io.*;
 
@@ -48,15 +46,6 @@ public class Main {
         public static JTextField in = new JTextField("game");
 
         // gui & consts.
-
-        public volatile static ArrayList<item> Items = new ArrayList<>();
-        public volatile static ArrayList<fluid> Fluids = new ArrayList<>();
-        public volatile static ArrayList<material> Materials = new ArrayList<>();
-        public volatile static ArrayList<element> Elements = new ArrayList<>();
-        public volatile static ArrayList<recipe> Recipe = new ArrayList<>();
-        public volatile static ArrayList<machine> Machine = new ArrayList<>();
-
-        // ID map
 
         public static void main(String[] args) throws Exception {
 
@@ -161,7 +150,7 @@ public class Main {
                 Class<?> cls;
 
                 PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),
-                                String.format("Crash report %d.log",
+                                String.format("Report %d.log",
                                                 System.currentTimeMillis()))
                                 .toString()),
                                 false, "utf-8");

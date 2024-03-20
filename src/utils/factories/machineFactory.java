@@ -4,16 +4,19 @@ import java.util.Map;
 
 import src.gts.machine;
 import src.gts.recipe;
+import src.utils.reg;
 
 public class machineFactory implements factory {
 
     private String name;
     private String description;
 
-    private Map<String, recipe> bindedRecipe;
+    private Map<String, recipe> ChildOfThis;
 
     private String[] flags;
     private Map<String, String> flagSettings;
+
+    private reg<machine> ParentOfThis;
 
     public machineFactory setName(String name) {
         this.name = name;
@@ -25,8 +28,8 @@ public class machineFactory implements factory {
         return this;
     }
 
-    public machineFactory setBindedRecipe(Map<String, recipe> bindedRecipe) {
-        this.bindedRecipe = bindedRecipe;
+    public machineFactory setChildOfThis(Map<String, recipe> ChildOfThis) {
+        this.ChildOfThis = ChildOfThis;
         return this;
     }
 
@@ -40,26 +43,19 @@ public class machineFactory implements factory {
         return this;
     }
 
-    public int register() {
-        int ID = src.main.Main.Machine.size();
-
-        src.main.Main.Machine.add(new machine(
-                name,
-                description,
-                bindedRecipe,
-                flags,
-                flagSettings));
-
-        return ID;
+    public machineFactory setParentOfThis(reg<machine> ParentOfThis) {
+        this.ParentOfThis = ParentOfThis;
+        return this;
     }
 
     public machine getProduct() {
         return new machine(
-                name,
-                description,
-                bindedRecipe,
-                flags,
-                flagSettings);
+                this.name,
+                this.description,
+                this.ChildOfThis,
+                this.flags,
+                this.flagSettings,
+                this.ParentOfThis);
     }
 
 }

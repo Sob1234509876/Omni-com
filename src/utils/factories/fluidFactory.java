@@ -6,7 +6,7 @@ import java.util.Map;
 import src.gts.element;
 import src.gts.fluid;
 import src.gts.material;
-import src.main.Main;
+import src.utils.reg;
 
 public class fluidFactory implements factory {
 
@@ -24,6 +24,7 @@ public class fluidFactory implements factory {
 
     private String[] flags = {};
     private Map<String, String> flagSettings = new HashMap<String, String>();
+    private reg<fluid> ChildOfPlugin;
 
     public fluidFactory setName(String name) {
         this.name = name;
@@ -50,28 +51,27 @@ public class fluidFactory implements factory {
         return this;
     }
 
-    public int register() {
-
-        int ID = Main.Fluids.size();
-
-        if (component == null) {
-            Main.Fluids.add(new fluid(this.name, this.color, this.description, this.component,
-                    this.temperature, this.flags, this.flagSettings));
-        } else {
-            Main.Fluids.add(new fluid(this.name, this.color, this.description, this.elements,
-                    this.temperature, this.flags, this.flagSettings));
-        }
-        return ID;
-
-    }
-
     public fluid getProduct() {
         if (component == null) {
-            return new fluid(this.name, this.color, this.description, this.component, this.temperature, this.flags,
-                    this.flagSettings);
+            return new fluid(
+                    this.name,
+                    this.color,
+                    this.description,
+                    this.elements,
+                    this.temperature,
+                    this.flags,
+                    this.flagSettings,
+                    this.ChildOfPlugin);
         } else {
-            return new fluid(this.name, this.color, this.description, this.elements, this.temperature, this.flags,
-                    this.flagSettings);
+            return new fluid(
+                    this.name,
+                    this.color,
+                    this.description,
+                    this.component,
+                    this.temperature,
+                    this.flags,
+                    this.flagSettings,
+                    this.ChildOfPlugin);
         }
     }
 

@@ -1,12 +1,10 @@
 package src.utils.factories;
 
-import java.nio.file.Path;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import src.gts.item;
-import src.main.Main;
+import src.utils.reg;
 
 /**
  * This factory is used for creating items, items are stored in
@@ -34,8 +32,7 @@ public class itemFactory implements factory {
 
     private String[] flags;
     private Map<String, String> flagSettings = new HashMap<String, String>();
-
-    private Path docPath;
+    private reg<item> ParentOfThis;
 
     public itemFactory setName(String name) {
         this.name = name;
@@ -57,31 +54,18 @@ public class itemFactory implements factory {
         return this;
     }
 
-    public itemFactory setDocPath(Path docPath) {
-        this.docPath = docPath;
+    public itemFactory setParentOfThis(reg<item> ParentOfThis) {
+        this.ParentOfThis = ParentOfThis;
         return this;
-    }
-
-    public int register() {
-
-        int ID = Main.Items.size();
-
-        Main.Items.add(new item(
-                this.name,
-                this.description,
-
-                this.flags,
-                this.flagSettings));
-        return ID;
     }
 
     public item getProduct() {
         return new item(
                 this.name,
                 this.description,
-
                 this.flags,
-                this.flagSettings);
+                this.flagSettings,
+                this.ParentOfThis);
     }
 
 }
