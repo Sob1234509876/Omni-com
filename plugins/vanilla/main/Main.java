@@ -16,6 +16,12 @@ import java.nio.file.*;
 
 import java.util.Properties;
 
+/**
+ * The vanilla game of this game.
+ * 
+ * @version 1.0.2
+ */
+
 public class Main {
 
     public static String __VERSION__ = "1.0a";
@@ -43,13 +49,15 @@ public class Main {
 
     /**
      * The entry of this plugin, consists of init. and gt. creation.
+     * 
+     * @throws Exception
      */
 
     public static void run() throws Exception {
 
-        Reg.set(new itemFactory()
+        Reg.add(new itemFactory()
                 .setName("ALPHA")
-                .getProduct(), 0);
+                .getProduct());
 
         System.out.println(Reg.get(0).name);
         System.out.println("2024.3.18 : Alpha success (1.1.0)");

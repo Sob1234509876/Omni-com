@@ -35,3 +35,6 @@ Now every lib is finished, it`s time to make some real game!
 alpha 1.1.1 :
 The "lang" property of the configs is now useable, yay!
 Also made some GUI in the vanilla JFrame and add some random things.
+
+alpha FIX1 :
+Emergency fix on the newly added reg type, added the method "add" and "lenth" 
