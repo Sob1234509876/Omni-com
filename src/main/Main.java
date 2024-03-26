@@ -10,7 +10,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 import src.gui.listeners.keyDetect;
-import src.utils.io.*;
+import src.io.*;
 
 //io
 import java.io.*;
@@ -48,6 +48,14 @@ public class Main {
         // gui & consts.
 
         public static void main(String[] args) throws Exception {
+
+                PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),
+                                String.format("Report %d.log",
+                                                System.currentTimeMillis()))
+                                .toString()),
+                                false, "utf-8");
+
+                System.setErr(t);
 
                 // Path Init
 
@@ -142,18 +150,13 @@ public class Main {
 
                 String fileName, fileEx;
                 boolean ERR_FLAG = false;
+                Exception TMP = new Exception("FILL THIS NEW CREATED EXCEPTION WITH ERRORS AND BUGS!");
 
                 output.log("Plugins loading");
 
                 URL[] url = { new URL("file:C:") };
                 URLClassLoader UCL = new URLClassLoader(url);
                 Class<?> cls;
-
-                PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),
-                                String.format("Report %d.log",
-                                                System.currentTimeMillis()))
-                                .toString()),
-                                false, "utf-8");
 
                 for (File f : PLUGINS_PATH.toFile().listFiles()) {
 
@@ -173,25 +176,24 @@ public class Main {
                                         System.out.println("\n------");
                                 }
 
-                        } catch (StringIndexOutOfBoundsException e) {
-
-                                ERR_FLAG = false;
-
                         } catch (Exception e) {
 
-                                e.printStackTrace(t);
-                                t.write('\n');
+                                TMP = e;
+                                e.printStackTrace();
+                                System.err.print('\n');
                                 ERR_FLAG = true;
+
+                        } finally {
+
+                                if (ERR_FLAG) {
+
+                                        output.log();
+                                        TMP.printStackTrace(System.out);
+
+                                }
                         }
 
                 }
-                if (ERR_FLAG) {
-
-                        output.log("Oops, something went wrong... please check the report folder at "
-                                        + REPORT_PATH.toString() + " (False alarm warning)");
-                }
-
-                t.close();
 
                 UCL.close();
         }

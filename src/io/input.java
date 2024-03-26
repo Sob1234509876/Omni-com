@@ -1,4 +1,4 @@
-package src.utils.io;
+package src.io;
 
 import src.main.Main;
 
@@ -13,7 +13,7 @@ public class input {
     }
 
     public static void clear() {
-        Main.in.setText("");
+        Main.in.setText(null);
     }
 
 }
