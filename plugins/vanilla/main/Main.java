@@ -2,6 +2,7 @@ package vanilla.main;
 
 import src.utils.*;
 import src.utils.factories.*;
+import vanilla.main.others.createGame;
 import src.gts.*;
 import src.gui.listeners.*;
 
@@ -37,7 +38,7 @@ public class Main {
     public static long flag = -1;
     // A flag describing current game status
 
-    public static String __VERSION__ = "1.0a";
+    public static String __VERSION__ = "1.1a";
     public static volatile reg<item> Reg = new reg<>("vanilla");
     // METAish
 

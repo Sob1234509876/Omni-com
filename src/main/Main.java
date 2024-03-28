@@ -30,7 +30,7 @@ public class Main {
         public static Properties settings = new Properties();
         public static Properties langSettings = new Properties();
 
-        public static final String __VERSION__ = "1.0.3a";
+        public static final String __VERSION__ = "1.2.1a";
         public static final Path GAME_PATH = Paths.get("").toAbsolutePath();
         public static final Path SRC_PATH = Paths.get(GAME_PATH.toString(), "src");
         public static final Path CONFIGS_PATH = Paths.get(GAME_PATH.toString(), "configs");
