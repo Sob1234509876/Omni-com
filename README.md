@@ -40,4 +40,4 @@ alpha FIX1 :
 Emergency fix on the newly added reg type, added the method "add" and "lenth" 
 
 alpha 1.2.0 :
-Changed name of the game to Omni com., made save and tried to make a local server and client (Note : it doesn`t works, Note2 : the peice of code is in vanilla.main.createGame, can anybody give me some help???). The server and client is W.I.P, the fandom website is also W.I.P (official fandom? What`s that?).
+Changed name of the game to Omni com., made save and tried to make a local server and client (Note : it doesn\`t works, Note2 : the peice of code is in vanilla.main.createGame, can anybody give me some help???). The server and client is W.I.P, the fandom website is also W.I.P (official fandom? What`s that?).
