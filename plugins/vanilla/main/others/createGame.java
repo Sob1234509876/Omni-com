@@ -32,7 +32,7 @@ import java.nio.file.*;
 
 public class createGame implements Runnable {
 
-    private static final Path SAVES_PATH = src.main.Main.SAVES_PATH;
+    private static final File SAVES_PATH = src.main.Main.SAVES_PATH;
     private static Thread SST = new Thread(new localServer(), "Server Thread"),
             ST = new Thread(new localClient(), "Client Thread");
 
@@ -51,7 +51,7 @@ public class createGame implements Runnable {
             // a new empty save file.
             if (buffer.equals("play")) {
 
-                File f = SAVES_PATH.toFile();
+                File f = SAVES_PATH;
                 // If there is no save files then create one.
                 if (f.list().length == 0) {
 

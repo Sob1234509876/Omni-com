@@ -1,11 +1,13 @@
 rem Remember to run the same script under the plugins/vanilla folder!
 
 @echo off
-javac -encoding utf-8 @cFile
-jar -cvfm test.jar src\MANIFEST.MF src
+"../JAVA/JDK17/bin/javac" -encoding utf-8 @cFile
+"../JAVA/JDK17/bin/jar" -cvfm test.jar src\MANIFEST.MF src
 
 echo FLAG@1
 
-java -jar test.jar
+"../JAVA/JDK17/bin/java" -jar test.jar
 
 echo FLAG@2
+
+pause

@@ -1,5 +1,7 @@
 package src.utils.factories;
 
+import java.util.Map;
+
 import src.gts.element;
 import src.utils.reg;
 
@@ -19,39 +21,46 @@ import src.utils.reg;
  * </blockquote>
  */
 
-public class elementFactory implements factory {
+public class ElementFactory extends ItemFactory {
 
-    private String atomSymbol = "Nl";
-    private long protonAmount = 0;
-    private long neutronAmount = 0;
-    private reg<element> ParentOfThis;
+    public String ChemSymbol = "Nl";
+    public long ProtonAmount = 0;
+    public long NeutronAmount = 0;
+    public reg<element> ParentOfThis;
 
-    public elementFactory setAtomSymbol(String atomSymbol) {
-        this.atomSymbol = atomSymbol;
+    public ElementFactory setName(String name) {
+        super.Name = name;
         return this;
     }
 
-    public elementFactory setProtonAmount(long protonAmount) {
-        this.protonAmount = protonAmount;
+    public ElementFactory setDescription(String description) {
+        super.Description = description;
         return this;
     }
 
-    public elementFactory setNeutronAmount(long neutronAmount) {
-        this.neutronAmount = neutronAmount;
+    public ElementFactory setFlags(String[] flags) {
+        super.Flags = flags;
         return this;
     }
 
-    public elementFactory setParentOfThis(reg<element> ParentOfThis) {
-        this.ParentOfThis = ParentOfThis;
+    public ElementFactory setFlagSettings(Map<String, String> flagSettings) {
+        super.FlagSettings = flagSettings;
+        return this;
+    }
+    public ElementFactory setAtomSymbol(String AtomSymbol) {
+        this.ChemSymbol = AtomSymbol;
         return this;
     }
 
-    public element getProduct() {
-        return new element(
-                this.atomSymbol,
-                this.protonAmount,
-                this.neutronAmount,
-                this.ParentOfThis);
+    public ElementFactory setProtonAmount(long ProtonAmount) {
+        this.ProtonAmount = ProtonAmount;
+        return this;
     }
+
+    public ElementFactory setNeutronAmount(long NeutronAmount) {
+        this.NeutronAmount = NeutronAmount;
+        return this;
+    }
+
 
 }

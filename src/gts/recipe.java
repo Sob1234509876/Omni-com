@@ -1,82 +1,33 @@
 package src.gts;
 
-import java.util.Map;
-
 import src.utils.reg;
+import src.utils.factories.*;
 
-public class recipe {
 
-    public String name;
-    public String description;
-    public machine craftType;
-    public item[] input;
-    public item[] output;
-    public Runnable inputFun;
-    public Runnable outputFun;
+public class recipe extends item {
 
-    public String[] flags;
-    public Map<String, String> flagSettings;
+    public item[] Input;
+    public item[] Output;
+    public Runnable InputFun;
+    public Runnable OutputFun;
+    
     public reg<recipe> ParentOfThis;
 
-    public recipe(
-            String name,
-            String description,
-            item[] input,
-            item[] output,
-            String[] flags,
-            Map<String, String> flagSettings,
-            reg<recipe> ParentOfThis) {
-        this.name = name;
-        this.description = description;
-        this.input = input;
-        this.output = output;
-        this.flags = flags;
-        this.flagSettings = flagSettings;
-        this.ParentOfThis = ParentOfThis;
-    }
+    public static recipe valueOf(RecipeFactory RF) {
+        recipe tmp = new recipe();
+        
+        tmp.Name = RF.Name;
+        tmp.Description = RF.Description;
+        tmp.Flags = RF.Flags;
+        tmp.FlagSettings = RF.FlagSettings;
+        tmp.ParentOfThis = RF.ParentOfThis;
 
-    public recipe(
-            String name,
-            String description,
-            item[] input,
-            item[] output,
-            Runnable runFun,
-            boolean flag,
-            String[] flags,
-            Map<String, String> flagSettings,
-            reg<recipe> ParentOfThis) {
-        this.name = name;
-        this.description = description;
-        this.input = input;
-        this.output = output;
-        if (flag)
-            this.inputFun = runFun;
-        else
-            this.outputFun = runFun;
-        this.flags = flags;
-        this.flagSettings = flagSettings;
-        this.ParentOfThis = ParentOfThis;
-    }
+        tmp.Input = RF.Input;
+        tmp.Output = RF.Output;
+        tmp.InputFun = RF.InputFun;
+        tmp.OutputFun = RF.OutputFun;
 
-    public recipe(
-            String name,
-            String description,
-            item[] input,
-            item[] output,
-            Runnable inputFun,
-            Runnable outputFun,
-            String[] flags,
-            Map<String, String> flagSettings,
-            reg<recipe> ParentOfThis) {
-        this.name = name;
-        this.description = description;
-        this.input = input;
-        this.output = output;
-        this.inputFun = inputFun;
-        this.outputFun = outputFun;
-        this.flags = flags;
-        this.flagSettings = flagSettings;
-        this.ParentOfThis = ParentOfThis;
+        return tmp;
     }
 
 }

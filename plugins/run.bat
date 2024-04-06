@@ -2,9 +2,13 @@
 
 rem 1. Compile
 
-"javac" "@cFile" "-encoding" "utf-8" "-cp" "../../;../src;../;"
+"../../JAVA/JDK17/bin/javac" "@cFile" "-encoding" "utf-8" "-cp" "../../;../src;../;"
 echo Compiling finish
+
+pause
 
 rem 2. Packaging
 rem   [option] [pack_name]  [Manifest directory]  [pack file]
-"jar" "-cvfm" "vanilla.jar" "vanilla\MANIFEST.MF" "vanilla"
+"../../JAVA/JDK17/bin/jar" "-cvfm" "vanilla.jar" "vanilla\MANIFEST.MF" "vanilla"
+
+pause

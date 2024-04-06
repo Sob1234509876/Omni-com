@@ -1,11 +1,11 @@
 package src.utils.factories;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import src.gts.element;
-import src.gts.material;
+import src.gts.*;
 import src.utils.reg;
+
+//TODO : MaterialFactory & material
 
 /**
  * The {@code materialFactory} factory is used for generatting massive amount of
@@ -13,88 +13,55 @@ import src.utils.reg;
  * <p>
  * Available flags :
  * <p>
- * {@code "NO_UNIFICATION"} ——
+ * WIP
  */
 
-public class materialFactory implements factory {
+public class MaterialFactory extends ItemFactory {
 
-    private String name = "NULL";
-    private String color = "White";
-    private String description = "Nothing, not even true-vaccum!";
-    private material[] component;
-    private element[] elements = { new elementFactory()
-            .setAtomSymbol("Nl")
-            .setProtonAmount(0)
-            .setNeutronAmount(0)
-            .getProduct() };
+    public String Color;
+    public material[] Component;
+    public element[] Elements;
 
-    private String[] flags;
-    private Map<String, String> flagSettings = new HashMap<String, String>();
-    private reg<material> ParentOfThis;
+    public reg<material> ParentOfThis;
 
-    public materialFactory setName(String name) {
-        this.name = name;
+    public MaterialFactory setName(String Name) {
+        super.Name = Name;
         return this;
     }
 
-    public materialFactory setColor(String color) {
-        this.color = color;
+    public MaterialFactory setColor(String Color) {
+        this.Color = Color;
         return this;
     }
 
-    public materialFactory setDescription(String description) {
-        this.description = description;
+    public MaterialFactory setDescription(String Description) {
+        super.Description = Description;
         return this;
     }
 
-    public materialFactory setComponents(material[] component) {
-        this.component = component;
+    public MaterialFactory setFlags(String[] Flags) {
+        super.Flags = Flags;
         return this;
     }
 
-    public materialFactory setElements(element[] elements) {
-        this.elements = elements;
+    public MaterialFactory setFlagSettings(Map<String, String> FlagSettings) {
+        super.FlagSettings = FlagSettings;
         return this;
     }
 
-    public materialFactory setFlags(String[] flags) {
-        this.flags = flags;
-        return this;
-    }
-
-    public materialFactory setFlagSettings(Map<String, String> flagSettings) {
-        this.flagSettings = flagSettings;
-        return this;
-    }
-
-    public materialFactory setParentOfThis(reg<material> ParentOfThis) {
+    public MaterialFactory setParentOfThis(reg<material> ParentOfThis) {
         this.ParentOfThis = ParentOfThis;
         return this;
     }
 
-    public material getProduct() {
+    public MaterialFactory setComponents(material[] Component) {
+        this.Component = Component;
+        return this;
+    }
 
-        material newMaterial;
-
-        if (elements == null) {
-            newMaterial = new material(
-                    this.name,
-                    this.color,
-                    this.component,
-                    this.flags,
-                    this.flagSettings,
-                    this.ParentOfThis);
-        } else {
-            newMaterial = new material(
-                    this.name,
-                    this.color,
-                    this.elements,
-                    this.flags,
-                    this.flagSettings,
-                    this.ParentOfThis);
-        }
-
-        return newMaterial;
+    public MaterialFactory setElements(element[] Elements) {
+        this.Elements = Elements;
+        return this;
     }
 
 }

@@ -1,38 +1,41 @@
 package src.gts;
 
-import java.util.Map;
-
 import src.utils.reg;
+import src.utils.factories.ElementFactory;
 
 /**
  * {@code Element} class, used in type fluid and material.
  */
 
-public class element {
+public class element extends item{
 
-    public String chemSymbol = "Nl";
-    public long protonAmount = 0;
-    public long neutronAmount = 0;
-    public long atomicMass = 0;
-    public long amount;
+    public static char[] ChemNumbers = "₀₁₂₃₄₅₆₇₈₉".toCharArray();
+    public static char[] AtomicNumbers = "⁰¹²³⁴⁵⁶⁷⁸⁹".toCharArray();
 
-    public String[] flags;
-    public Map<String, String> flagSettings;
-
+    public String ChemSymbol;
+    public Long ProtonAmount;
+    public Long NeutronAmount;
+    public Long AtomicMass;
+    public Long Amount;
     public reg<element> ParentOfThis;
 
-    public element(
-            String chemSymbol,
-            long protonAmount,
-            long neutronAmount,
-            reg<element> ParentOfThis) {
-        this.chemSymbol = chemSymbol;
-        this.protonAmount = protonAmount;
-        this.neutronAmount = neutronAmount;
+    public element valueOf(ElementFactory EF) {
 
-        this.ParentOfThis = ParentOfThis;
+        element tmp = new element();
 
-        this.atomicMass = this.protonAmount + this.neutronAmount;
+        tmp.Name = EF.Name;
+        tmp.Description = EF.Description;
+        tmp.Flags = EF.Flags;
+        tmp.FlagSettings = EF.FlagSettings;
+        tmp.ParentOfThis = EF.ParentOfThis;
+
+        tmp.ChemSymbol = EF.ChemSymbol;
+        tmp.ProtonAmount = EF.ProtonAmount;
+        tmp.NeutronAmount = EF.NeutronAmount;
+        tmp.AtomicMass = tmp.ProtonAmount + tmp.NeutronAmount;
+
+        return tmp;
+
     }
 
 }

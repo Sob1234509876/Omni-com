@@ -6,56 +6,37 @@ import src.gts.machine;
 import src.gts.recipe;
 import src.utils.reg;
 
-public class machineFactory implements factory {
+public class MachineFactory extends ItemFactory {
 
-    private String name;
-    private String description;
+    public recipe[] BindedRecipes;
 
-    private Map<String, recipe> ChildOfThis;
+    public reg<machine> ParentOfThis;
 
-    private String[] flags;
-    private Map<String, String> flagSettings;
-
-    private reg<machine> ParentOfThis;
-
-    public machineFactory setName(String name) {
-        this.name = name;
+    public MachineFactory setName(String Name) {
+        super.Name = Name;
         return this;
     }
 
-    public machineFactory setDescription(String description) {
-        this.description = description;
+    public MachineFactory setDescription(String Description) {
+        super.Description = Description;
         return this;
     }
 
-    public machineFactory setChildOfThis(Map<String, recipe> ChildOfThis) {
-        this.ChildOfThis = ChildOfThis;
+
+    public MachineFactory setFlags(String[] Flags) {
+        super.Flags = Flags;
         return this;
     }
 
-    public machineFactory setFlags(String[] flags) {
-        this.flags = flags;
+    public MachineFactory setFlagSettings(Map<String, String> FlagSettings) {
+        super.FlagSettings = FlagSettings;
         return this;
     }
 
-    public machineFactory setFlagSettings(Map<String, String> flagSettings) {
-        this.flagSettings = flagSettings;
+    public MachineFactory setBindedRecipes(recipe[] BindedRecipes) {
+        this.BindedRecipes = BindedRecipes;
         return this;
     }
 
-    public machineFactory setParentOfThis(reg<machine> ParentOfThis) {
-        this.ParentOfThis = ParentOfThis;
-        return this;
-    }
-
-    public machine getProduct() {
-        return new machine(
-                this.name,
-                this.description,
-                this.ChildOfThis,
-                this.flags,
-                this.flagSettings,
-                this.ParentOfThis);
-    }
 
 }

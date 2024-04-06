@@ -1,6 +1,5 @@
 package src.utils.factories;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import src.gts.item;
@@ -25,47 +24,32 @@ import src.utils.reg;
  * <p>
  */
 
-public class itemFactory implements factory {
+public class ItemFactory implements Factory {
 
-    private String name = "defaultItem";
-    private String description;
+    public String Name;
+    public String Description;
+    public String[] Flags;
+    public Map<String, String> FlagSettings;
+    public reg<item> ParentOfThis;
 
-    private String[] flags;
-    private Map<String, String> flagSettings = new HashMap<String, String>();
-    private reg<item> ParentOfThis;
-
-    public itemFactory setName(String name) {
-        this.name = name;
+    public ItemFactory setName(String Name) {
+        this.Name = Name;
         return this;
     }
 
-    public itemFactory setDescription(String description) {
-        this.description = description;
+    public ItemFactory setDescription(String Description) {
+        this.Description = Description;
         return this;
     }
 
-    public itemFactory setFlags(String[] flags) {
-        this.flags = flags;
+    public ItemFactory setFlags(String[] Flags) {
+        this.Flags = Flags;
         return this;
     }
 
-    public itemFactory setFlagSettings(Map<String, String> flagSettings) {
-        this.flagSettings = flagSettings;
+    public ItemFactory setFlagSettings(Map<String, String> FlagSettings) {
+        this.FlagSettings = FlagSettings;
         return this;
-    }
-
-    public itemFactory setParentOfThis(reg<item> ParentOfThis) {
-        this.ParentOfThis = ParentOfThis;
-        return this;
-    }
-
-    public item getProduct() {
-        return new item(
-                this.name,
-                this.description,
-                this.flags,
-                this.flagSettings,
-                this.ParentOfThis);
     }
 
 }

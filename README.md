@@ -44,3 +44,6 @@ Changed name of the game to Omni com., made save and tried to make a local serve
 
 alpha 1.2.1 :
 Fixed the client and server of the vanilla plugin, added run.bat for compiling and running the game.
+
+alpha 1.2.2 :
+Redone the game types (gts) and factories of src. Orignally I was working on the client but I changed to a new computer and progress resetted.

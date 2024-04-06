@@ -16,7 +16,6 @@ import src.io.*;
 import java.io.*;
 
 import java.nio.file.Paths;
-import java.nio.file.Path;
 
 //Swing
 import javax.swing.*;
@@ -31,13 +30,13 @@ public class Main {
         public static Properties langSettings = new Properties();
 
         public static final String __VERSION__ = "1.2.1a";
-        public static final Path GAME_PATH = Paths.get("").toAbsolutePath();
-        public static final Path SRC_PATH = Paths.get(GAME_PATH.toString(), "src");
-        public static final Path CONFIGS_PATH = Paths.get(GAME_PATH.toString(), "configs");
-        public static final Path PLUGINS_PATH = Paths.get(GAME_PATH.toString(), "plugins");
-        public static final Path RESOURCE_PATH = Paths.get(GAME_PATH.toString(), "resource");
-        public static final Path SAVES_PATH = Paths.get(GAME_PATH.toString(), "saves");
-        public static final Path REPORT_PATH = Paths.get(GAME_PATH.toString(), "report");
+        public static final File GAME_PATH = Paths.get("").toAbsolutePath().toFile();
+        public static final File SRC_PATH = new File(GAME_PATH, "src");
+        public static final File CONFIGS_PATH = new File(GAME_PATH, "configs");
+        public static final File PLUGINS_PATH = new File(GAME_PATH, "plugins");
+        public static final File RESOURCE_PATH = new File(GAME_PATH, "resource") ;
+        public static final File SAVES_PATH = new File(GAME_PATH, "saves");
+        public static final File REPORT_PATH = new File(GAME_PATH, "report");
 
         // Consts. & importants
 
@@ -48,6 +47,10 @@ public class Main {
         // gui & consts.
 
         public static void main(String[] args) throws Exception {
+
+                Paths.get(REPORT_PATH.toString(),
+                                String.format("Report %d.log",
+                                                System.currentTimeMillis())).toFile().createNewFile();
 
                 PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),
                                 String.format("Report %d.log",
@@ -158,7 +161,7 @@ public class Main {
                 URLClassLoader UCL = new URLClassLoader(url);
                 Class<?> cls;
 
-                for (File f : PLUGINS_PATH.toFile().listFiles()) {
+                for (File f : PLUGINS_PATH.listFiles()) {
 
                         try {
 

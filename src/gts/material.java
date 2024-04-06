@@ -1,9 +1,11 @@
 package src.gts;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import src.utils.reg;
+import src.utils.factories.*;
+
+//TODO : LoadChemFormula() & LoadItems()
 
 /**
  * {@code material} class, use for making formatted items
@@ -11,58 +13,35 @@ import src.utils.reg;
  * example : Cyberium plate & Cyberium screw; Sodium ingot & Sodium dust
  */
 
-public class material {
+public class material extends item {
 
-    public String name;
-    public String color;
-    public String chemFormula;
-    public material[] component;
-    public element[] elements;
+    public String Color;
+    public String ChemFormula;
+    public material[] Component;
+    public element[] Elements;
 
-    public String[] flags;
-    public Map<String, String> flagSettings = new HashMap<String, String>();
-    public Map<String, Integer> createdItemsID = new HashMap<String, Integer>();
-    public reg<material> ChildOfPlugin;
+    public Map<String, Integer> CreatedItemsID;
 
-    public long amount = 0;
+    public Long Amount;
 
-    public material(
-            String name,
-            String color,
-            material[] component,
-            String[] flags,
-            Map<String, String> flagSettings,
-            reg<material> ChildOfPlugin) {
-        this.name = name;
-        this.color = color;
-        this.component = component;
-        this.flags = flags;
-        this.flagSettings = flagSettings;
-        this.ChildOfPlugin = ChildOfPlugin;
+    public reg<material> ParentOfThis;
 
-        for (material matter : component) {
-            this.chemFormula += "(" + matter.chemFormula + ")" + matter.amount;
-        }
-    }
+    public static material valueOf(MaterialFactory MF) {
+        material tmp = new material();
 
-    public material(
-            String name,
-            String color,
-            element[] elements,
-            String[] flags,
-            Map<String, String> flagSettings,
-            reg<material> ChildOfPlugin) {
-        this.name = name;
-        this.color = color;
-        this.elements = elements;
-        this.flags = flags;
-        this.flagSettings = flagSettings;
-        this.ChildOfPlugin = ChildOfPlugin;
+        tmp.Name = MF.Name;
+        tmp.Description = MF.Description;
+        tmp.Flags = MF.Flags;
+        tmp.FlagSettings = MF.FlagSettings;
+        tmp.ParentOfThis = MF.ParentOfThis;
 
-        for (element element : elements) {
-            this.chemFormula += element.chemSymbol + element.amount;
-        }
+        tmp.Color = MF.Color;
+        tmp.Component = MF.Component;
+        tmp.Elements = MF.Elements;
 
-    }
+        return tmp;
+    } 
 
 }
+
+

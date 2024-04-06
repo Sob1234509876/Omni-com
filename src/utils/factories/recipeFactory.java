@@ -2,94 +2,67 @@ package src.utils.factories;
 
 import java.util.Map;
 
-import src.gts.item;
-import src.gts.recipe;
+import src.gts.*;
 import src.utils.reg;
 
-public class recipeFactory implements factory {
+public class RecipeFactory extends ItemFactory {
 
-    private String name = "Create null";
-    private String description = "Nothing!";
-    private item[] input = {
-            new itemFactory()
-                    .setName("null")
-                    .setDescription("Nothing, not even true vaccum.")
-                    .getProduct()
-    };
-    private item[] output = {
-            new itemFactory()
-                    .setName("null")
-                    .setDescription("Nothing, not even true vaccum.")
-                    .getProduct()
-    };
-    private Runnable inputFun = new Runnable() {
-        public void run() {
-        }
-    };
-    private Runnable outputFun = new Runnable() {
-        public void run() {
-        }
-    };
+    public item[] Input;
+    public item[] Output;
+    public Runnable InputFun;
+    public Runnable OutputFun;
+    public machine BindedMachine;
 
-    private String[] flags;
-    private Map<String, String> flagSettings;
-    private reg<recipe> ParentOfThis;
+    public reg<recipe> ParentOfThis;
 
-    public recipeFactory setName(String name) {
-        this.name = name;
+    public RecipeFactory setName(String Name) {
+        super.Name = Name;
         return this;
     }
 
-    public recipeFactory setDescription(String description) {
-        this.description = description;
+    public RecipeFactory setDescription(String Description) {
+        super.Description = Description;
+        return this;
+    }
+    public RecipeFactory setFlags(String[] Flags) {
+        super.Flags = Flags;
         return this;
     }
 
-    public recipeFactory setInput(item[] input) {
-        this.input = input;
+    public RecipeFactory setFlagSettings(Map<String, String> FlagSettings) {
+        super.FlagSettings = FlagSettings;
         return this;
     }
-
-    public recipeFactory setOutput(item[] output) {
-        this.output = output;
-        return this;
-    }
-
-    public recipeFactory setInputFun(Runnable inputFun) {
-        this.inputFun = inputFun;
-        return this;
-    }
-
-    public recipeFactory setOutputFun(Runnable outputFun) {
-        this.outputFun = outputFun;
-        return this;
-    }
-
-    public recipeFactory setFlags(String[] flags) {
-        this.flags = flags;
-        return this;
-    }
-
-    public recipeFactory setParentOfThis(reg<recipe> ParentOfThis) {
+    public RecipeFactory setParentOfThis(reg<recipe> ParentOfThis) {
         this.ParentOfThis = ParentOfThis;
         return this;
     }
 
-    public recipeFactory setFlagSettings(Map<String, String> flagSettings) {
-        this.flagSettings = flagSettings;
+    public RecipeFactory setInput(item[] Input) {
+        this.Input = Input;
         return this;
     }
 
-    public recipe getProduct() {
-        return new recipe(
-                this.name,
-                this.description,
-                this.input,
-                this.output,
-                this.inputFun,
-                this.outputFun,
-                this.flags,
-                this.flagSettings,
-                this.ParentOfThis);
+    public RecipeFactory setOutput(item[] Output) {
+        this.Output = Output;
+        return this;
     }
+
+    public RecipeFactory setInputFun(Runnable InputFun) {
+        this.InputFun = InputFun;
+        return this;
+    }
+
+    public RecipeFactory setOutputFun(Runnable OutputFun) {
+        this.OutputFun = OutputFun;
+        return this;
+    }
+
+    public RecipeFactory setBindedMachine(machine BindedMachine) {
+        this.BindedMachine = BindedMachine;
+        return this;
+    }
+
+
+
 }

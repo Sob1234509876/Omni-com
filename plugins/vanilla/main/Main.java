@@ -2,9 +2,10 @@ package vanilla.main;
 
 import src.utils.*;
 import src.utils.factories.*;
-import vanilla.main.others.createGame;
 import src.gts.*;
 import src.gui.listeners.*;
+
+import vanilla.main.others.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -38,7 +39,7 @@ public class Main {
     public static long flag = -1;
     // A flag describing current game status
 
-    public static String __VERSION__ = "1.1a";
+    public static final String __VERSION__ = "1.1a";
     public static volatile reg<item> Reg = new reg<>("vanilla");
     // METAish
 
@@ -51,14 +52,14 @@ public class Main {
     public static JTextField in = new JTextField("play");
     // GUI
 
-    private static Path RESOURCE_PATH = src.main.Main.RESOURCE_PATH;
-    private static Path CONFIG_PATH = src.main.Main.CONFIGS_PATH;
+    private static File RESOURCE_PATH = src.main.Main.RESOURCE_PATH;
+    private static File CONFIG_PATH = src.main.Main.CONFIGS_PATH;
     // Paths
 
     static {
-        Reg.add(new itemFactory()
-                .setName("ALPHA")
-                .getProduct());
+        Reg.add(item.valueOf(new ItemFactory()
+                .setName("ALPHA"))
+                );
     }
 
     /**
@@ -80,7 +81,7 @@ public class Main {
 
         System.err.println("There might not be any errors, lol");
 
-        System.out.println(Reg.get(0).name);
+        System.out.println(Reg.get(0).Name);
         System.out.println("2024.3.18 : Alpha success (1.1.0)");
         System.out.println("Omni co., Ltd.");
 

@@ -1,35 +1,27 @@
 package src.gts;
 
-import java.util.Map;
-
 import src.utils.reg;
+import src.utils.factories.*;
 
-public class machine {
+public class machine extends item {
 
-    public String name;
-    public String description;
+    public recipe[] BindedRecipes;
 
-    public Map<String, recipe> ChildOfThis;
-
-    public String[] flags;
-    public Map<String, String> flagSettings;
     public reg<machine> ParentOfThis;
 
-    public machine(
+    public static machine valueOf(MachineFactory MF) {
+        machine tmp = new machine();
 
-            String name,
-            String description,
+        tmp.Name = MF.Name;
+        tmp.Description = MF.Description;
+        tmp.Flags = MF.Flags;
+        tmp.FlagSettings = MF.FlagSettings;
+        tmp.ParentOfThis = MF.ParentOfThis;
 
-            Map<String, recipe> ChildOfThis,
+        tmp.BindedRecipes = MF.BindedRecipes;
 
-            String[] flags,
-            Map<String, String> flagSettings,
-            reg<machine> ParentOfThis) {
-        this.name = name;
-        this.description = description;
-        this.ChildOfThis = ChildOfThis;
-        this.flags = flags;
-        this.flagSettings = flagSettings;
-        this.ParentOfThis = ParentOfThis;
+        return tmp;
+
     }
+
 }

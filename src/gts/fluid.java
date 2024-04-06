@@ -1,82 +1,51 @@
 package src.gts;
 
-import java.util.Map;
-
 import src.utils.reg;
+import src.utils.factories.FluidFactory;
 
 /**
  * 
  */
 
-public class fluid {
+public class fluid extends item {
 
-    public String name;
-    public String color;
-    public String description;
-    public material[] component;
-    public element[] elements;
+    public String Color;
+    public material[] Component;
+    public element[] Elements;
+    public long Temperature;
+    public String ChemFormula;
+    public reg<fluid> ParentOfThis;
 
-    public long temperature;
-
-    public String[] flags;
-    public Map<String, String> flagSettings;
-    public reg<fluid> ChildOfPlugin;
-
-    public String chemFormula;
-
-    public fluid(
-            String name,
-            String color,
-            String description,
-            material[] component,
-
-            long temperature,
-
-            String[] flags,
-            Map<String, String> flagSettings,
-            reg<fluid> ChildOfPlugin) {
-        this.name = name;
-        this.color = color;
-        this.description = description;
-        this.component = component;
-
-        this.temperature = temperature;
-
-        this.flags = flags;
-        this.flagSettings = flagSettings;
-        this.ChildOfPlugin = ChildOfPlugin;
-
-        for (material matter : component) {
-            chemFormula += "(" + matter.chemFormula + ")" + matter.amount;
+    public void loadChemFormula() {
+        if (this.Component == null) {
+            for (element e : this.Elements) {
+                this.ChemFormula += e.ChemSymbol + element.ChemNumbers[e.Amount.intValue()];
+            }
+        } else {
+            for (material m : this.Component) {
+                this.ChemFormula += String.format("(%s%c)", m.Name, element.ChemNumbers[m.Amount.intValue()]);
+            }
         }
     }
 
-    public fluid(
-            String name,
-            String color,
-            String description,
-            element[] elements,
+    public static fluid valueOf(FluidFactory FF) {
+        fluid tmp = new fluid();
+        tmp.Name = FF.Name;
+        tmp.Description = FF.Description;
+        tmp.Flags = FF.Flags;
+        tmp.FlagSettings = FF.FlagSettings;
+        tmp.ParentOfThis = FF.ParentOfThis;
 
-            long temperature,
+        tmp.Color = FF.Color;
+        tmp.Temperature = FF.Temperature;
 
-            String[] flags,
-            Map<String, String> flagSettings,
-            reg<fluid> ChildOfPlugin) {
-        this.name = name;
-        this.color = color;
-        this.description = description;
-        this.elements = elements;
-
-        this.temperature = temperature;
-
-        this.flags = flags;
-        this.flagSettings = flagSettings;
-        this.ChildOfPlugin = ChildOfPlugin;
-
-        for (element element : elements) {
-            chemFormula += element.chemSymbol + element.amount;
+        if (FF.Component == null) {
+            tmp.Component = FF.Component;
+        } else {
+            tmp.Elements = FF.Elements;
         }
 
+        return tmp;
     }
 
 }
