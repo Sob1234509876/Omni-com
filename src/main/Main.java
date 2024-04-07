@@ -29,12 +29,12 @@ public class Main {
         public static Properties settings = new Properties();
         public static Properties langSettings = new Properties();
 
-        public static final String __VERSION__ = "1.2.1a";
-        public static final File GAME_PATH = Paths.get("").toAbsolutePath().toFile();
+        public static final String __VERSION__ = "1.2.3a";
+        public static final File GAME_PATH = new File("../../");
         public static final File SRC_PATH = new File(GAME_PATH, "src");
         public static final File CONFIGS_PATH = new File(GAME_PATH, "configs");
         public static final File PLUGINS_PATH = new File(GAME_PATH, "plugins");
-        public static final File RESOURCE_PATH = new File(GAME_PATH, "resource") ;
+        public static final File RESOURCE_PATH = new File(GAME_PATH, "resource");
         public static final File SAVES_PATH = new File(GAME_PATH, "saves");
         public static final File REPORT_PATH = new File(GAME_PATH, "report");
 
@@ -47,6 +47,10 @@ public class Main {
         // gui & consts.
 
         public static void main(String[] args) throws Exception {
+
+                output.log(Paths.get(REPORT_PATH.toString(),
+                String.format("Report %d.log",
+                                System.currentTimeMillis())));
 
                 Paths.get(REPORT_PATH.toString(),
                                 String.format("Report %d.log",

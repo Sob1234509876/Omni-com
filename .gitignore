@@ -4,12 +4,9 @@
 # These are the compiled stuffs
 *.jar
 *.class
-*.MF
 
 # These are the files used for compiling
 *.bat
-cFile
-cFile2
 
 # Use to compile and run
 !run.bat
