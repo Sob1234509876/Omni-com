@@ -51,11 +51,7 @@ public class Main {
                 output.log(Paths.get(REPORT_PATH.toString(),
                 String.format("Report %d.log",
                                 System.currentTimeMillis())));
-
-                Paths.get(REPORT_PATH.toString(),
-                                String.format("Report %d.log",
-                                                System.currentTimeMillis())).toFile().createNewFile();
-
+                                
                 PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),
                                 String.format("Report %d.log",
                                                 System.currentTimeMillis()))
@@ -83,9 +79,9 @@ public class Main {
 
                 // Setting init
 
+                loadPlugins();
                 init();
 
-                loadPlugins();
 
         }
 
@@ -155,32 +151,48 @@ public class Main {
 
         private static void loadPlugins() throws Exception {
 
-                String fileName, fileEx;
+                String fileName;
+                String[] splitFileName;
                 boolean ERR_FLAG = false;
+
+
                 Exception TMP = new Exception("FILL THIS NEW CREATED EXCEPTION WITH ERRORS AND BUGS!");
 
+                output.log(PLUGINS_PATH);
                 output.log("Plugins loading");
 
+                // Avoid the UCL throwing NullPointerException
                 URL[] url = { new URL("file:C:") };
+                // Avoid Uninit.
                 URLClassLoader UCL = new URLClassLoader(url);
+
                 Class<?> cls;
 
                 for (File f : PLUGINS_PATH.listFiles()) {
 
                         try {
 
-                                fileName = f.getName().split("\\.")[0];
-                                fileEx = f.getName().split("\\.")[1];
-                                if (fileEx.equals("jar")) {
+                                splitFileName = f.getName().split("\\.");
+
+                                fileName = splitFileName[0];
+
+                                if (f.isFile()) {
+
+                                        output.log(f.getName());
+
                                         url[0] = new URL("file:" + f.getAbsolutePath());
                                         UCL = new URLClassLoader(url);
+
                                         cls = UCL.loadClass(fileName + ".main.Main");
+
                                         output.log(fileName + " loaded");
 
                                         output.log(fileName + " running");
                                         output.log("\n---" + fileName + "---");
                                         cls.getDeclaredMethod("run").invoke(null);
                                         System.out.println("\n------");
+
+
                                 }
 
                         } catch (Exception e) {

@@ -47,3 +47,6 @@ Fixed the client and server of the vanilla plugin, added run.bat for compiling a
 
 alpha 1.2.2 :
 Redone the game types (gts) and factories of src. Orignally I was working on the client but I changed to a new computer and progress resetted.
+
+alpha 1.2.3 :
+Redone the compiling part. Added qrun and qqrun standing for quick run and quick quick run.

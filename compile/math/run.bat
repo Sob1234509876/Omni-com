@@ -5,13 +5,15 @@ echo [COMPILING MATH]
 
 cd %~dp0
 
-set HOME="../../"
-
-"%JAVA_HOME%/bin/javac" "-encoding" "utf-8" "-cp" "%HOME%plugins/;" "@cFile"
+rem Compiling
+"%JAVA_HOME%/bin/javac" "@cFile" "-encoding" "utf-8" "-cp" "%PLUG_HOME%/;"
 
 echo Compiling finish
 
-"%JAVA_HOME%/bin/jar" "-cvfm" "%HOME%plugins/math.jar" "MANIFEST.MF"  "%HOME%plugins/math/"
+cd %PLUG_HOME%
 
+rem Packing
+"%JAVA_HOME%/bin/jar" "-cfm" "math.jar" "../compile/math/MANIFEST.MF" "math/"
 
-"../vanilla/run"
+rem Run vanilla compile
+"../compile/vanilla/run"

@@ -82,12 +82,15 @@ public class Main {
         System.err.println("There might not be any errors, lol");
 
         System.out.println(Reg.get(0).Name);
-        System.out.println("2024.3.18 : Alpha success (1.1.0)");
+        System.out.println("2024.03.18 : Alpha success (1.1.0)");
+        System.out.println("2024.04.08 : Epic Rebirth  (1.2.3)");
         System.out.println("Omni co., Ltd.");
 
+        System.out.println("______________________________________");
         System.out.println(" _");
         System.out.println("/ \\ |/\\/\\ |/\\ .   _  _     |  _|_  _|");
         System.out.println("\\_/ | | | | | |  |_ |_| ., |_  |  |_|.");
+        System.out.println("______________________________________");
 
         // Happy coding and loading.
 

@@ -10,4 +10,5 @@
 
 # Use to compile and run
 !run.bat
-!run2.bat
+!qrun.bat
+!qqrun.bat
