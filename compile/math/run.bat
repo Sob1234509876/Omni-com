@@ -13,7 +13,7 @@ echo Compiling finish
 cd %PLUG_HOME%
 
 rem Packing
-"%JAVA_HOME%/bin/jar" "-cfm" "math.jar" "../compile/math/MANIFEST.MF" "math/"
+"%JAVA_HOME%/bin/jar" "-cfm" "math.jar" "math/MANIFEST.MF" "math/"
 
 rem Run vanilla compile
 "../compile/vanilla/run"

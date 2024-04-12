@@ -5,8 +5,6 @@ import java.util.Map;
 import src.gts.*;
 import src.utils.reg;
 
-//TODO : MaterialFactory & material
-
 /**
  * The {@code materialFactory} factory is used for generatting massive amount of
  * items.

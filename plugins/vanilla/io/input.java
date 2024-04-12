@@ -3,11 +3,11 @@ package vanilla.io;
 public class input {
 
     public static String read() {
-        return vanilla.main.Main.in.getText();
+        return vanilla.main.Main.InTextArea.getText();
     }
 
     public static void clear() {
-        vanilla.main.Main.in.setText(null);
+        vanilla.main.Main.InTextArea.setText(null);
     }
 
 }

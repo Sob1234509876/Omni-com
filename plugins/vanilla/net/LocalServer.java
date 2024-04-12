@@ -1,4 +1,4 @@
-package vanilla.main;
+package vanilla.net;
 
 import src.io.*;
 
@@ -7,34 +7,36 @@ import vanilla.utils.*;
 import java.net.*;
 
 /**
- * Currently used for testing.
+ * Currently used for testing
  * 
  * @version 1.1a
  * @since 1.2.0a
  */
-public class localClient implements Runnable {
+public class LocalServer implements Runnable {
 
-    public static client S;
+    public static server SS;
     private static String buffer;
 
     public void run() {
 
         try {
 
-            output.log(writeNread("WOW, THIS STILL WORKS!!!"));
-            output.log(read());
+            output.log(readNwrite("OMG?!?!?"));
+            write("HOW DID IT WORKED????");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     private static String read() {
         try {
 
-            localClient.S = new client(8080, Inet6Address.getLocalHost());
-            buffer = localClient.S.read();
-            localClient.S.close();
+            LocalServer.SS = new server(8080, Inet6Address.getLocalHost());
+            LocalServer.SS.start();
+            buffer = LocalServer.SS.read();
+            LocalServer.SS.close();
             return buffer;
 
         } catch (Exception e) {
@@ -48,9 +50,10 @@ public class localClient implements Runnable {
     private static void write(String data) {
         try {
 
-            localClient.S = new client(8080, Inet6Address.getLocalHost());
-            localClient.S.write(data);
-            localClient.S.close();
+            LocalServer.SS = new server(8080, Inet6Address.getLocalHost());
+            LocalServer.SS.start();
+            LocalServer.SS.write(data);
+            LocalServer.SS.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,10 +64,11 @@ public class localClient implements Runnable {
     private static String readNwrite(String data) {
         try {
 
-            localClient.S = new client(8080, Inet6Address.getLocalHost());
-            buffer = localClient.S.read();
-            localClient.S.write(data);
-            localClient.S.close();
+            LocalServer.SS = new server(8080, Inet6Address.getLocalHost());
+            LocalServer.SS.start();
+            buffer = LocalServer.SS.read();
+            LocalServer.SS.write(data);
+            LocalServer.SS.close();
             return buffer;
 
         } catch (Exception e) {
@@ -77,10 +81,11 @@ public class localClient implements Runnable {
     private static String writeNread(String data) {
         try {
 
-            localClient.S = new client(8080, Inet6Address.getLocalHost());
-            localClient.S.write(data);
-            buffer = localClient.S.read();
-            localClient.S.close();
+            LocalServer.SS = new server(8080, Inet6Address.getLocalHost());
+            LocalServer.SS.start();
+            LocalServer.SS.write(data);
+            buffer = LocalServer.SS.read();
+            LocalServer.SS.close();
             return buffer;
 
         } catch (Exception e) {
@@ -89,4 +94,5 @@ public class localClient implements Runnable {
             return new String();
         }
     }
+
 }

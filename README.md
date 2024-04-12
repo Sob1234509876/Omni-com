@@ -50,3 +50,17 @@ Redone the game types (gts) and factories of src. Orignally I was working on the
 
 alpha 1.2.3 :
 Redone the compiling part. Added qrun and qqrun standing for quick run and quick quick run.
+
+alpha 1.2.4 :
+Redone the core of vanilla plugin. The orignal plugin was quite broken and could not load packages properly.
+
+Chinese stuffs (Poorly written classical Chinese)
+===
+初
+===
+  一日，吾游至此地，忽见天裂一缝，致使天地分，万物生。见此地宜人，便立碑，碑刻“天地工坊”。<p>
+  劫（指成劫，后皆如此意）复劫，吾以产再产为旨，创无双工坊。见君来访，便领君来望。
+  
+材间
+===
+  欲知后事如何，且等后版本。

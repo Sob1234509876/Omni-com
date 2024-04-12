@@ -13,7 +13,7 @@ echo Compiling finish
 cd %PLUG_HOME%
 
 rem Packing
-"%JAVA_HOME%/bin/jar" "-cfm" "vanilla.jar" "../compile/vanilla/MANIFEST.MF" "vanilla"
+"%JAVA_HOME%/bin/jar" "-cfm" "vanilla.jar" "vanilla/MANIFEST.MF" "vanilla"
 
 rem Run src compile
 "../compile/src/run"

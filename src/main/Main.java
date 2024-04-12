@@ -1,7 +1,5 @@
 package src.main;
 
-///////
-//Types
 
 //Tools
 import java.util.Properties;
@@ -9,78 +7,56 @@ import java.util.Properties;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import src.gui.listeners.keyDetect;
-import src.io.*;
+import src.gui.listeners.*;
+import src.io .*;
 
 //io
-import java.io.*;
-
+import java.io .*;
 import java.nio.file.Paths;
 
-//Swing
+//GUI
 import javax.swing.*;
-import javax.swing.border.MatteBorder;
+import javax.swing.border.*;
+import java .awt  .*;
 
-import java.awt.*;
-///////
 
 public class Main {
 
         public static Properties settings = new Properties();
         public static Properties langSettings = new Properties();
 
-        public static final String __VERSION__ = "1.2.3a";
-        public static final File GAME_PATH = new File("../../");
-        public static final File SRC_PATH = new File(GAME_PATH, "src");
-        public static final File CONFIGS_PATH = new File(GAME_PATH, "configs");
-        public static final File PLUGINS_PATH = new File(GAME_PATH, "plugins");
-        public static final File RESOURCE_PATH = new File(GAME_PATH, "resource");
-        public static final File SAVES_PATH = new File(GAME_PATH, "saves");
-        public static final File REPORT_PATH = new File(GAME_PATH, "report");
+        public static final String __VERSION__ = "1.2.4a";
+        public static final File   GAME_PATH = new File("../../");
+        public static final File   SRC_PATH = new File(GAME_PATH, "src");
+        public static final File   CONFIGS_PATH = new File(GAME_PATH, "configs");
+        public static final File   PLUGINS_PATH = new File(GAME_PATH, "plugins");
+        public static final File   RESOURCE_PATH = new File(GAME_PATH, "resource");
+        public static final File   SAVES_PATH = new File(GAME_PATH, "saves");
+        public static final File   REPORT_PATH = new File(GAME_PATH, "report");
+        public static final Image  ICON = new ImageIcon(Paths.get(RESOURCE_PATH.toString(),"icon.png").toString()).getImage();
 
         // Consts. & importants
 
-        public static JFrame gui = new JFrame();
-        public static JTextArea out = new JTextArea();
-        public static JTextField in = new JTextField("game");
+        public static JFrame     GameFrame = new JFrame();
+        public static JTextArea  OutTextArea = new JTextArea();
+        public static JTextField InTextArea = new JTextField("game");
 
         // gui & consts.
 
         public static void main(String[] args) throws Exception {
-
-                output.log(Paths.get(REPORT_PATH.toString(),
-                String.format("Report %d.log",
-                                System.currentTimeMillis())));
                                 
-                PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),
-                                String.format("Report %d.log",
-                                                System.currentTimeMillis()))
-                                .toString()),
-                                false, "utf-8");
-
+                PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),String.format("Report %d.log",System.currentTimeMillis())).toString()),false, "utf-8");
                 System.setErr(t);
 
-                // Path Init
+                // Init Reports
 
-                settings.load(new InputStreamReader(
-                                new FileInputStream(
-                                                Paths.get(CONFIGS_PATH.toString(),
-                                                                "Main.cfg").toString()),
-                                "utf-8"));
+                settings    .load (new InputStreamReader(new FileInputStream(Paths.get(CONFIGS_PATH.toString(),"Main.cfg").toString()),"utf-8"));
+                langSettings.load (new InputStreamReader(new FileInputStream(Paths.get(RESOURCE_PATH.toString(),"Main",settings.getProperty("lang") + ".lang").toString()),"utf-8"));
 
-                langSettings.load(
-                                new InputStreamReader(
-                                                new FileInputStream(
-                                                                Paths.get(RESOURCE_PATH.toString(),
-                                                                                "Main",
-                                                                                settings.getProperty("lang") + ".lang")
-                                                                                .toString()),
-                                                "utf-8"));
+                // Setting init, uses utf-8
 
-                // Setting init
-
-                loadPlugins();
-                init();
+                LoadPlugins();
+                Init();
 
 
         }
@@ -89,55 +65,49 @@ public class Main {
          * Graphics init. (That`s all)
          */
 
-        private static void init() {
+        private static void Init() {
 
-                gui.add(out);
-                gui.add(in);
+                GameFrame.add(InTextArea);
+                GameFrame.add(OutTextArea);
 
-                gui.setTitle(String.format(langSettings.getProperty("title"), __VERSION__));
-                out.setText(langSettings.getProperty("default"));
 
-                int GUI_X = Integer.parseInt(settings.getProperty("GUI.size").split("x")[0]);
-                int GUI_Y = Integer.parseInt(settings.getProperty("GUI.size").split("x")[1]);
-                int SIZ = Integer.parseInt(settings.getProperty("GUI.font_siz"));
-                int BGCOLOR = Integer.parseInt(settings.getProperty("GUI.BGColor"));
-                int FGCOLOR = Integer.parseInt(settings.getProperty("GUI.FGColor"));
-                Font FONT = new Font(settings.getProperty("GUI.font"), Font.PLAIN, SIZ);
-                MatteBorder BORDER = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(FGCOLOR, false));
+                final Integer GUI_X = Integer.parseInt(settings.getProperty("GUI.size").split("x")[0]);
+                final Integer GUI_Y = Integer.parseInt(settings.getProperty("GUI.size").split("x")[1]);
+                final Integer SIZ = Integer.parseInt(settings.getProperty("GUI.font_siz"));
+                final Integer BGCOLOR = Integer.parseInt(settings.getProperty("GUI.BGColor"));
+                final Integer FGCOLOR = Integer.parseInt(settings.getProperty("GUI.FGColor"));
+                final Font    FONT = new Font(settings.getProperty("GUI.font"), Font.PLAIN, SIZ);
+                final Border  BORDER = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(FGCOLOR, false));
 
-                gui.setVisible(true);
-                gui.setIconImage(
-                                new ImageIcon(
-                                                Paths.get(
-                                                                RESOURCE_PATH.toString(),
-                                                                "icon.png").toString())
-                                                .getImage());
-                gui.setLayout(null);
-                gui.setSize(GUI_X + 12, GUI_Y + 35);
-                gui.setResizable(false);
-                gui.setLocationRelativeTo(null);
-                gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                GameFrame.setTitle    (String.format(langSettings.getProperty("title"), __VERSION__));
+                GameFrame.setVisible  (true);
+                GameFrame.setIconImage(ICON);
+                GameFrame.setLayout   (null);
+                GameFrame.setSize     (GUI_X + 12, GUI_Y + 35);
+                GameFrame.setResizable(false);
+                GameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                out.setBounds(0,
-                                0,
-                                GUI_X,
-                                GUI_Y - SIZ);
-                out.setFont(FONT);
-                out.setBackground(new Color(BGCOLOR, false));
-                out.setForeground(new Color(FGCOLOR, false));
-                out.setBorder(BORDER);
-                out.setLineWrap(true);
+                OutTextArea.setBounds    (0,
+                                          0,
+                                          GUI_X,
+                                          GUI_Y - SIZ);
+                OutTextArea.setFont      (FONT);
+                OutTextArea.setBackground(new Color(BGCOLOR, false));
+                OutTextArea.setForeground(new Color(FGCOLOR, false));
+                OutTextArea.setBorder    (BORDER);
+                OutTextArea.setLineWrap  (true);
+                OutTextArea.setText      (langSettings.getProperty("default"));
 
-                in.setBounds(0,
+                InTextArea.setBounds(0,
                                 GUI_Y - SIZ,
                                 GUI_X,
                                 SIZ);
-                in.setFont(FONT);
-                in.setBackground(new Color(BGCOLOR, false));
-                in.setForeground(new Color(FGCOLOR, false));
-                in.setBorder(BORDER);
-                in.setEditable(true);
-                in.addKeyListener(new keyDetect());
+                InTextArea.setFont(FONT);
+                InTextArea.setBackground(new Color(BGCOLOR, false));
+                InTextArea.setForeground(new Color(FGCOLOR, false));
+                InTextArea.setBorder(BORDER);
+                InTextArea.setEditable(true);
+                InTextArea.addKeyListener(new keyDetect());
 
         }
 
@@ -149,47 +119,52 @@ public class Main {
          * @throws Exception
          */
 
-        private static void loadPlugins() throws Exception {
+        private static void LoadPlugins() throws Exception {
 
-                String fileName;
+                String   fileName;
                 String[] splitFileName;
-                boolean ERR_FLAG = false;
-
-
-                Exception TMP = new Exception("FILL THIS NEW CREATED EXCEPTION WITH ERRORS AND BUGS!");
-
-                output.log(PLUGINS_PATH);
-                output.log("Plugins loading");
-
-                // Avoid the UCL throwing NullPointerException
-                URL[] url = { new URL("file:C:") };
-                // Avoid Uninit.
-                URLClassLoader UCL = new URLClassLoader(url);
-
+                boolean  ERR_FLAG = false;
                 Class<?> cls;
+                // Temporary varibles. 
+
+                Exception TMP = new Exception();
+                // It will throw something if not init.
+
+                output.log("Plugins loading");
+                //logs
+
+                URL[]          url = { new URL("file:C:") };
+                URLClassLoader UCL = new URLClassLoader(url);
+                // Avoid Uninit.
+
 
                 for (File f : PLUGINS_PATH.listFiles()) {
 
                         try {
 
                                 splitFileName = f.getName().split("\\.");
-
-                                fileName = splitFileName[0];
+                                fileName      = splitFileName[0];
+                                // Getting the plugin names
 
                                 if (f.isFile()) {
 
                                         output.log(f.getName());
+                                        // Log
 
                                         url[0] = new URL("file:" + f.getAbsolutePath());
-                                        UCL = new URLClassLoader(url);
+                                        UCL    = new URLClassLoader(url);
+                                        // Creating new class loader
 
                                         cls = UCL.loadClass(fileName + ".main.Main");
+                                        // Load class
 
                                         output.log(fileName + " loaded");
-
                                         output.log(fileName + " running");
                                         output.log("\n---" + fileName + "---");
-                                        cls.getDeclaredMethod("run").invoke(null);
+
+                                        cls.getDeclaredMethod("main", String[].class).invoke(null, new Object[1]);
+                                        // Run plugin method "main"
+                                        
                                         System.out.println("\n------");
 
 
@@ -203,12 +178,8 @@ public class Main {
                                 ERR_FLAG = true;
 
                         } finally {
-
                                 if (ERR_FLAG) {
-
-                                        output.log();
                                         TMP.printStackTrace(System.out);
-
                                 }
                         }
 

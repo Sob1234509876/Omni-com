@@ -12,3 +12,5 @@ echo ______________
 echo ____________
 echo [END OF RUN]
 echo ____________
+
+pause

@@ -16,16 +16,12 @@ public class output {
     }
 
     public static void log(Object message) {
-        System.out.printf("[%s/ANNOUNCE][%s] %s\n", new Date().toString(), Thread.currentThread().getName(),
-                message.toString());
+        log(message, "ANNOUNCE");
     }
 
     public static void log(Object message, String type) {
         System.out.printf("[%s/%s][%s] %s\n", new Date().toString(), type, Thread.currentThread().getName(), message);
-    }
-
-    public static void log(Object message, String type, Date time) {
-        System.out.printf("[%s/%s][%s] %s\n", time.toString(), type, Thread.currentThread().getName(), message);
+        System.err.printf("[%s/%s][%s] %s\n", new Date().toString(), type, Thread.currentThread().getName(), message);
     }
 
     public static void clear() {
@@ -34,11 +30,11 @@ public class output {
     }
 
     public static void write() {
-        Main.out.setText(null);
+        Main.OutTextArea.setText(null);
     }
 
-    public static void write(String x) {
-        Main.out.setText(x);
+    public static void write(Object x) {
+        Main.OutTextArea.setText(x.toString());
     }
 
 }

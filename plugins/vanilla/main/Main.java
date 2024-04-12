@@ -1,11 +1,7 @@
 package vanilla.main;
 
-import src.utils.*;
-import src.utils.factories.*;
 import src.gts.*;
 import src.gui.listeners.*;
-
-import vanilla.main.others.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -15,7 +11,7 @@ import java.awt.*;
 import java.io.*;
 import java.nio.file.*;
 
-import java.util.Properties;
+import java.util.*;
 
 /**
  * The vanilla game of this game.
@@ -24,64 +20,46 @@ import java.util.Properties;
  * <p>
  * Quick info :
  * {@code vanilla.main.Main.flag} - A flag describing current game status
- * <p>
- * -1 - default.
- * <p>
- * 0 - init.
- * <p>
- * 1 - new save creating.
- * 
+ * <pre>
+ * -1 : default.
+ * 0 : init.
+ * 1 : new save creating.
+ * </pre>
  * @version 1.0.2a
  */
 
 public class Main {
 
-    public static long flag = -1;
-    // A flag describing current game status
+    public static long StatusFlag = -1;
+    // Flags
 
-    public static final String __VERSION__ = "1.1a";
-    public static volatile reg<item> Reg = new reg<>("vanilla");
+    public static final String                 __VERSION__ = "2.0a";
+    public static volatile src.utils.reg<item> VanillaReg = new src.utils.reg<>("vanilla");
     // METAish
-
     public static Properties settings = new Properties();
     public static Properties langSettings = new Properties();
     // Properties
-
-    public static JFrame game = new JFrame();
-    public static JTextArea out = new JTextArea();
-    public static JTextField in = new JTextField("play");
+    public static JFrame     GameFrame = new JFrame();
+    public static JTextArea  OutTextArea = new JTextArea();
+    public static JTextField InTextArea = new JTextField("play");
     // GUI
 
     private static File RESOURCE_PATH = src.main.Main.RESOURCE_PATH;
     private static File CONFIG_PATH = src.main.Main.CONFIGS_PATH;
-    // Paths
+    // Privates
 
     static {
-        Reg.add(item.valueOf(new ItemFactory()
+        VanillaReg.add(item.valueOf(new src.utils.factories.ItemFactory()
                 .setName("ALPHA"))
                 );
     }
 
     /**
-     * Used as a testing ground.
-     * 
-     * @param args , you know what does it means.
+     * The entry of this plugin.
      */
+    public static void main(String[] args) throws Exception {
 
-    public static void main(String[] args) {
-    }
-
-    /**
-     * The entry of this plugin, consists of init. and gt. creation.
-     * 
-     * @throws Exception
-     */
-
-    public static void run() throws Exception {
-
-        System.err.println("There might not be any errors, lol");
-
-        System.out.println(Reg.get(0).Name);
+        System.out.println(VanillaReg.get(0).Name);
         System.out.println("2024.03.18 : Alpha success (1.1.0)");
         System.out.println("2024.04.08 : Epic Rebirth  (1.2.3)");
         System.out.println("Omni co., Ltd.");
@@ -94,68 +72,15 @@ public class Main {
 
         // Happy coding and loading.
 
-        Game();
-
+        InitResource();
+        CoreCmdProcessor();
     }
 
     /**
-     * The part where the cmd line of the src works.
-     * 
+     * Inits some basic resources like settings and lang files.
      * @throws Exception
      */
-
-    private static void Game() throws Exception {
-
-        // BLAH Blah blah!!!!!!!!!!!!!!! It is only about the main game cmd commands.
-        Thread gamet = new Thread(new Runnable() {
-
-            private String buffer;
-
-            public void run() {
-
-                try {
-
-                    while (true) {
-                        if ((keyDetect.PressedKey == '\n')) {
-
-                            buffer = src.io.input.read();
-
-                            if (buffer.equals("game")) {
-                                initGame();
-                            }
-
-                            if (buffer.equals("help")) {
-                                src.io.output.write(String.format(langSettings.getProperty("help")));
-                            }
-
-                            src.io.input.clear();
-                            keyDetect.PressedKey = '\0';
-                        }
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-
-                , "Game");
-
-        gamet.start();
-
-    }
-
-    /**
-     * The init. part of the game, GUI and etc.
-     * 
-     * @throws Exception
-     */
-    private static void initGame() throws Exception {
-
-        game.add(in);
-        game.add(out);
-        // Add the input and output JTextPanel
+    private static void InitResource() throws Exception{
 
         settings.load(new InputStreamReader(
                 new FileInputStream(
@@ -175,71 +100,111 @@ public class Main {
                 "utf-8"));
 
         // Load the settings and lang files
+    }
 
-        final int GUI_WIDTH = Integer.parseInt(settings.getProperty("GUI.size").split("x")[0]);
-        final int GUI_HEIGHT = Integer.parseInt(settings.getProperty("GUI.size").split("x")[1]);
-        final int SIZ = Integer.parseInt(settings.getProperty("GUI.font_siz"));
+    /**
+     * The part where the cmd line of the src works.
+     * 
+     * @throws Exception
+     */
+    private static void CoreCmdProcessor() throws Exception {
 
-        final Color BGCOLOR = new Color(Integer.parseInt(settings.getProperty("GUI.BGColor")), false);
-        final Color FGCOLOR = new Color(Integer.parseInt(settings.getProperty("GUI.FGColor")), false);
+        Thread VanillaCoreCmdPT = new Thread(new Runnable() {
 
-        final Border BORDER = BorderFactory.createMatteBorder(1, 1, 1, 1, FGCOLOR);
-        final Font FONT = new Font(
-                settings.getProperty("GUI.font"),
-                Font.PLAIN,
-                SIZ);
+            private String buffer;
+
+            public void run() {
+
+                try {
+                    while (true) {
+                        if ((keyDetect.PressedKey == '\n')) {
+
+                            buffer = src.io.input.read();
+
+                            if (buffer.equals("game")) {
+                                InitGUI();
+                            }
+
+                            if (buffer.equals("help")) {
+                                src.io.output.write(String.format(langSettings.getProperty("help")));
+                            }
+
+                            src.io.input.clear();
+                            keyDetect.PressedKey = '\0';
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+                , "Game");
+
+        VanillaCoreCmdPT.start();
+
+    }
+
+    /**
+     * The init. part of the game, GUI and etc.
+     * 
+     * @throws Exception
+     */
+    private static void InitGUI() throws Exception {
+
+        GameFrame.add(InTextArea);
+        GameFrame.add(OutTextArea);
+        // Add the input and output JTextPanel
+        final Integer SIZ        = Integer.parseInt(settings.getProperty("GUI.font_siz"));
+
+        final Font    FONT       = new Font(settings.getProperty("GUI.font"),Font.PLAIN,SIZ);
+        final Color   BGCOLOR    = new Color(Integer.parseInt(settings.getProperty("GUI.BGColor")), false);
+        final Color   FGCOLOR    = new Color(Integer.parseInt(settings.getProperty("GUI.FGColor")), false);
+        final Integer GUI_WIDTH  = Integer.parseInt(settings.getProperty("GUI.size").split("x")[0]);
+        final Integer GUI_HEIGHT = Integer.parseInt(settings.getProperty("GUI.size").split("x")[1]);
+        final Border  BORDER     = BorderFactory.createMatteBorder(1, 1, 1, 1, FGCOLOR);
 
         // For quick access to gui configurations.
 
-        ///////////////////////////////////////////// A nice wall///////////////////
-        game.setTitle(String.format(langSettings.getProperty("title"), __VERSION__));
-
-        game.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        game.setLayout(null);
-        game.setIconImage(
-                (new ImageIcon(
-                        Paths.get(
-                                RESOURCE_PATH.toString(),
-                                "icon.png").toString())
-                        .getImage()));
-        game.setSize(GUI_WIDTH, GUI_HEIGHT + 35);
-        game.setResizable(false);
-        game.setLocationRelativeTo(null);
-        game.setVisible(true);
+        GameFrame.setTitle                 (String.format(langSettings.getProperty("title"), __VERSION__));
+        GameFrame.setDefaultCloseOperation (JFrame.HIDE_ON_CLOSE);
+        GameFrame.setLayout                (null);
+        GameFrame.setIconImage             (src.main.Main.ICON);
+        GameFrame.setSize                  (GUI_WIDTH, GUI_HEIGHT + 35);
+        GameFrame.setResizable             (false);
+        GameFrame.setLocationRelativeTo    (null);
+        GameFrame.setVisible               (true);
 
         // Init. game JFrame
 
-        out.setText("");
-        out.setFont(FONT);
-        out.setBounds(
-                0,
-                0,
-                GUI_WIDTH,
-                GUI_HEIGHT - SIZ);
-        out.setBackground(BGCOLOR);
-        out.setForeground(FGCOLOR);
-        out.setBorder(BORDER);
-        out.setLineWrap(true);
+        OutTextArea.setText       ("");
+        OutTextArea.setEditable   (false);
+        OutTextArea.setFont       (FONT);
+        OutTextArea.setBounds     (
+                                   0,
+                                   0,
+                                   GUI_WIDTH,
+                                   GUI_HEIGHT - SIZ);
+        OutTextArea.setBackground (BGCOLOR);
+        OutTextArea.setForeground (FGCOLOR);
+        OutTextArea.setBorder     (BORDER);
+        OutTextArea.setLineWrap   (true);
 
         // Init. output JTextPanel
 
-        in.setText("");
-        in.setFont(FONT);
-        in.setBounds(
-                0,
-                GUI_HEIGHT - SIZ,
-                GUI_WIDTH,
-                SIZ);
-        in.setBackground(BGCOLOR);
-        in.setForeground(FGCOLOR);
-        in.setBorder(BORDER);
-        in.addKeyListener(new keyDetect()); // Runs createGame when you type
-        ///////////////////////////////////////////// A nice wall///////////////////
-
-        Thread mkGame = new Thread(new createGame(), "mk Game");
-        mkGame.start();
-
-        // Init. input JTextPanel
+        InTextArea.setText        ("");
+        InTextArea.setFont        (FONT);
+        InTextArea.setBounds      (
+                                   0,
+                                   GUI_HEIGHT - SIZ,
+                                   GUI_WIDTH,
+                                   SIZ);
+        InTextArea.setBackground  (BGCOLOR);
+        InTextArea.setForeground  (FGCOLOR);
+        InTextArea.setBorder      (BORDER);
+        InTextArea.addKeyListener (new keyDetect()); // Runs createGame when you type
+    
     }
 
 }

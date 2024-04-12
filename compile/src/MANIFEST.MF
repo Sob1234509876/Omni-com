@@ -1,2 +1,0 @@
-Main-Class: src.main.Main
-Class-Path: "../;../plugins/"

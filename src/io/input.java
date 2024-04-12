@@ -9,11 +9,11 @@ import src.main.Main;
 public class input {
 
     public static String read() {
-        return Main.in.getText();
+        return Main.InTextArea.getText();
     }
 
     public static void clear() {
-        Main.in.setText(null);
+        Main.InTextArea.setText(null);
     }
 
 }
