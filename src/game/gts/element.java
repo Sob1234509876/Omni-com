@@ -1,7 +1,7 @@
-package src.gts;
+package game.gts;
 
-import src.utils.reg;
-import src.utils.factories.ElementFactory;
+import game.utils.reg;
+import game.utils.factories.ElementFactory;
 
 /**
  * {@code Element} class, used in type fluid and material.

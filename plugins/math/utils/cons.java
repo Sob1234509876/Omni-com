@@ -1,4 +1,4 @@
-package math;
+package math.utils;
 
 public class cons {
     public static final String __VERSION__ = "0.1a";

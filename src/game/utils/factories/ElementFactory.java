@@ -1,9 +1,9 @@
-package src.utils.factories;
+package game.utils.factories;
 
 import java.util.Map;
 
-import src.gts.element;
-import src.utils.reg;
+import game.gts.element;
+import game.utils.reg;
 
 /**
  * The {@code elementFactory} class is used for creating elements, elements are

@@ -1,6 +1,6 @@
 package vanilla.net;
 
-import src.io.*;
+import game.io.*;
 
 import vanilla.utils.*;
 

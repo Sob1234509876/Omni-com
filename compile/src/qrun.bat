@@ -7,7 +7,7 @@ echo ______________
 echo [RUNNING GAME]
 echo ______________
 
-"%JAVA_HOME%/bin/java" "-jar" "%HOME%/test.jar"
+"%JAVA_HOME%/bin/java" "-jar" "%HOME%/game.jar" "-XX:+ShowCodeDetailsInExceptionMessages"
 
 echo ____________
 echo [END OF RUN]

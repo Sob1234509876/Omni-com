@@ -1,4 +1,4 @@
-package src.main;
+package game.main;
 
 
 //Tools
@@ -7,8 +7,8 @@ import java.util.Properties;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import src.gui.listeners.*;
-import src.io .*;
+import game.gui.listeners.*;
+import game.io .*;
 
 //io
 import java.io .*;
@@ -39,7 +39,7 @@ public class Main {
 
         public static JFrame     GameFrame = new JFrame();
         public static JTextArea  OutTextArea = new JTextArea();
-        public static JTextField InTextArea = new JTextField("game");
+        public static JTextField InTextArea = new JTextField("cns");
 
         // gui & consts.
 
@@ -91,6 +91,7 @@ public class Main {
                                           0,
                                           GUI_X,
                                           GUI_Y - SIZ);
+                OutTextArea.setEditable  (false);
                 OutTextArea.setFont      (FONT);
                 OutTextArea.setBackground(new Color(BGCOLOR, false));
                 OutTextArea.setForeground(new Color(FGCOLOR, false));
@@ -107,7 +108,7 @@ public class Main {
                 InTextArea.setForeground(new Color(FGCOLOR, false));
                 InTextArea.setBorder(BORDER);
                 InTextArea.setEditable(true);
-                InTextArea.addKeyListener(new keyDetect());
+                InTextArea.addKeyListener(new KeyDetect());
 
         }
 
@@ -123,12 +124,8 @@ public class Main {
 
                 String   fileName;
                 String[] splitFileName;
-                boolean  ERR_FLAG = false;
                 Class<?> cls;
                 // Temporary varibles. 
-
-                Exception TMP = new Exception();
-                // It will throw something if not init.
 
                 output.log("Plugins loading");
                 //logs
@@ -172,15 +169,10 @@ public class Main {
 
                         } catch (Exception e) {
 
-                                TMP = e;
                                 e.printStackTrace();
+                                e.printStackTrace(System.out);
                                 System.err.print('\n');
-                                ERR_FLAG = true;
 
-                        } finally {
-                                if (ERR_FLAG) {
-                                        TMP.printStackTrace(System.out);
-                                }
                         }
 
                 }

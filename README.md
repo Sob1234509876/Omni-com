@@ -54,6 +54,9 @@ Redone the compiling part. Added qrun and qqrun standing for quick run and quick
 alpha 1.2.4 :
 Redone the core of vanilla plugin. The orignal plugin was quite broken and could not load packages properly.
 
+alpha 1.2.5 :
+Trying to fix problems of vanilla plugin. (part 1)
+
 Chinese stuffs (Poorly written classical Chinese)
 ===
 初
@@ -61,6 +64,10 @@ Chinese stuffs (Poorly written classical Chinese)
   一日，吾游至此地，忽见天裂一缝，致使天地分，万物生。见此地宜人，便立碑，碑刻“天地工坊”。<p>
   劫（指成劫，后皆如此意）复劫，吾以产再产为旨，创无双工坊。见君来访，便领君来望。
   
-材间
+间
 ===
-  欲知后事如何，且等后版本。
+  吾立碑刻“天地工坊”，乃欲将天地万物造于工坊。坊有千万间，分为材间、化间、料间、器间与电间，至于东、南、西、北、中五荒之地，相依相辅。
+  闻君欲知各间之细，且听下版本分解。
+
+元
+===

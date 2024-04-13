@@ -1,9 +1,9 @@
-package src.utils.factories;
+package game.utils.factories;
 
 import java.util.Map;
 
-import src.gts.*;
-import src.utils.reg;
+import game.gts.*;
+import game.utils.reg;
 
 /**
  * The {@code materialFactory} factory is used for generatting massive amount of

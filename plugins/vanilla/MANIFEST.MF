@@ -1,1 +1,1 @@
-Class-Path: ../plugins/vanilla.jar;
+Class-Path: ../../game.jar;

@@ -1,10 +1,10 @@
-package src.utils.factories;
+package game.utils.factories;
 
 import java.util.Map;
 
-import src.gts.machine;
-import src.gts.recipe;
-import src.utils.reg;
+import game.gts.machine;
+import game.gts.recipe;
+import game.utils.reg;
 
 public class MachineFactory extends ItemFactory {
 

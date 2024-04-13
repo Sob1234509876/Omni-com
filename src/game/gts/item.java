@@ -1,11 +1,11 @@
-package src.gts;
+package game.gts;
 
 import java.io.File;
 import java.util.Map;
 
-import src.utils.reg;
-import src.utils.factories.ItemFactory;
-import src.main.Main;
+import game.utils.reg;
+import game.utils.factories.ItemFactory;
+import game.main.Main;
 
 public class item {
 

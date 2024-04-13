@@ -1,4 +1,4 @@
-package src.gui.listeners;
+package game.gui.listeners;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
@@ -8,13 +8,13 @@ import java.awt.event.KeyEvent;
  * set it back to {@code '\0'} to prevent LOD (loop of death)
  */
 
-public class keyDetect implements KeyListener {
+public class KeyDetect implements KeyListener {
 
     public volatile static int PressedKey = 0;
 
     public void keyPressed(KeyEvent k) {
 
-        keyDetect.PressedKey = k.getKeyCode();
+        KeyDetect.PressedKey = k.getKeyCode();
 
     }
 

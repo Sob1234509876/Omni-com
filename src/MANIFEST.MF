@@ -1,2 +1,2 @@
-Main-Class: src.main.Main
+Main-Class: game.main.Main
 Class-Path: ../plugins/;

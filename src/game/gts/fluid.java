@@ -1,7 +1,7 @@
-package src.gts;
+package game.gts;
 
-import src.utils.reg;
-import src.utils.factories.FluidFactory;
+import game.utils.reg;
+import game.utils.factories.FluidFactory;
 
 /**
  * 

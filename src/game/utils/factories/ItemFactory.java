@@ -1,9 +1,9 @@
-package src.utils.factories;
+package game.utils.factories;
 
 import java.util.Map;
 
-import src.gts.item;
-import src.utils.reg;
+import game.gts.item;
+import game.utils.reg;
 
 /**
  * This factory is used for creating items, items are stored in

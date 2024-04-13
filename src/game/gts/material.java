@@ -1,9 +1,9 @@
-package src.gts;
+package game.gts;
 
 import java.util.Map;
 
-import src.utils.reg;
-import src.utils.factories.*;
+import game.utils.reg;
+import game.utils.factories.*;
 
 //TODO : LoadChemFormula() & LoadItems()
 

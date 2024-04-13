@@ -1,4 +1,4 @@
-package math;
+package math.utils;
 
 /**
  * Provides some useful tools to cauculate physic and thermal dynamics (and

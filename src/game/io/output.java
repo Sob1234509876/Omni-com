@@ -1,6 +1,6 @@
-package src.io;
+package game.io;
 
-import src.main.Main;
+import game.main.Main;
 
 import java.util.Date;
 
