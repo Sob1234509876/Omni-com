@@ -55,7 +55,7 @@ alpha 1.2.4 :
 Redone the core of vanilla plugin. The orignal plugin was quite broken and could not load packages properly.
 
 alpha 1.2.5 :
-Trying to fix problems of vanilla plugin. (part 1)
+Trying to fix problems of vanilla plugin. (part 1) Fix all of the problems (and also left some poorly fixed problems that *might* be fixed in the future)(part 2).
 
 Chinese stuffs (Poorly written classical Chinese)
 ===
@@ -67,7 +67,9 @@ Chinese stuffs (Poorly written classical Chinese)
 间
 ===
   吾立碑刻“天地工坊”，乃欲将天地万物造于工坊。坊有千万间，分为材间、化间、料间、器间与电间，至于东、南、西、北、中五荒之地，相依相辅。
-  闻君欲知各间之细，且听下版本分解。
+  闻君欲知各间之细，吾便列其细。
 
 元
 ===
+  吾坊底细多而精，不可被外人知。但君已问，吾便列坊底细之小部也。
+  欲知底细如何，且听下版本分解。

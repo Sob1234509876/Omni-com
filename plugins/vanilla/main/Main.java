@@ -2,11 +2,12 @@ package vanilla.main;
 
 import game.gts.*;
 import game.gui.listeners.*;
-import vanilla.CreateNewSave;
 
 import javax.swing.*;
 
 import java.io.*;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.*;
 
 import java.util.*;
@@ -23,10 +24,9 @@ import java.util.*;
  * 0 : init.
  * 1 : new save creating.
  * </pre>
- * @version 1.0.2a
+ * @version 2.0.1a
  */
 
-//TODO : How to let Main access other classes.
 
 public class Main {
     public static volatile long StatusFlag = -1;
@@ -35,16 +35,17 @@ public class Main {
     public static final    String              __VERSION__ = "2.0a";
     public static volatile game.utils.reg<item> VanillaReg  = new game.utils.reg<>("vanilla");
     // METAish
-    public static Properties settings     = new Properties();
-    public static Properties langSettings = new Properties();
+    public static final Properties settings     = new Properties();
+    public static final Properties langSettings = new Properties();
     // Properties
     public static JFrame     GameFrame   = new JFrame();
     public static JTextArea  OutTextArea = new JTextArea();
     public static JTextField InTextArea  = new JTextField("play");
     // GUI
 
-    private static File RESOURCE_PATH = game.main.Main.RESOURCE_PATH;
-    private static File CONFIG_PATH   = game.main.Main.CONFIGS_PATH;
+    private static final File RESOURCE_PATH = game.main.Main.RESOURCE_PATH;
+    private static final File CONFIG_PATH   = game.main.Main.CONFIGS_PATH;
+    private static final File PLUGINS_PATH  = game.main.Main.PLUGINS_PATH;
     // Privates
 
     static {
@@ -72,6 +73,14 @@ public class Main {
         // Happy coding and loading.
 
         InitResource();
+        game.io.output.log(String.format("SETTINGS LOAD...%s...L:%d\n", (settings.isEmpty() ? "FAILED" : "SUCSEED"), settings.size()));
+        settings.list(System.out);
+        settings.list(System.err);
+
+        game.io.output.log(String.format("LANGS LOAD...%s...L:%d\n", (settings.isEmpty() ? "FAILED" : "SUCSEED"), settings.size()));
+        langSettings.list(System.out);
+        langSettings.list(System.err);
+
         CoreCmdProcessor();
     }
 
@@ -85,6 +94,8 @@ public class Main {
         langSettings.load(new InputStreamReader(new FileInputStream(Paths.get(RESOURCE_PATH.toString(),"vanilla",settings.getProperty("lang") + ".lang").toString()),"utf-8"));
 
         // Load the settings and lang files
+
+
     }
 
     /**
@@ -104,9 +115,21 @@ public class Main {
                     while (true) {
                         buffer = GET();
 
-                        if (buffer.equals("cns") ||
-                        buffer.equals("create new save")) {
-                            CreateNewSave.Create();
+                        if (buffer.equals("cns")) {
+                            
+                            URL[] U = {new URL(String.format("file:%s/vanilla.jar", PLUGINS_PATH))};
+                            URLClassLoader UCL = new URLClassLoader(U);
+
+                            game.io.output.log("LOADING CNS");
+
+                            UCL.loadClass("vanilla.CreateNewSave")
+                                .getMethod("Create")
+                                .invoke(null);
+
+                            game.io.output.log("USE CNS");
+
+                            UCL.close();
+
                         }
                         else if (buffer.equals("help")) {
                             game.io.output.write(String.format(langSettings.getProperty("help")));
@@ -120,7 +143,7 @@ public class Main {
 
         }
 
-                , "Game");
+                , "VCL");
 
         VanillaCmdSolver.start();
 

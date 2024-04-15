@@ -6,7 +6,6 @@ echo #############################
 
 rem Enviroment varibles
 set COMP_PATH=compile
-set HOME=../..
-set PLUG_HOME=%HOME%/plugins
+set PLUG_HOME=plugins
 
 "%COMP_PATH%/math/run"

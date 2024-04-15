@@ -3,17 +3,14 @@
 echo ________________
 echo [COMPILING MATH]
 
-cd %~dp0
-
 rem Compiling
-"%JAVA_HOME%/bin/javac" "@cFile" "-encoding" "utf-8" "-cp" "%PLUG_HOME%/;"
+"%JAVA_HOME%/bin/javac" "@%COMP_PATH%/math/cFile" "-encoding" "utf-8" "-cp" "%PLUG_HOME%/;"
 
 echo Compiling finish
 
-cd %PLUG_HOME%
-
 rem Packing
-"%JAVA_HOME%/bin/jar" "-cfm" "math.jar" "math/MANIFEST.MF" "math/"
+
+"%JAVA_HOME%/bin/jar" "-cfm" "plugins/math.jar" "plugins/math/MANIFEST.MF" "-C" "plugins/" "math/"
 
 rem Run vanilla compile
-"../compile/vanilla/run"
+"compile/vanilla/run"

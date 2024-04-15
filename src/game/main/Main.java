@@ -26,7 +26,7 @@ public class Main {
         public static Properties langSettings = new Properties();
 
         public static final String __VERSION__ = "1.2.4a";
-        public static final File   GAME_PATH = new File("../../");
+        public static final File   GAME_PATH = new File(new File("").getAbsolutePath());
         public static final File   SRC_PATH = new File(GAME_PATH, "src");
         public static final File   CONFIGS_PATH = new File(GAME_PATH, "configs");
         public static final File   PLUGINS_PATH = new File(GAME_PATH, "plugins");

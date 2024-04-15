@@ -8,9 +8,11 @@ import javax.swing.border.*;
 import java.awt.*;
 
 import game.gui.listeners.*;
-import vanilla.main.Main;
+
+import game.main.*;
 
 public class Play {
+
     public static void Start(Integer Mode) throws Exception {
         InitGUI();
     }
@@ -39,43 +41,43 @@ public class Play {
 
         // For quick access to gui configurations.
 
-        Main.GameFrame.setTitle                 (String.format(Main.langSettings.getProperty("title"), Main.__VERSION__));
-        Main.GameFrame.setDefaultCloseOperation (JFrame.HIDE_ON_CLOSE);
-        Main.GameFrame.setLayout                (null);
-        Main.GameFrame.setIconImage             (game.main.Main.ICON);
-        Main.GameFrame.setSize                  (GUI_WIDTH, GUI_HEIGHT + 35);
-        Main.GameFrame.setResizable             (false);
-        Main.GameFrame.setLocationRelativeTo    (null);
-        Main.GameFrame.setVisible               (true);
+        vanilla.main.Main.GameFrame.setTitle                 (String.format(Main.langSettings.getProperty("title"), Main.__VERSION__));
+        vanilla.main.Main.GameFrame.setDefaultCloseOperation (JFrame.HIDE_ON_CLOSE);
+        vanilla.main.Main.GameFrame.setLayout                (null);
+        vanilla.main.Main.GameFrame.setIconImage             (game.main.Main.ICON);
+        vanilla.main.Main.GameFrame.setSize                  (GUI_WIDTH, GUI_HEIGHT + 35);
+        vanilla.main.Main.GameFrame.setResizable             (false);
+        vanilla.main.Main.GameFrame.setLocationRelativeTo    (null);
+        vanilla.main.Main.GameFrame.setVisible               (true);
 
         // Init. game JFrame
 
-        Main.OutTextArea.setText       ("");
-        Main.OutTextArea.setEditable   (false);
-        Main.OutTextArea.setFont       (FONT);
-        Main.OutTextArea.setBounds     (
+        vanilla.main.Main.OutTextArea.setText       ("");
+        vanilla.main.Main.OutTextArea.setEditable   (false);
+        vanilla.main.Main.OutTextArea.setFont       (FONT);
+        vanilla.main.Main.OutTextArea.setBounds     (
                                    0,
                                    0,
                                    GUI_WIDTH,
                                    GUI_HEIGHT - SIZ);
-        Main.OutTextArea.setBackground (BGCOLOR);
-        Main.OutTextArea.setForeground (FGCOLOR);
-        Main.OutTextArea.setBorder     (BORDER);
-        Main.OutTextArea.setLineWrap   (true);
+        vanilla.main.Main.OutTextArea.setBackground (BGCOLOR);
+        vanilla.main.Main.OutTextArea.setForeground (FGCOLOR);
+        vanilla.main.Main.OutTextArea.setBorder     (BORDER);
+        vanilla.main.Main.OutTextArea.setLineWrap   (true);
 
         // Init. output JTextPanel
 
-        Main.InTextArea.setText        ("");
-        Main.InTextArea.setFont        (FONT);
-        Main.InTextArea.setBounds      (
+        vanilla.main.Main.InTextArea.setText        ("");
+        vanilla.main.Main.InTextArea.setFont        (FONT);
+        vanilla.main.Main.InTextArea.setBounds      (
                                    0,
                                    GUI_HEIGHT - SIZ,
                                    GUI_WIDTH,
                                    SIZ);
-        Main.InTextArea.setBackground  (BGCOLOR);
-        Main.InTextArea.setForeground  (FGCOLOR);
-        Main.InTextArea.setBorder      (BORDER);
-        Main.InTextArea.addKeyListener (new KeyDetect()); // Runs createGame when you type
+        vanilla.main.Main.InTextArea.setBackground  (BGCOLOR);
+        vanilla.main.Main.InTextArea.setForeground  (FGCOLOR);
+        vanilla.main.Main.InTextArea.setBorder      (BORDER);
+        vanilla.main.Main.InTextArea.addKeyListener (new KeyDetect()); // Runs createGame when you type
     
         //Init. input JTextArea
     }

@@ -1,1 +1,2 @@
-../../plugins/vanilla/main/Main.java
+plugins/vanilla/main/Main.java
+plugins/vanilla/CreateNewSave.java
