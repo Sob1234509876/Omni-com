@@ -12,6 +12,7 @@ import game.io .*;
 
 //io
 import java.io .*;
+import java.nio.charset.Charset;
 import java.nio.file.Paths;
 
 //GUI
@@ -25,15 +26,16 @@ public class Main {
         public static Properties settings = new Properties();
         public static Properties langSettings = new Properties();
 
-        public static final String __VERSION__ = "1.2.4a";
-        public static final File   GAME_PATH = new File(new File("").getAbsolutePath());
-        public static final File   SRC_PATH = new File(GAME_PATH, "src");
-        public static final File   CONFIGS_PATH = new File(GAME_PATH, "configs");
-        public static final File   PLUGINS_PATH = new File(GAME_PATH, "plugins");
-        public static final File   RESOURCE_PATH = new File(GAME_PATH, "resource");
-        public static final File   SAVES_PATH = new File(GAME_PATH, "saves");
-        public static final File   REPORT_PATH = new File(GAME_PATH, "report");
-        public static final Image  ICON = new ImageIcon(Paths.get(RESOURCE_PATH.toString(),"icon.png").toString()).getImage();
+        public static final String  __VERSION__ = "1.2.5a";
+        public static final File    GAME_PATH = new File(new File("").getAbsolutePath());
+        public static final File    SRC_PATH = new File(GAME_PATH, "src");
+        public static final File    CONFIGS_PATH = new File(GAME_PATH, "configs");
+        public static final File    PLUGINS_PATH = new File(GAME_PATH, "plugins");
+        public static final File    RESOURCE_PATH = new File(GAME_PATH, "resource");
+        public static final File    SAVES_PATH = new File(GAME_PATH, "saves");
+        public static final File    REPORT_PATH = new File(GAME_PATH, "report");
+        public static final Image   ICON = new ImageIcon(Paths.get(RESOURCE_PATH.toString(),"icon.png").toString()).getImage();
+        public static final Charset DEF_CHARSET = Charset.forName("utf-8");
 
         // Consts. & importants
 
@@ -45,7 +47,7 @@ public class Main {
 
         public static void main(String[] args) throws Exception {
                                 
-                PrintStream t = new PrintStream(new FileOutputStream(Paths.get(REPORT_PATH.toString(),String.format("Report %d.log",System.currentTimeMillis())).toString()),false, "utf-8");
+                PrintStream t = new PrintStream(new File(REPORT_PATH, String.format("REPORT %d.log", System.currentTimeMillis())), DEF_CHARSET);
                 System.setErr(t);
 
                 // Init Reports

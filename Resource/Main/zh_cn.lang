@@ -1,2 +1,6 @@
 title=天地工坊 %s
 default=输入“help”来获取帮助或输入“game”来进入游戏
+help=不可能的（
+CreateSaveName=请输入新存档的名称
+
+vanilla.title=天地工坊集团

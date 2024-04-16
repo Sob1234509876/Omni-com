@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.*;
 
 import java.util.*;
 
@@ -32,7 +31,7 @@ public class Main {
     public static volatile long StatusFlag = -1;
     // Flags
 
-    public static final    String              __VERSION__ = "2.0a";
+    public static final    String              __VERSION__ = "2.0.1a";
     public static volatile game.utils.reg<item> VanillaReg  = new game.utils.reg<>("vanilla");
     // METAish
     public static final Properties settings     = new Properties();
@@ -43,8 +42,6 @@ public class Main {
     public static JTextField InTextArea  = new JTextField("play");
     // GUI
 
-    private static final File RESOURCE_PATH = game.main.Main.RESOURCE_PATH;
-    private static final File CONFIG_PATH   = game.main.Main.CONFIGS_PATH;
     private static final File PLUGINS_PATH  = game.main.Main.PLUGINS_PATH;
     // Privates
 
@@ -72,31 +69,9 @@ public class Main {
 
         // Happy coding and loading.
 
-        InitResource();
-        game.io.output.log(String.format("SETTINGS LOAD...%s...L:%d\n", (settings.isEmpty() ? "FAILED" : "SUCSEED"), settings.size()));
-        settings.list(System.out);
-        settings.list(System.err);
-
-        game.io.output.log(String.format("LANGS LOAD...%s...L:%d\n", (settings.isEmpty() ? "FAILED" : "SUCSEED"), settings.size()));
-        langSettings.list(System.out);
-        langSettings.list(System.err);
-
         CoreCmdProcessor();
     }
 
-    /**
-     * Inits some basic resources like settings and lang files.
-     * @throws Exception
-     */
-    private static void InitResource() throws Exception{
-
-        settings.load(new InputStreamReader(new FileInputStream(Paths.get(CONFIG_PATH.toString(),"vanilla.cfg").toString()),"utf-8"));
-        langSettings.load(new InputStreamReader(new FileInputStream(Paths.get(RESOURCE_PATH.toString(),"vanilla",settings.getProperty("lang") + ".lang").toString()),"utf-8"));
-
-        // Load the settings and lang files
-
-
-    }
 
     /**
      * The part where the cmd line of the src works.
@@ -132,7 +107,7 @@ public class Main {
 
                         }
                         else if (buffer.equals("help")) {
-                            game.io.output.write(String.format(langSettings.getProperty("help")));
+                            game.io.output.write(game.main.Main.langSettings.getProperty("help"));
                         }
                     }
                 } catch (Exception e) {

@@ -1,6 +1,6 @@
 package vanilla;
 
-import java.nio.file.*;
+import java.io.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -15,9 +15,11 @@ public class Play {
 
     public static void Start(Integer Mode) throws Exception {
         InitGUI();
+        InitGts.Init();
     }
-    public static void Start(Files Game) throws Exception {
+    public static void Start(File Game) throws Exception {
         InitGUI();
+        InitGts.Init();
     }
 
     /**
@@ -27,8 +29,8 @@ public class Play {
      */
     private static void InitGUI() throws Exception {
 
-        Main.GameFrame.add(Main.InTextArea );
-        Main.GameFrame.add(Main.OutTextArea);
+        vanilla.main.Main.GameFrame.add(vanilla.main.Main.InTextArea );
+        vanilla.main.Main.GameFrame.add(vanilla.main.Main.OutTextArea);
         // Add the input and output JTextPanel
 
         final Integer SIZ        = Integer.parseInt(Main.settings.getProperty("GUI.font_siz"));
@@ -41,7 +43,7 @@ public class Play {
 
         // For quick access to gui configurations.
 
-        vanilla.main.Main.GameFrame.setTitle                 (String.format(Main.langSettings.getProperty("title"), Main.__VERSION__));
+        vanilla.main.Main.GameFrame.setTitle                 (String.format(Main.langSettings.getProperty("vanilla.title"), Main.__VERSION__));
         vanilla.main.Main.GameFrame.setDefaultCloseOperation (JFrame.HIDE_ON_CLOSE);
         vanilla.main.Main.GameFrame.setLayout                (null);
         vanilla.main.Main.GameFrame.setIconImage             (game.main.Main.ICON);

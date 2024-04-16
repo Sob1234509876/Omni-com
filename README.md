@@ -55,7 +55,7 @@ alpha 1.2.4 :
 Redone the core of vanilla plugin. The orignal plugin was quite broken and could not load packages properly.
 
 alpha 1.2.5 :
-Trying to fix problems of vanilla plugin. (part 1) Fix all of the problems (and also left some poorly fixed problems that *might* be fixed in the future)(part 2).
+Trying to fix problems of vanilla plugin. (part 1) Fix all of the problems (and also left some poorly fixed problems that *might* be fixed in the future)(part 2). Fix the part of where the frame of plugin vanilla is white (part 3).
 
 Chinese stuffs (Poorly written classical Chinese)
 ===

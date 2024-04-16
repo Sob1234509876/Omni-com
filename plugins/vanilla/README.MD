@@ -1,4 +1,4 @@
 The vanilla plugin
 ---
 
-It is used as the core of the game.
+It is use as the core of the game.

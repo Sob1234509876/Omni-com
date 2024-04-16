@@ -4,7 +4,7 @@ import java.io.*;
 
 import java.net.*;
 
-import java.nio.charset.Charset;
+import game.main.*;
 
 /**
  * Creates a IPv6 client for some purpose, might be deleted in the future.
@@ -17,7 +17,7 @@ import java.nio.charset.Charset;
  * <p>
  * 
  * @since 1.2.0a
- * @version 1.1a
+ * @version 1.1.1a
  */
 public class client {
 
@@ -47,13 +47,13 @@ public class client {
         // Read from stream
         SIS.read(buffer);
 
-        return new String(buffer, Charset.forName("utf-8"));
+        return new String(buffer, Main.DEF_CHARSET);
     }
 
     public void write(String data) throws Exception {
 
         SOS = S.getOutputStream();
-        byte[] BA = data.getBytes(Charset.forName("utf-8"));
+        byte[] BA = data.getBytes(Main.DEF_CHARSET);
         SOS.write(BA);
 
     }
