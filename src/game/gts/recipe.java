@@ -1,7 +1,7 @@
 package game.gts;
 
 import game.utils.reg;
-import game.utils.factories.*;
+import game.utils.templates.*;
 
 
 public class recipe extends item {
@@ -13,7 +13,7 @@ public class recipe extends item {
     
     public reg<recipe> ParentOfThis;
 
-    public static recipe valueOf(RecipeFactory RF) {
+    public static recipe valueOf(RecipeTemplate RF) {
         recipe tmp = new recipe();
         
         tmp.Name = RF.Name;

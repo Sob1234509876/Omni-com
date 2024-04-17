@@ -1,4 +1,4 @@
-package game.utils.factories;
+package game.utils.templates;
 
 import java.util.Map;
 
@@ -21,43 +21,43 @@ import game.utils.reg;
  * </blockquote>
  */
 
-public class ElementFactory extends ItemFactory {
+public class ElementTemplate extends ItemTemplate {
 
     public String ChemSymbol = "Nl";
     public long ProtonAmount = 0;
     public long NeutronAmount = 0;
     public reg<element> ParentOfThis;
 
-    public ElementFactory setName(String name) {
+    public ElementTemplate setName(String name) {
         super.Name = name;
         return this;
     }
 
-    public ElementFactory setDescription(String description) {
+    public ElementTemplate setDescription(String description) {
         super.Description = description;
         return this;
     }
 
-    public ElementFactory setFlags(String[] flags) {
+    public ElementTemplate setFlags(String[] flags) {
         super.Flags = flags;
         return this;
     }
 
-    public ElementFactory setFlagSettings(Map<String, String> flagSettings) {
+    public ElementTemplate setFlagSettings(Map<String, String> flagSettings) {
         super.FlagSettings = flagSettings;
         return this;
     }
-    public ElementFactory setAtomSymbol(String AtomSymbol) {
+    public ElementTemplate setAtomSymbol(String AtomSymbol) {
         this.ChemSymbol = AtomSymbol;
         return this;
     }
 
-    public ElementFactory setProtonAmount(long ProtonAmount) {
+    public ElementTemplate setProtonAmount(long ProtonAmount) {
         this.ProtonAmount = ProtonAmount;
         return this;
     }
 
-    public ElementFactory setNeutronAmount(long NeutronAmount) {
+    public ElementTemplate setNeutronAmount(long NeutronAmount) {
         this.NeutronAmount = NeutronAmount;
         return this;
     }

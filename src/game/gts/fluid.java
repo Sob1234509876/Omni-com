@@ -1,7 +1,7 @@
 package game.gts;
 
 import game.utils.reg;
-import game.utils.factories.FluidFactory;
+import game.utils.templates.FluidTemplate;
 
 /**
  * 
@@ -28,7 +28,7 @@ public class fluid extends item {
         }
     }
 
-    public static fluid valueOf(FluidFactory FF) {
+    public static fluid valueOf(FluidTemplate FF) {
         fluid tmp = new fluid();
         tmp.Name = FF.Name;
         tmp.Description = FF.Description;

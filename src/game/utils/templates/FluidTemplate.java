@@ -1,11 +1,11 @@
-package game.utils.factories;
+package game.utils.templates;
 
 import java.util.Map;
 
 import game.gts.*;
 import game.utils.reg;
 
-public class FluidFactory extends ItemFactory {
+public class FluidTemplate extends ItemTemplate {
 
     public String Color;
     public material[] Component;
@@ -14,37 +14,37 @@ public class FluidFactory extends ItemFactory {
     public reg<fluid> ParentOfThis;
 
     
-    public FluidFactory setName(String name) {
+    public FluidTemplate setName(String name) {
         super.Name = name;
         return this;
     }
 
-    public FluidFactory setDescription(String description) {
+    public FluidTemplate setDescription(String description) {
         super.Description = description;
         return this;
     }
 
-    public FluidFactory setFlags(String[] flags) {
+    public FluidTemplate setFlags(String[] flags) {
         super.Flags = flags;
         return this;
     }
 
-    public FluidFactory setFlagSettings(Map<String, String> flagSettings) {
+    public FluidTemplate setFlagSettings(Map<String, String> flagSettings) {
         super.FlagSettings = flagSettings;
         return this;
     }
 
-    public FluidFactory setColor(String color) {
+    public FluidTemplate setColor(String color) {
         this.Color = color;
         return this;
     }
 
-    public FluidFactory setComponent(material[] component) {
+    public FluidTemplate setComponent(material[] component) {
         this.Component = component;
         return this;
     }
 
-    public FluidFactory setTemperature(long temperature) {
+    public FluidTemplate setTemperature(long temperature) {
         this.Temperature = temperature;
         return this;
     }

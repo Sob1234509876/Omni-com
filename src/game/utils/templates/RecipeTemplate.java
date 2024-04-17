@@ -1,11 +1,11 @@
-package game.utils.factories;
+package game.utils.templates;
 
 import java.util.Map;
 
 import game.gts.*;
 import game.utils.reg;
 
-public class RecipeFactory extends ItemFactory {
+public class RecipeTemplate extends ItemTemplate {
 
     public item[] Input;
     public item[] Output;
@@ -15,50 +15,50 @@ public class RecipeFactory extends ItemFactory {
 
     public reg<recipe> ParentOfThis;
 
-    public RecipeFactory setName(String Name) {
+    public RecipeTemplate setName(String Name) {
         super.Name = Name;
         return this;
     }
 
-    public RecipeFactory setDescription(String Description) {
+    public RecipeTemplate setDescription(String Description) {
         super.Description = Description;
         return this;
     }
-    public RecipeFactory setFlags(String[] Flags) {
+    public RecipeTemplate setFlags(String[] Flags) {
         super.Flags = Flags;
         return this;
     }
 
-    public RecipeFactory setFlagSettings(Map<String, String> FlagSettings) {
+    public RecipeTemplate setFlagSettings(Map<String, String> FlagSettings) {
         super.FlagSettings = FlagSettings;
         return this;
     }
-    public RecipeFactory setParentOfThis(reg<recipe> ParentOfThis) {
+    public RecipeTemplate setParentOfThis(reg<recipe> ParentOfThis) {
         this.ParentOfThis = ParentOfThis;
         return this;
     }
 
-    public RecipeFactory setInput(item[] Input) {
+    public RecipeTemplate setInput(item[] Input) {
         this.Input = Input;
         return this;
     }
 
-    public RecipeFactory setOutput(item[] Output) {
+    public RecipeTemplate setOutput(item[] Output) {
         this.Output = Output;
         return this;
     }
 
-    public RecipeFactory setInputFun(Runnable InputFun) {
+    public RecipeTemplate setInputFun(Runnable InputFun) {
         this.InputFun = InputFun;
         return this;
     }
 
-    public RecipeFactory setOutputFun(Runnable OutputFun) {
+    public RecipeTemplate setOutputFun(Runnable OutputFun) {
         this.OutputFun = OutputFun;
         return this;
     }
 
-    public RecipeFactory setBindedMachine(machine BindedMachine) {
+    public RecipeTemplate setBindedMachine(machine BindedMachine) {
         this.BindedMachine = BindedMachine;
         return this;
     }

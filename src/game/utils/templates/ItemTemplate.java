@@ -1,4 +1,4 @@
-package game.utils.factories;
+package game.utils.templates;
 
 import java.util.Map;
 
@@ -24,7 +24,7 @@ import game.utils.reg;
  * <p>
  */
 
-public class ItemFactory implements Factory {
+public class ItemTemplate implements Template {
 
     public String Name;
     public String Description;
@@ -32,22 +32,22 @@ public class ItemFactory implements Factory {
     public Map<String, String> FlagSettings;
     public reg<item> ParentOfThis;
 
-    public ItemFactory setName(String Name) {
+    public ItemTemplate setName(String Name) {
         this.Name = Name;
         return this;
     }
 
-    public ItemFactory setDescription(String Description) {
+    public ItemTemplate setDescription(String Description) {
         this.Description = Description;
         return this;
     }
 
-    public ItemFactory setFlags(String[] Flags) {
+    public ItemTemplate setFlags(String[] Flags) {
         this.Flags = Flags;
         return this;
     }
 
-    public ItemFactory setFlagSettings(Map<String, String> FlagSettings) {
+    public ItemTemplate setFlagSettings(Map<String, String> FlagSettings) {
         this.FlagSettings = FlagSettings;
         return this;
     }

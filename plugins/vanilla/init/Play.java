@@ -1,4 +1,4 @@
-package vanilla;
+package vanilla.init;
 
 import java.io.*;
 
@@ -15,11 +15,11 @@ public class Play {
 
     public static void Start(Integer Mode) throws Exception {
         InitGUI();
-        InitGts.Init();
+        InitGameResource.Init();
     }
-    public static void Start(File Game) throws Exception {
+    public static void Start(File Game, Integer Mode) throws Exception {
         InitGUI();
-        InitGts.Init();
+        InitGameResource.Init();
     }
 
     /**
@@ -33,17 +33,17 @@ public class Play {
         vanilla.main.Main.GameFrame.add(vanilla.main.Main.OutTextArea);
         // Add the input and output JTextPanel
 
-        final Integer SIZ        = Integer.parseInt(Main.settings.getProperty("GUI.font_siz"));
-        final Font    FONT       = new Font(Main.settings.getProperty("GUI.font"),Font.PLAIN,SIZ);
-        final Color   BGCOLOR    = new Color(Integer.parseInt(Main.settings.getProperty("GUI.BGColor")), false);
-        final Color   FGCOLOR    = new Color(Integer.parseInt(Main.settings.getProperty("GUI.FGColor")), false);
-        final Integer GUI_WIDTH  = Integer.parseInt(Main.settings.getProperty("GUI.size").split("x")[0]);
-        final Integer GUI_HEIGHT = Integer.parseInt(Main.settings.getProperty("GUI.size").split("x")[1]);
+        final Integer SIZ        = Integer.parseInt(Main.Settings.getProperty("GUI.font_siz"));
+        final Font    FONT       = new Font(Main.Settings.getProperty("GUI.font"),Font.PLAIN,SIZ);
+        final Color   BGCOLOR    = new Color(Integer.parseInt(Main.Settings.getProperty("GUI.BGColor")), false);
+        final Color   FGCOLOR    = new Color(Integer.parseInt(Main.Settings.getProperty("GUI.FGColor")), false);
+        final Integer GUI_WIDTH  = Integer.parseInt(Main.Settings.getProperty("GUI.size").split("x")[0]);
+        final Integer GUI_HEIGHT = Integer.parseInt(Main.Settings.getProperty("GUI.size").split("x")[1]);
         final Border  BORDER     = BorderFactory.createMatteBorder(1, 1, 1, 1, FGCOLOR);
 
         // For quick access to gui configurations.
 
-        vanilla.main.Main.GameFrame.setTitle                 (String.format(Main.langSettings.getProperty("vanilla.title"), Main.__VERSION__));
+        vanilla.main.Main.GameFrame.setTitle                 (String.format(Main.LangSettings.getProperty("vanilla.title"), Main.__VERSION__));
         vanilla.main.Main.GameFrame.setDefaultCloseOperation (JFrame.HIDE_ON_CLOSE);
         vanilla.main.Main.GameFrame.setLayout                (null);
         vanilla.main.Main.GameFrame.setIconImage             (game.main.Main.ICON);

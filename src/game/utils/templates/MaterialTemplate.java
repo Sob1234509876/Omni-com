@@ -1,4 +1,4 @@
-package game.utils.factories;
+package game.utils.templates;
 
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import game.utils.reg;
  * WIP
  */
 
-public class MaterialFactory extends ItemFactory {
+public class MaterialTemplate extends ItemTemplate {
 
     public String Color;
     public material[] Component;
@@ -22,42 +22,42 @@ public class MaterialFactory extends ItemFactory {
 
     public reg<material> ParentOfThis;
 
-    public MaterialFactory setName(String Name) {
+    public MaterialTemplate setName(String Name) {
         super.Name = Name;
         return this;
     }
 
-    public MaterialFactory setColor(String Color) {
+    public MaterialTemplate setColor(String Color) {
         this.Color = Color;
         return this;
     }
 
-    public MaterialFactory setDescription(String Description) {
+    public MaterialTemplate setDescription(String Description) {
         super.Description = Description;
         return this;
     }
 
-    public MaterialFactory setFlags(String[] Flags) {
+    public MaterialTemplate setFlags(String[] Flags) {
         super.Flags = Flags;
         return this;
     }
 
-    public MaterialFactory setFlagSettings(Map<String, String> FlagSettings) {
+    public MaterialTemplate setFlagSettings(Map<String, String> FlagSettings) {
         super.FlagSettings = FlagSettings;
         return this;
     }
 
-    public MaterialFactory setParentOfThis(reg<material> ParentOfThis) {
+    public MaterialTemplate setParentOfThis(reg<material> ParentOfThis) {
         this.ParentOfThis = ParentOfThis;
         return this;
     }
 
-    public MaterialFactory setComponents(material[] Component) {
+    public MaterialTemplate setComponents(material[] Component) {
         this.Component = Component;
         return this;
     }
 
-    public MaterialFactory setElements(element[] Elements) {
+    public MaterialTemplate setElements(element[] Elements) {
         this.Elements = Elements;
         return this;
     }

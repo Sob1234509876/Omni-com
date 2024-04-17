@@ -3,7 +3,7 @@ package game.gts;
 import java.util.Map;
 
 import game.utils.reg;
-import game.utils.factories.*;
+import game.utils.templates.*;
 
 //TODO : LoadChemFormula() & LoadItems()
 
@@ -26,7 +26,7 @@ public class material extends item {
 
     public reg<material> ParentOfThis;
 
-    public static material valueOf(MaterialFactory MF) {
+    public static material valueOf(MaterialTemplate MF) {
         material tmp = new material();
 
         tmp.Name = MF.Name;

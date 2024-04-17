@@ -1,2 +1,2 @@
 plugins/vanilla/main/Main.java
-plugins/vanilla/CreateNewSave.java
+plugins/vanilla/init/CreateNewSave.java

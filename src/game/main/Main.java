@@ -2,39 +2,37 @@ package game.main;
 
 
 //Tools
-import java.util.Properties;
+import java.util.*;
 
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.net.*;
 
 import game.gui.listeners.*;
 import game.io .*;
 
 //io
 import java.io .*;
-import java.nio.charset.Charset;
-import java.nio.file.Paths;
+import java.nio.charset.*;
 
 //GUI
 import javax.swing.*;
 import javax.swing.border.*;
 import java .awt  .*;
 
-
+/**
+ * The core of the whole game, consists of core paths, starting frame, plugin loading and etc.
+ */
 public class Main {
 
-        public static Properties settings = new Properties();
-        public static Properties langSettings = new Properties();
+        public static Properties Settings = new Properties();
+        public static Properties LangSettings = new Properties();
 
         public static final String  __VERSION__ = "1.2.5a";
         public static final File    GAME_PATH = new File(new File("").getAbsolutePath());
         public static final File    SRC_PATH = new File(GAME_PATH, "src");
         public static final File    CONFIGS_PATH = new File(GAME_PATH, "configs");
         public static final File    PLUGINS_PATH = new File(GAME_PATH, "plugins");
-        public static final File    RESOURCE_PATH = new File(GAME_PATH, "resource");
         public static final File    SAVES_PATH = new File(GAME_PATH, "saves");
         public static final File    REPORT_PATH = new File(GAME_PATH, "report");
-        public static final Image   ICON = new ImageIcon(Paths.get(RESOURCE_PATH.toString(),"icon.png").toString()).getImage();
         public static final Charset DEF_CHARSET = Charset.forName("utf-8");
 
         // Consts. & importants
@@ -42,6 +40,7 @@ public class Main {
         public static JFrame     GameFrame = new JFrame();
         public static JTextArea  OutTextArea = new JTextArea();
         public static JTextField InTextArea = new JTextField("cns");
+        public static Image      ICON;
 
         // gui & consts.
 
@@ -52,13 +51,8 @@ public class Main {
 
                 // Init Reports
 
-                settings    .load (new InputStreamReader(new FileInputStream(Paths.get(CONFIGS_PATH.toString(),"Main.cfg").toString()),"utf-8"));
-                langSettings.load (new InputStreamReader(new FileInputStream(Paths.get(RESOURCE_PATH.toString(),"Main",settings.getProperty("lang") + ".lang").toString()),"utf-8"));
-
-                // Setting init, uses utf-8
-
-                LoadPlugins();
                 Init();
+                LoadPlugins();
 
 
         }
@@ -67,21 +61,31 @@ public class Main {
          * Graphics init. (That`s all)
          */
 
-        private static void Init() {
+        private static void Init() throws Exception {
+
+                URL[] TUA = {new URL("file:" + new File(GAME_PATH, "game.jar"))};
+                URLClassLoader UCL = new URLClassLoader(TUA);
+
+                ICON = new ImageIcon(UCL.getResource("game/assets/icon.png")).getImage();
+
+                Settings    .load (new InputStreamReader(new FileInputStream(new File(CONFIGS_PATH, "Main.cfg")), DEF_CHARSET));
+                LangSettings.load (new InputStreamReader(UCL.getResourceAsStream("game/assets/lang/" + Settings.getProperty("lang") + ".lang"), DEF_CHARSET));
+
+                UCL.close();
 
                 GameFrame.add(InTextArea);
                 GameFrame.add(OutTextArea);
 
 
-                final Integer GUI_X = Integer.parseInt(settings.getProperty("GUI.size").split("x")[0]);
-                final Integer GUI_Y = Integer.parseInt(settings.getProperty("GUI.size").split("x")[1]);
-                final Integer SIZ = Integer.parseInt(settings.getProperty("GUI.font_siz"));
-                final Integer BGCOLOR = Integer.parseInt(settings.getProperty("GUI.BGColor"));
-                final Integer FGCOLOR = Integer.parseInt(settings.getProperty("GUI.FGColor"));
-                final Font    FONT = new Font(settings.getProperty("GUI.font"), Font.PLAIN, SIZ);
+                final Integer GUI_X = Integer.parseInt(Settings.getProperty("GUI.size").split("x")[0]);
+                final Integer GUI_Y = Integer.parseInt(Settings.getProperty("GUI.size").split("x")[1]);
+                final Integer SIZ = Integer.parseInt(Settings.getProperty("GUI.font_siz"));
+                final Integer BGCOLOR = Integer.parseInt(Settings.getProperty("GUI.BGColor"));
+                final Integer FGCOLOR = Integer.parseInt(Settings.getProperty("GUI.FGColor"));
+                final Font    FONT = new Font(Settings.getProperty("GUI.font"), Font.PLAIN, SIZ);
                 final Border  BORDER = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(FGCOLOR, false));
 
-                GameFrame.setTitle    (String.format(langSettings.getProperty("title"), __VERSION__));
+                GameFrame.setTitle    (String.format(LangSettings.getProperty("title"), __VERSION__));
                 GameFrame.setVisible  (true);
                 GameFrame.setIconImage(ICON);
                 GameFrame.setLayout   (null);
@@ -99,7 +103,7 @@ public class Main {
                 OutTextArea.setForeground(new Color(FGCOLOR, false));
                 OutTextArea.setBorder    (BORDER);
                 OutTextArea.setLineWrap  (true);
-                OutTextArea.setText      (langSettings.getProperty("default"));
+                OutTextArea.setText      (LangSettings.getProperty("default"));
 
                 InTextArea.setBounds(0,
                                 GUI_Y - SIZ,

@@ -1,11 +1,9 @@
 package game.gts;
 
-import java.io.File;
-import java.util.Map;
+import java.util.*;
 
-import game.utils.reg;
-import game.utils.factories.ItemFactory;
-import game.main.Main;
+import game.utils.*;
+import game.utils.templates.*;
 
 public class item {
 
@@ -14,17 +12,8 @@ public class item {
     public String[] Flags;
     public Map<String, String> FlagSettings;
     public reg<item> ParentOfThis;
-    public File DesPath;
 
-    public void InitMDPath() throws NullPointerException {
-        try {
-            this.DesPath = new File(Main.RESOURCE_PATH, this.Name + ".des");
-        } catch (NullPointerException e) {
-            throw new NullPointerException("ParentOfThis un-initilize.");
-        }
-    }
-
-    public static item valueOf(ItemFactory IF) {
+    public static item valueOf(ItemTemplate IF) {
         item tmp = new item();
 
         tmp.Name = IF.Name;

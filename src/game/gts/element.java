@@ -1,7 +1,7 @@
 package game.gts;
 
 import game.utils.reg;
-import game.utils.factories.ElementFactory;
+import game.utils.templates.ElementTemplate;
 
 /**
  * {@code Element} class, used in type fluid and material.
@@ -19,7 +19,7 @@ public class element extends item{
     public Long Amount;
     public reg<element> ParentOfThis;
 
-    public element valueOf(ElementFactory EF) {
+    public element valueOf(ElementTemplate EF) {
 
         element tmp = new element();
 

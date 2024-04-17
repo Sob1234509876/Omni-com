@@ -15,27 +15,17 @@ import java.util.*;
  * The vanilla game of this game.
  * For more information, please check out the html file in the jar package.
  * (W.I.P)
- * <p>
- * Quick info :
- * {@code vanilla.main.Main.flag} - A flag describing current game status
- * <pre>
- * -1 : default.
- * 0 : init.
- * 1 : new save creating.
- * </pre>
- * @version 2.0.1a
+ * @version 2.0.2a
  */
 
 
 public class Main {
-    public static volatile long StatusFlag = -1;
-    // Flags
 
-    public static final    String              __VERSION__ = "2.0.1a";
-    public static volatile game.utils.reg<item> VanillaReg  = new game.utils.reg<>("vanilla");
+    public static final    String              __VERSION__ = "2.0.2a";
+    public static final    game.utils.reg<item> VanillaItemReg  = new game.utils.reg<>("vanilla");
     // METAish
     public static final Properties settings     = new Properties();
-    public static final Properties langSettings = new Properties();
+    public static final Properties LangSettings = new Properties();
     // Properties
     public static JFrame     GameFrame   = new JFrame();
     public static JTextArea  OutTextArea = new JTextArea();
@@ -46,7 +36,7 @@ public class Main {
     // Privates
 
     static {
-        VanillaReg.add(item.valueOf(new game.utils.factories.ItemFactory()
+        VanillaItemReg.add(item.valueOf(new game.utils.templates.ItemTemplate()
                 .setName("ALPHA"))
                 );
     }
@@ -56,7 +46,7 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
 
-        System.out.println(VanillaReg.get(0).Name);
+        System.out.println(VanillaItemReg.get(0).Name);
         System.out.println("2024.03.18 : Alpha success (1.1.0)");
         System.out.println("2024.04.08 : Epic Rebirth  (1.2.3)");
         System.out.println("Omni co., Ltd.");
@@ -97,7 +87,7 @@ public class Main {
 
                             game.io.output.log("LOADING CNS");
 
-                            UCL.loadClass("vanilla.CreateNewSave")
+                            UCL.loadClass("vanilla.init.CreateNewSave")
                                 .getMethod("Create")
                                 .invoke(null);
 
@@ -107,7 +97,7 @@ public class Main {
 
                         }
                         else if (buffer.equals("help")) {
-                            game.io.output.write(game.main.Main.langSettings.getProperty("help"));
+                            game.io.output.write(game.main.Main.LangSettings.getProperty("help"));
                         }
                     }
                 } catch (Exception e) {

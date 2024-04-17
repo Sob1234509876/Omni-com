@@ -1,7 +1,7 @@
 package game.gts;
 
 import game.utils.reg;
-import game.utils.factories.*;
+import game.utils.templates.*;
 
 public class machine extends item {
 
@@ -9,7 +9,7 @@ public class machine extends item {
 
     public reg<machine> ParentOfThis;
 
-    public static machine valueOf(MachineFactory MF) {
+    public static machine valueOf(MachineTemplate MF) {
         machine tmp = new machine();
 
         tmp.Name = MF.Name;
