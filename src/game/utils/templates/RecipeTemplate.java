@@ -3,17 +3,17 @@ package game.utils.templates;
 import java.util.Map;
 
 import game.gts.*;
-import game.utils.reg;
+import game.utils.*;
 
 public class RecipeTemplate extends ItemTemplate {
 
-    public item[] Input;
-    public item[] Output;
+    public Item[] Input;
+    public Item[] Output;
     public Runnable InputFun;
     public Runnable OutputFun;
-    public machine BindedMachine;
+    public Machine BindedMachine;
 
-    public reg<recipe> ParentOfThis;
+    public Reg<Recipe> ParentOfThis;
 
     public RecipeTemplate setName(String Name) {
         super.Name = Name;
@@ -33,17 +33,17 @@ public class RecipeTemplate extends ItemTemplate {
         super.FlagSettings = FlagSettings;
         return this;
     }
-    public RecipeTemplate setParentOfThis(reg<recipe> ParentOfThis) {
+    public RecipeTemplate setParentOfThis(Reg<Recipe> ParentOfThis) {
         this.ParentOfThis = ParentOfThis;
         return this;
     }
 
-    public RecipeTemplate setInput(item[] Input) {
+    public RecipeTemplate setInput(Item[] Input) {
         this.Input = Input;
         return this;
     }
 
-    public RecipeTemplate setOutput(item[] Output) {
+    public RecipeTemplate setOutput(Item[] Output) {
         this.Output = Output;
         return this;
     }
@@ -58,7 +58,7 @@ public class RecipeTemplate extends ItemTemplate {
         return this;
     }
 
-    public RecipeTemplate setBindedMachine(machine BindedMachine) {
+    public RecipeTemplate setBindedMachine(Machine BindedMachine) {
         this.BindedMachine = BindedMachine;
         return this;
     }

@@ -1,16 +1,16 @@
 package game.gts;
 
-import game.utils.reg;
+import game.utils.Reg;
 import game.utils.templates.*;
 
-public class machine extends item {
+public class Machine extends Item {
 
-    public recipe[] BindedRecipes;
+    public Recipe[] BindedRecipes;
 
-    public reg<machine> ParentOfThis;
+    public Reg<Machine> ParentOfThis;
 
-    public static machine valueOf(MachineTemplate MF) {
-        machine tmp = new machine();
+    public static Machine valueOf(MachineTemplate MF) {
+        Machine tmp = new Machine();
 
         tmp.Name = MF.Name;
         tmp.Description = MF.Description;

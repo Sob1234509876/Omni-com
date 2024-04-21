@@ -6,6 +6,7 @@ import java.net.*;
 
 import game.main.*;
 
+//TODO:Remove the nulls of the buffer.
 /**
  * Creates a IPv6 client for some purpose, might be deleted in the future.
  * <p>
@@ -47,7 +48,7 @@ public class client {
         // Read from stream
         SIS.read(buffer);
 
-        return new String(buffer, Main.DEF_CHARSET);
+        return new String(buffer, Main.DEF_CHARSET).strip();
     }
 
     public void write(String data) throws Exception {

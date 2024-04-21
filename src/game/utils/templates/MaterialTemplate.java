@@ -3,7 +3,7 @@ package game.utils.templates;
 import java.util.Map;
 
 import game.gts.*;
-import game.utils.reg;
+import game.utils.Reg;
 
 /**
  * The {@code materialFactory} factory is used for generatting massive amount of
@@ -17,10 +17,10 @@ import game.utils.reg;
 public class MaterialTemplate extends ItemTemplate {
 
     public String Color;
-    public material[] Component;
-    public element[] Elements;
+    public Material[] Component;
+    public Element[] Elements;
 
-    public reg<material> ParentOfThis;
+    public Reg<Material> ParentOfThis;
 
     public MaterialTemplate setName(String Name) {
         super.Name = Name;
@@ -47,17 +47,17 @@ public class MaterialTemplate extends ItemTemplate {
         return this;
     }
 
-    public MaterialTemplate setParentOfThis(reg<material> ParentOfThis) {
+    public MaterialTemplate setParentOfThis(Reg<Material> ParentOfThis) {
         this.ParentOfThis = ParentOfThis;
         return this;
     }
 
-    public MaterialTemplate setComponents(material[] Component) {
+    public MaterialTemplate setComponents(Material[] Component) {
         this.Component = Component;
         return this;
     }
 
-    public MaterialTemplate setElements(element[] Elements) {
+    public MaterialTemplate setElements(Element[] Elements) {
         this.Elements = Elements;
         return this;
     }

@@ -5,16 +5,16 @@ import java.util.*;
 import game.utils.*;
 import game.utils.templates.*;
 
-public class item {
+public class Item {
 
     public String Name;
     public String Description;
     public String[] Flags;
     public Map<String, String> FlagSettings;
-    public reg<item> ParentOfThis;
+    public Reg<Item> ParentOfThis;
 
-    public static item valueOf(ItemTemplate IF) {
-        item tmp = new item();
+    public static Item valueOf(ItemTemplate IF) {
+        Item tmp = new Item();
 
         tmp.Name = IF.Name;
         tmp.Description = IF.Description;

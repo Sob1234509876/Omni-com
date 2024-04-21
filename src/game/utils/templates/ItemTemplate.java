@@ -2,8 +2,8 @@ package game.utils.templates;
 
 import java.util.Map;
 
-import game.gts.item;
-import game.utils.reg;
+import game.gts.Item;
+import game.utils.Reg;
 
 /**
  * This factory is used for creating items, items are stored in
@@ -30,7 +30,7 @@ public class ItemTemplate implements Template {
     public String Description;
     public String[] Flags;
     public Map<String, String> FlagSettings;
-    public reg<item> ParentOfThis;
+    public Reg<Item> ParentOfThis;
 
     public ItemTemplate setName(String Name) {
         this.Name = Name;

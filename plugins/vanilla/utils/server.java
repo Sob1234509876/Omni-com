@@ -6,6 +6,7 @@ import java.io.*;
 
 import java.net.*;
 
+//TODO:Remove the nulls of the buffer.
 /**
  * Creates a IPv6 server for some purpose, might be deleted in the future.
  * <p>
@@ -49,7 +50,7 @@ public class server {
         SIS.read(buffer);
 
         // Uses UTF-8 for encoding.
-        return new String(buffer, Main.DEF_CHARSET);
+        return new String(buffer, Main.DEF_CHARSET).strip();
     }
 
     public void write(String data) throws Exception {

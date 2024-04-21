@@ -2,15 +2,15 @@ package game.utils.templates;
 
 import java.util.Map;
 
-import game.gts.machine;
-import game.gts.recipe;
-import game.utils.reg;
+import game.gts.Machine;
+import game.gts.Recipe;
+import game.utils.Reg;
 
 public class MachineTemplate extends ItemTemplate {
 
-    public recipe[] BindedRecipes;
+    public Recipe[] BindedRecipes;
 
-    public reg<machine> ParentOfThis;
+    public Reg<Machine> ParentOfThis;
 
     public MachineTemplate setName(String Name) {
         super.Name = Name;
@@ -33,7 +33,7 @@ public class MachineTemplate extends ItemTemplate {
         return this;
     }
 
-    public MachineTemplate setBindedRecipes(recipe[] BindedRecipes) {
+    public MachineTemplate setBindedRecipes(Recipe[] BindedRecipes) {
         this.BindedRecipes = BindedRecipes;
         return this;
     }

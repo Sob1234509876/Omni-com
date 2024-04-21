@@ -1,35 +1,35 @@
 package game.gts;
 
-import game.utils.reg;
+import game.utils.Reg;
 import game.utils.templates.FluidTemplate;
 
 /**
  * 
  */
 
-public class fluid extends item {
+public class Fluid extends item {
 
     public String Color;
-    public material[] Component;
-    public element[] Elements;
+    public Material[] Component;
+    public Element[] Elements;
     public long Temperature;
     public String ChemFormula;
-    public reg<fluid> ParentOfThis;
+    public Reg<Fluid> ParentOfThis;
 
     public void loadChemFormula() {
         if (this.Component == null) {
-            for (element e : this.Elements) {
-                this.ChemFormula += e.ChemSymbol + element.ChemNumbers[e.Amount.intValue()];
+            for (Element e : this.Elements) {
+                this.ChemFormula += e.ChemSymbol + Element.ChemNumbers[e.Amount.intValue()];
             }
         } else {
-            for (material m : this.Component) {
-                this.ChemFormula += String.format("(%s%c)", m.Name, element.ChemNumbers[m.Amount.intValue()]);
+            for (Material m : this.Component) {
+                this.ChemFormula += String.format("(%s%c)", m.Name, Element.ChemNumbers[m.Amount.intValue()]);
             }
         }
     }
 
-    public static fluid valueOf(FluidTemplate FF) {
-        fluid tmp = new fluid();
+    public static Fluid valueOf(FluidTemplate FF) {
+        Fluid tmp = new Fluid();
         tmp.Name = FF.Name;
         tmp.Description = FF.Description;
         tmp.Flags = FF.Flags;

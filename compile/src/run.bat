@@ -5,7 +5,7 @@ echo [COMPILING SRC]
 
 
 rem Compiling
-"%JAVA_HOME%/bin/javac" "-encoding" "utf-8" "-cp" "src; src/game/" "@%COMP_PATH%/src/cFile"
+"%JAVA_HOME%/bin/javac" "-encoding" "utf-8" "-cp" "src; src/game/" "@compile/src/cFile"
 
 echo Compiling finish
 

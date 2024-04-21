@@ -1,20 +1,20 @@
 package game.gts;
 
-import game.utils.reg;
+import game.utils.Reg;
 import game.utils.templates.*;
 
 
-public class recipe extends item {
+public class Recipe extends Item {
 
-    public item[] Input;
-    public item[] Output;
+    public Item[] Input;
+    public Item[] Output;
     public Runnable InputFun;
     public Runnable OutputFun;
     
-    public reg<recipe> ParentOfThis;
+    public Reg<Recipe> ParentOfThis;
 
-    public static recipe valueOf(RecipeTemplate RF) {
-        recipe tmp = new recipe();
+    public static Recipe valueOf(RecipeTemplate RF) {
+        Recipe tmp = new Recipe();
         
         tmp.Name = RF.Name;
         tmp.Description = RF.Description;

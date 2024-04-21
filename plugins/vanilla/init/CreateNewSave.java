@@ -44,6 +44,7 @@ public class CreateNewSave {
         TW.write("META=null");
         TW.close();
 
+        Play.init();
         Play.Start(TF, 0);
 
         output.write();

@@ -3,15 +3,15 @@ package game.utils.templates;
 import java.util.Map;
 
 import game.gts.*;
-import game.utils.reg;
+import game.utils.Reg;
 
 public class FluidTemplate extends ItemTemplate {
 
     public String Color;
-    public material[] Component;
-    public element[] Elements;
+    public Material[] Component;
+    public Element[] Elements;
     public long Temperature;
-    public reg<fluid> ParentOfThis;
+    public Reg<Fluid> ParentOfThis;
 
     
     public FluidTemplate setName(String name) {
@@ -39,7 +39,7 @@ public class FluidTemplate extends ItemTemplate {
         return this;
     }
 
-    public FluidTemplate setComponent(material[] component) {
+    public FluidTemplate setComponent(Material[] component) {
         this.Component = component;
         return this;
     }

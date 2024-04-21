@@ -22,7 +22,7 @@ import java.util.*;
 public class Main {
 
     public static final    String              __VERSION__ = "2.0.2a";
-    public static final    game.utils.reg<item> VanillaItemReg  = new game.utils.reg<>("vanilla");
+    public static final    game.utils.Reg<Item> VanillaItemReg  = new game.utils.Reg<>("vanilla");
     // METAish
     public static final Properties settings     = new Properties();
     public static final Properties LangSettings = new Properties();
@@ -32,11 +32,10 @@ public class Main {
     public static JTextField InTextArea  = new JTextField("play");
     // GUI
 
-    private static final File PLUGINS_PATH  = game.main.Main.PLUGINS_PATH;
-    // Privates
+    public static final File THIS_PATH  = new File(String.format("file:%s/vanilla.jar", game.main.Main.PLUGINS_PATH));
 
     static {
-        VanillaItemReg.add(item.valueOf(new game.utils.templates.ItemTemplate()
+        VanillaItemReg.add(Item.valueOf(new game.utils.templates.ItemTemplate()
                 .setName("ALPHA"))
                 );
     }
@@ -82,16 +81,14 @@ public class Main {
 
                         if (buffer.equals("cns")) {
                             
-                            URL[] U = {new URL(String.format("file:%s/vanilla.jar", PLUGINS_PATH))};
+                            URL[] U = {new URL(THIS_PATH.toString())};
                             URLClassLoader UCL = new URLClassLoader(U);
 
-                            game.io.output.log("LOADING CNS");
+                            game.io.output.log("CNS");
 
                             UCL.loadClass("vanilla.init.CreateNewSave")
                                 .getMethod("Create")
                                 .invoke(null);
-
-                            game.io.output.log("USE CNS");
 
                             UCL.close();
 

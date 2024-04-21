@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @see ArrayList
  * @version 1.1.1a
  */
-public class reg<T> {
+public class Reg<T> {
 
     private ArrayList<T> list = new ArrayList<T>();
     private String name;
@@ -23,7 +23,7 @@ public class reg<T> {
      * @param name
      * @see ArrayList
      */
-    public reg(String name) {
+    public Reg(String name) {
         this.name = name;
     }
 

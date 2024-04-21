@@ -2,7 +2,7 @@ package game.gts;
 
 import java.util.Map;
 
-import game.utils.reg;
+import game.utils.Reg;
 import game.utils.templates.*;
 
 //TODO : LoadChemFormula() & LoadItems()
@@ -13,21 +13,21 @@ import game.utils.templates.*;
  * example : Cyberium plate & Cyberium screw; Sodium ingot & Sodium dust
  */
 
-public class material extends item {
+public class Material extends Item {
 
     public String Color;
     public String ChemFormula;
-    public material[] Component;
-    public element[] Elements;
+    public Material[] Component;
+    public Element[] Elements;
 
     public Map<String, Integer> CreatedItemsID;
 
     public Long Amount;
 
-    public reg<material> ParentOfThis;
+    public Reg<Material> ParentOfThis;
 
-    public static material valueOf(MaterialTemplate MF) {
-        material tmp = new material();
+    public static Material valueOf(MaterialTemplate MF) {
+        Material tmp = new Material();
 
         tmp.Name = MF.Name;
         tmp.Description = MF.Description;

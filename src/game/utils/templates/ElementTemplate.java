@@ -2,8 +2,8 @@ package game.utils.templates;
 
 import java.util.Map;
 
-import game.gts.element;
-import game.utils.reg;
+import game.gts.Element;
+import game.utils.Reg;
 
 /**
  * The {@code elementFactory} class is used for creating elements, elements are
@@ -26,7 +26,7 @@ public class ElementTemplate extends ItemTemplate {
     public String ChemSymbol = "Nl";
     public long ProtonAmount = 0;
     public long NeutronAmount = 0;
-    public reg<element> ParentOfThis;
+    public Reg<Element> ParentOfThis;
 
     public ElementTemplate setName(String name) {
         super.Name = name;

@@ -5,12 +5,4 @@
 *.jar
 *.class
 
-# These are the files used for compiling
-*.bat
-
-# Use to compile and run
-!run.bat
-!qrun.bat
-!qqrun.bat
-
 saves/*

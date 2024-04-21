@@ -8,6 +8,7 @@ import java.net.*;
 
 import game.gui.listeners.*;
 import game.io .*;
+import game.utils.ShowData;
 
 //io
 import java.io .*;
@@ -23,30 +24,33 @@ import java .awt  .*;
  */
 public class Main {
 
-        public static Properties Settings = new Properties();
+        public static Properties Settings     = new Properties();
         public static Properties LangSettings = new Properties();
 
-        public static final String  __VERSION__ = "1.2.5a";
-        public static final File    GAME_PATH = new File(new File("").getAbsolutePath());
-        public static final File    SRC_PATH = new File(GAME_PATH, "src");
-        public static final File    CONFIGS_PATH = new File(GAME_PATH, "configs");
-        public static final File    PLUGINS_PATH = new File(GAME_PATH, "plugins");
-        public static final File    SAVES_PATH = new File(GAME_PATH, "saves");
-        public static final File    REPORT_PATH = new File(GAME_PATH, "report");
-        public static final Charset DEF_CHARSET = Charset.forName("utf-8");
+        public static final String      __VERSION__      = "1.2.6a";
+        public static final File        GAME_PATH        = new File(new File("").getAbsolutePath());
+        public static final File        SRC_PATH         = new File(GAME_PATH, "src");
+        public static final File        CONFIGS_PATH     = new File(GAME_PATH, "configs");
+        public static final File        PLUGINS_PATH     = new File(GAME_PATH, "plugins");
+        public static final File        SAVES_PATH       = new File(GAME_PATH, "saves");
+        public static final File        REPORT_PATH      = new File(GAME_PATH, "report");
+        public static final Charset     DEF_CHARSET      = Charset.forName("utf-8");
+        public static final ClassLoader DEF_CLASS_LOADER = Main.class.getClassLoader();
 
         // Consts. & importants
 
-        public static JFrame     GameFrame = new JFrame();
+        public static JFrame     GameFrame   = new JFrame();
         public static JTextArea  OutTextArea = new JTextArea();
-        public static JTextField InTextArea = new JTextField("cns");
+        public static JTextField InTextArea  = new JTextField("cns");
         public static Image      ICON;
 
         // gui & consts.
 
+        private static final Thread SHOW_DATA_THREAD = new Thread(new ShowData(), "Show Data Thread");
+
         public static void main(String[] args) throws Exception {
                                 
-                PrintStream t = new PrintStream(new File(REPORT_PATH, String.format("REPORT %d.log", System.currentTimeMillis())), DEF_CHARSET);
+                PrintStream t = new PrintStream(new File(REPORT_PATH, String.format("REPORT %s.log", System.currentTimeMillis())), DEF_CHARSET);
                 System.setErr(t);
 
                 // Init Reports
@@ -63,19 +67,14 @@ public class Main {
 
         private static void Init() throws Exception {
 
-                URL[] TUA = {new URL("file:" + new File(GAME_PATH, "game.jar"))};
-                URLClassLoader UCL = new URLClassLoader(TUA);
-
-                ICON = new ImageIcon(UCL.getResource("game/assets/icon.png")).getImage();
+                ICON = new ImageIcon(DEF_CLASS_LOADER.getResource("game/assets/icon.png")).getImage();
 
                 Settings    .load (new InputStreamReader(new FileInputStream(new File(CONFIGS_PATH, "Main.cfg")), DEF_CHARSET));
-                LangSettings.load (new InputStreamReader(UCL.getResourceAsStream("game/assets/lang/" + Settings.getProperty("lang") + ".lang"), DEF_CHARSET));
-
-                UCL.close();
+                LangSettings.load (new InputStreamReader(DEF_CLASS_LOADER.getResourceAsStream("game/assets/lang/" + Settings.getProperty("lang") + ".lang"), DEF_CHARSET));
+                // Loads icon, settings and langs
 
                 GameFrame.add(InTextArea);
                 GameFrame.add(OutTextArea);
-
 
                 final Integer GUI_X = Integer.parseInt(Settings.getProperty("GUI.size").split("x")[0]);
                 final Integer GUI_Y = Integer.parseInt(Settings.getProperty("GUI.size").split("x")[1]);
@@ -114,7 +113,9 @@ public class Main {
                 InTextArea.setForeground(new Color(FGCOLOR, false));
                 InTextArea.setBorder(BORDER);
                 InTextArea.setEditable(true);
-                InTextArea.addKeyListener(new KeyDetect());
+                InTextArea.addKeyListener(new KeyDetect()); 
+
+                SHOW_DATA_THREAD.start();
 
         }
 
@@ -128,16 +129,16 @@ public class Main {
 
         private static void LoadPlugins() throws Exception {
 
-                String   fileName;
-                String[] splitFileName;
-                Class<?> cls;
+                String   FileName;
+                String[] SplitFileName;
+                Class<?> CLS;
                 // Temporary varibles. 
 
                 output.log("Plugins loading");
                 //logs
 
-                URL[]          url = { new URL("file:C:") };
-                URLClassLoader UCL = new URLClassLoader(url);
+                URL[]          URL = {new URL("file:C:")};
+                URLClassLoader UCL = new URLClassLoader(URL);
                 // Avoid Uninit.
 
 
@@ -145,8 +146,8 @@ public class Main {
 
                         try {
 
-                                splitFileName = f.getName().split("\\.");
-                                fileName      = splitFileName[0];
+                                SplitFileName = f.getName().split("\\.");
+                                FileName      = SplitFileName[0];
                                 // Getting the plugin names
 
                                 if (f.isFile()) {
@@ -154,18 +155,18 @@ public class Main {
                                         output.log(f.getName());
                                         // Log
 
-                                        url[0] = new URL("file:" + f.getAbsolutePath());
-                                        UCL    = new URLClassLoader(url);
+                                        URL[0] = new URL("file:" + f.getAbsolutePath());
+                                        UCL    = new URLClassLoader(URL);
                                         // Creating new class loader
 
-                                        cls = UCL.loadClass(fileName + ".main.Main");
+                                        CLS = UCL.loadClass(FileName + ".main.Main");
                                         // Load class
 
-                                        output.log(fileName + " loaded");
-                                        output.log(fileName + " running");
-                                        output.log("\n---" + fileName + "---");
+                                        output.log(FileName + " loaded");
+                                        output.log(FileName + " running");
+                                        output.log("\n---" + FileName + "---");
 
-                                        cls.getDeclaredMethod("main", String[].class).invoke(null, new Object[1]);
+                                        CLS.getDeclaredMethod("main", String[].class).invoke(null, new Object[1]);
                                         // Run plugin method "main"
                                         
                                         System.out.println("\n------");

@@ -4,7 +4,7 @@ echo ________________
 echo [COMPILING MATH]
 
 rem Compiling
-"%JAVA_HOME%/bin/javac" "@%COMP_PATH%/math/cFile" "-encoding" "utf-8" "-cp" "%PLUG_HOME%/;"
+"%JAVA_HOME%/bin/javac" "@compile/math/cFile" "-encoding" "utf-8" "-cp" "plugins/;"
 
 echo Compiling finish
 

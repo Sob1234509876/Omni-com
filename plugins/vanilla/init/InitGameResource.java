@@ -15,16 +15,16 @@ public class InitGameResource {
         ItemTemplate TEST = new ItemTemplate()
         .setName("TEST");
 
-        Main.VanillaItemReg.add(item.valueOf(TEST));
+        Main.VanillaItemReg.add(Item.valueOf(TEST));
         TEST.setName("TEST2");
 
-        Main.VanillaItemReg.add(item.valueOf(TEST));
+        Main.VanillaItemReg.add(Item.valueOf(TEST));
         TEST.setName("TEST3");
 
-        Main.VanillaItemReg.add(item.valueOf(TEST));
+        Main.VanillaItemReg.add(Item.valueOf(TEST));
         TEST.setName("TEST4");
 
-        Main.VanillaItemReg.add(item.valueOf(TEST));
+        Main.VanillaItemReg.add(Item.valueOf(TEST));
         TEST.setName("TEST5");
     }
 }
