@@ -6,16 +6,10 @@ import java.net.*;
 
 import game.main.*;
 
-//TODO:Remove the nulls of the buffer.
 /**
- * Creates a IPv6 client for some purpose, might be deleted in the future.
- * <p>
- * To interact with the client, you can add plugins or threads to change the
- * {@code client.RETURN_CMD} runnable type for sending data, cmds and other
- * things to the server.
+ * Creates a IPv6 client socket for some purpose.
  * <p>
  * This thing is just a mask, a interface for contacting with the server socket.
- * <p>
  * 
  * @since 1.2.0a
  * @version 1.1.1a
@@ -48,7 +42,7 @@ public class client {
         // Read from stream
         SIS.read(buffer);
 
-        return new String(buffer, Main.DEF_CHARSET).strip();
+        return new String(buffer, Main.DEF_CHARSET).replaceAll("\0", "");
     }
 
     public void write(String data) throws Exception {

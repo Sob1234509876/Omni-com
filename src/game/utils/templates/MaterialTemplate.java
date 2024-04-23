@@ -22,44 +22,64 @@ public class MaterialTemplate extends ItemTemplate {
 
     public Reg<Material> ParentOfThis;
 
+    @Override
+    public MaterialTemplate clone() {
+        MaterialTemplate NEW = null;
+        try {
+            NEW = (MaterialTemplate)(super.clone());
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.printStackTrace(System.out);
+        }
+        return NEW;
+    }
+
     public MaterialTemplate setName(String Name) {
-        super.Name = Name;
-        return this;
+        MaterialTemplate NEW = this.clone();
+        NEW.Name = Name;
+        return NEW;
     }
 
     public MaterialTemplate setColor(String Color) {
-        this.Color = Color;
-        return this;
+        MaterialTemplate NEW = this.clone();
+        NEW.Color = Color;
+        return NEW;
     }
 
     public MaterialTemplate setDescription(String Description) {
-        super.Description = Description;
-        return this;
+        MaterialTemplate NEW = this.clone();
+        NEW.Description = Description;
+        return NEW;
     }
 
     public MaterialTemplate setFlags(String[] Flags) {
-        super.Flags = Flags;
-        return this;
+        MaterialTemplate NEW = this.clone();
+        NEW.Flags = Flags;
+        return NEW;
     }
 
     public MaterialTemplate setFlagSettings(Map<String, String> FlagSettings) {
-        super.FlagSettings = FlagSettings;
-        return this;
+        MaterialTemplate NEW = this.clone();
+        NEW.FlagSettings = FlagSettings;
+        return NEW;
     }
 
     public MaterialTemplate setParentOfThis(Reg<Material> ParentOfThis) {
-        this.ParentOfThis = ParentOfThis;
-        return this;
+        MaterialTemplate NEW = this.clone();
+        NEW.ParentOfThis = ParentOfThis;
+        return NEW;
     }
 
     public MaterialTemplate setComponents(Material[] Component) {
-        this.Component = Component;
-        return this;
+        MaterialTemplate NEW = this.clone();
+        NEW.Component = Component;
+        return NEW;
     }
 
     public MaterialTemplate setElements(Element[] Elements) {
-        this.Elements = Elements;
-        return this;
+        MaterialTemplate NEW = this.clone();
+        NEW.Elements = Elements;
+        return NEW;
     }
 
 }

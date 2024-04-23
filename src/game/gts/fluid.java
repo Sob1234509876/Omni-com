@@ -7,7 +7,7 @@ import game.utils.templates.FluidTemplate;
  * 
  */
 
-public class Fluid extends item {
+public class Fluid extends Item {
 
     public String Color;
     public Material[] Component;

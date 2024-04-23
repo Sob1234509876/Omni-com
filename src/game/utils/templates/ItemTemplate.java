@@ -23,8 +23,7 @@ import game.utils.Reg;
  * </blockquote>
  * <p>
  */
-
-public class ItemTemplate implements Template {
+public class ItemTemplate implements Template, Cloneable {
 
     public String Name;
     public String Description;
@@ -32,24 +31,40 @@ public class ItemTemplate implements Template {
     public Map<String, String> FlagSettings;
     public Reg<Item> ParentOfThis;
 
+    @Override
+    public ItemTemplate clone() {
+        ItemTemplate NEW = null;
+        try {
+            NEW = (ItemTemplate)(super.clone());
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.printStackTrace(System.out);
+        }
+        return NEW;
+    }
+
     public ItemTemplate setName(String Name) {
-        this.Name = Name;
-        return this;
+        ItemTemplate NEW = this.clone();
+        NEW.Name = Name;
+        return NEW;
     }
 
     public ItemTemplate setDescription(String Description) {
-        this.Description = Description;
-        return this;
+        ItemTemplate NEW = this.clone();
+        NEW.Description = Description;
+        return NEW;
     }
 
     public ItemTemplate setFlags(String[] Flags) {
-        this.Flags = Flags;
-        return this;
+        ItemTemplate NEW = this.clone();
+        NEW.Flags = Flags;
+        return NEW;
     }
 
     public ItemTemplate setFlagSettings(Map<String, String> FlagSettings) {
-        this.FlagSettings = FlagSettings;
-        return this;
+        ItemTemplate NEW = this.clone();
+        NEW.FlagSettings = FlagSettings;
+        return NEW;
     }
 
 }

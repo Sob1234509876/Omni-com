@@ -15,52 +15,74 @@ public class RecipeTemplate extends ItemTemplate {
 
     public Reg<Recipe> ParentOfThis;
 
+    @Override
+    public RecipeTemplate clone() {
+        RecipeTemplate NEW = null;
+        try {
+            NEW = (RecipeTemplate)(super.clone());
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.printStackTrace(System.out);
+        }
+        return NEW;
+    }
+
     public RecipeTemplate setName(String Name) {
-        super.Name = Name;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.Name = Name;
+        return NEW;
     }
 
     public RecipeTemplate setDescription(String Description) {
-        super.Description = Description;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.Description = Description;
+        return NEW;
     }
     public RecipeTemplate setFlags(String[] Flags) {
-        super.Flags = Flags;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.Flags = Flags;
+        return NEW;
     }
 
     public RecipeTemplate setFlagSettings(Map<String, String> FlagSettings) {
-        super.FlagSettings = FlagSettings;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.FlagSettings = FlagSettings;
+        return NEW;
     }
     public RecipeTemplate setParentOfThis(Reg<Recipe> ParentOfThis) {
-        this.ParentOfThis = ParentOfThis;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.ParentOfThis = ParentOfThis;
+        return NEW;
     }
 
     public RecipeTemplate setInput(Item[] Input) {
-        this.Input = Input;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.Input = Input;
+        return NEW;
     }
 
     public RecipeTemplate setOutput(Item[] Output) {
-        this.Output = Output;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.Output = Output;
+        return NEW;
     }
 
     public RecipeTemplate setInputFun(Runnable InputFun) {
-        this.InputFun = InputFun;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.InputFun = InputFun;
+        return NEW;
     }
 
     public RecipeTemplate setOutputFun(Runnable OutputFun) {
-        this.OutputFun = OutputFun;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.OutputFun = OutputFun;
+        return NEW;
     }
 
     public RecipeTemplate setBindedMachine(Machine BindedMachine) {
-        this.BindedMachine = BindedMachine;
-        return this;
+        RecipeTemplate NEW = this.clone();
+        NEW.BindedMachine = BindedMachine;
+        return NEW;
     }
 
 

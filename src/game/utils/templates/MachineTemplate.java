@@ -12,30 +12,47 @@ public class MachineTemplate extends ItemTemplate {
 
     public Reg<Machine> ParentOfThis;
 
+    @Override
+    public MachineTemplate clone() {
+        MachineTemplate NEW = null;
+        try {
+            NEW = (MachineTemplate)(super.clone());
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.printStackTrace(System.out);
+        }
+        return NEW;
+    }
+
     public MachineTemplate setName(String Name) {
-        super.Name = Name;
-        return this;
+        MachineTemplate NEW = this.clone();
+        NEW.Name = Name;
+        return NEW;
     }
 
     public MachineTemplate setDescription(String Description) {
-        super.Description = Description;
-        return this;
+        MachineTemplate NEW = this.clone();
+        NEW.Description = Description;
+        return NEW;
     }
 
 
     public MachineTemplate setFlags(String[] Flags) {
-        super.Flags = Flags;
-        return this;
+        MachineTemplate NEW = this.clone();
+        NEW.Flags = Flags;
+        return NEW;
     }
 
     public MachineTemplate setFlagSettings(Map<String, String> FlagSettings) {
-        super.FlagSettings = FlagSettings;
-        return this;
+        MachineTemplate NEW = this.clone();
+        NEW.FlagSettings = FlagSettings;
+        return NEW;
     }
 
     public MachineTemplate setBindedRecipes(Recipe[] BindedRecipes) {
-        this.BindedRecipes = BindedRecipes;
-        return this;
+        MachineTemplate NEW = this.clone();
+        NEW.BindedRecipes = BindedRecipes;
+        return NEW;
     }
 
 

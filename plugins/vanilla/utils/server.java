@@ -6,16 +6,10 @@ import java.io.*;
 
 import java.net.*;
 
-//TODO:Remove the nulls of the buffer.
 /**
- * Creates a IPv6 server for some purpose, might be deleted in the future.
+ * Creates a IPv6 server socket for some purpose.
  * <p>
- * To interact with the server, you can add plugins or threads to change the
- * {@code server.RETURN_CMD} runnable type for sending data, cmds and other
- * things to the client.
- * <p>
- * This thing is just a mask, a interface for contacting with the client socket
- * <p>
+ * This thing is just a mask, a interface for contacting with the client socket.
  * 
  * @since 1.2.0a
  * @version 1.1.1a
@@ -50,7 +44,7 @@ public class server {
         SIS.read(buffer);
 
         // Uses UTF-8 for encoding.
-        return new String(buffer, Main.DEF_CHARSET).strip();
+        return new String(buffer, Main.DEF_CHARSET).replaceAll("\0", "");
     }
 
     public void write(String data) throws Exception {

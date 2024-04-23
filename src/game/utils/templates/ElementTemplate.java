@@ -28,37 +28,60 @@ public class ElementTemplate extends ItemTemplate {
     public long NeutronAmount = 0;
     public Reg<Element> ParentOfThis;
 
-    public ElementTemplate setName(String name) {
-        super.Name = name;
+    @Override
+    public ElementTemplate clone() {
+        ElementTemplate NEW = null;
+        try {
+            NEW = (ElementTemplate)(super.clone());
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.printStackTrace(System.out);
+        }
+        return NEW;
+    }
+
+    public ElementTemplate setName(String Name) {
+        ElementTemplate NEW = this.clone();
+        NEW.Name = Name;
+        return NEW;
+    }
+
+    public ElementTemplate setDescription(String Description) {
+        ElementTemplate NEW = this.clone();
+        NEW.Description = Description;
         return this;
     }
 
-    public ElementTemplate setDescription(String description) {
-        super.Description = description;
+    public ElementTemplate setFlags(String[] Flags) {
+        ElementTemplate NEW = this.clone();
+        NEW.Flags = Flags;
         return this;
     }
 
-    public ElementTemplate setFlags(String[] flags) {
-        super.Flags = flags;
+    public ElementTemplate setFlagSettings(Map<String, String> FlagSettings) {
+        
+        ElementTemplate NEW = this.clone();
+        NEW.FlagSettings = FlagSettings;
         return this;
     }
-
-    public ElementTemplate setFlagSettings(Map<String, String> flagSettings) {
-        super.FlagSettings = flagSettings;
-        return this;
-    }
-    public ElementTemplate setAtomSymbol(String AtomSymbol) {
-        this.ChemSymbol = AtomSymbol;
+    public ElementTemplate setAtomSymbol(String ChemSymbol) {
+        
+        ElementTemplate NEW = this.clone();
+        NEW.ChemSymbol = ChemSymbol;
         return this;
     }
 
     public ElementTemplate setProtonAmount(long ProtonAmount) {
-        this.ProtonAmount = ProtonAmount;
+        
+        ElementTemplate NEW = this.clone();
+        NEW.ProtonAmount = ProtonAmount;
         return this;
     }
 
     public ElementTemplate setNeutronAmount(long NeutronAmount) {
-        this.NeutronAmount = NeutronAmount;
+        
+        ElementTemplate NEW = this.clone();
+        NEW.NeutronAmount = NeutronAmount;
         return this;
     }
 

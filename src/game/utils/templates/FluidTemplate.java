@@ -13,40 +13,58 @@ public class FluidTemplate extends ItemTemplate {
     public long Temperature;
     public Reg<Fluid> ParentOfThis;
 
+    @Override
+    public FluidTemplate clone() {
+        FluidTemplate NEW = null;
+        try {
+            NEW = (FluidTemplate)(super.clone());
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.printStackTrace(System.out);
+        }
+        return NEW;
+    }
     
-    public FluidTemplate setName(String name) {
-        super.Name = name;
-        return this;
+    public FluidTemplate setName(String Name) {
+        FluidTemplate NEW = this.clone();
+        NEW.Name = Name;
+        return NEW;
     }
 
-    public FluidTemplate setDescription(String description) {
-        super.Description = description;
-        return this;
+    public FluidTemplate setDescription(String Description) {
+        FluidTemplate NEW = this.clone();
+        NEW.Description = Description;
+        return NEW;
     }
 
-    public FluidTemplate setFlags(String[] flags) {
-        super.Flags = flags;
-        return this;
+    public FluidTemplate setFlags(String[] Flags) {
+        FluidTemplate NEW = this.clone();
+        NEW.Flags = Flags;
+        return NEW;
     }
 
-    public FluidTemplate setFlagSettings(Map<String, String> flagSettings) {
-        super.FlagSettings = flagSettings;
-        return this;
+    public FluidTemplate setFlagSettings(Map<String, String> FlagSettings) {
+        FluidTemplate NEW = this.clone();
+        NEW.FlagSettings = FlagSettings;
+        return NEW;
     }
 
-    public FluidTemplate setColor(String color) {
-        this.Color = color;
-        return this;
+    public FluidTemplate setColor(String Color) {
+        FluidTemplate NEW = this.clone();
+        NEW.Color = Color;
+        return NEW;
     }
 
-    public FluidTemplate setComponent(Material[] component) {
-        this.Component = component;
-        return this;
+    public FluidTemplate setComponent(Material[] Component) {
+        FluidTemplate NEW = this.clone();
+        NEW.Component = Component;
+        return NEW;
     }
 
-    public FluidTemplate setTemperature(long temperature) {
-        this.Temperature = temperature;
-        return this;
+    public FluidTemplate setTemperature(long Temperature) {
+        FluidTemplate NEW = this.clone();
+        NEW.Temperature = Temperature;
+        return NEW;
     }
 
 

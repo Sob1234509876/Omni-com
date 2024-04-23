@@ -58,7 +58,7 @@ public class Main {
 
         // Happy coding and loading.
 
-        CoreCmdProcessor();
+        CoreCmdSolver();
     }
 
 
@@ -67,7 +67,7 @@ public class Main {
      * 
      * @throws Exception
      */
-    private static void CoreCmdProcessor() throws Exception {
+    private static void CoreCmdSolver() throws Exception {
 
         Thread VanillaCmdSolver = new Thread(new Runnable() {
 

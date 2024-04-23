@@ -58,7 +58,7 @@ alpha 1.2.5 :
 Trying to fix problems of vanilla plugin. (part 1) Fix all of the problems (and also left some poorly fixed problems that *might* be fixed in the future)(part 2). Fix the part of where the frame of plugin vanilla is white (part 3). Moved the resource file into the jar file game.jar (can work), renamed it to assets.(last part).
 
 alpha 1.2.6 :
-Fix some stuffs and made the LClient LServer work. (part 1)
+Fix some stuffs and made the LClient LServer work. (part 1) Fix the problem that the server and client recieves useless nulls, also redone the templates to match what I expected. (part 2)
 
 Chinese stuffs (Poorly written classical Chinese)
 ===
