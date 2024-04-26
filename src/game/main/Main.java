@@ -24,8 +24,8 @@ import java .awt  .*;
  */
 public class Main {
 
-        public static Properties Settings     = new Properties();
-        public static Properties LangSettings = new Properties();
+        public static final Properties Settings     = new Properties();
+        public static final Properties LangSettings = new Properties();
 
         public static final String      __VERSION__      = "1.2.6a";
         public static final File        GAME_PATH        = new File(new File("").getAbsolutePath());
@@ -34,15 +34,15 @@ public class Main {
         public static final File        PLUGINS_PATH     = new File(GAME_PATH, "plugins");
         public static final File        SAVES_PATH       = new File(GAME_PATH, "saves");
         public static final File        REPORT_PATH      = new File(GAME_PATH, "report");
-        public static final Charset     DEF_CHARSET      = Charset.forName("utf-8");
+        public static final Charset     DEF_CHARSET      = Charset.forName("UTF-8");
         public static final ClassLoader DEF_CLASS_LOADER = Main.class.getClassLoader();
 
         // Consts. & importants
 
-        public static JFrame     GameFrame   = new JFrame();
-        public static JTextArea  OutTextArea = new JTextArea();
-        public static JTextField InTextArea  = new JTextField("cns");
-        public static Image      ICON;
+        public static final JFrame     GameFrame   = new JFrame();
+        public static final JTextArea  OutTextArea = new JTextArea();
+        public static final JTextField InTextArea  = new JTextField("play");
+        public static Image ICON;
 
         // gui & consts.
 

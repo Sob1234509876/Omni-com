@@ -1,6 +1,7 @@
 package game.io;
 
-import game.main.Main;
+import game.main.*;
+import game.gui.listeners.*;
 
 /*
  * todo : change it to match the gui game
@@ -14,6 +15,15 @@ public class input {
 
     public static void clear() {
         Main.InTextArea.setText(null);
+    }
+    
+    public static String GET() {
+        while (KeyDetect.PressedKey != '\n') ;
+        String tmp = input.read();
+        input.clear();
+        KeyDetect.PressedKey = '\0';
+
+        return tmp;
     }
 
 }

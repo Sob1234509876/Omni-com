@@ -1,6 +1,9 @@
 title=Omni com. %s
 default=Enter "help" for help (duh) or enter "game" to enter game.
-help=LOL
+
+Help=LOL
 CreateSaveName=Please enter the name of your new save
 
 vanilla.title=Omni com. game
+vanilla.GetSave=Enter the save name
+vanilla.EnterCMD=Enter command

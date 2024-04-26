@@ -1,15 +1,9 @@
 package vanilla.main;
 
+import java.net.*;
+
+import game.io.*;
 import game.gts.*;
-import game.gui.listeners.*;
-
-import javax.swing.*;
-
-import java.io.*;
-import java.net.URL;
-import java.net.URLClassLoader;
-
-import java.util.*;
 
 /**
  * The vanilla game of this game.
@@ -21,40 +15,43 @@ import java.util.*;
 
 public class Main {
 
-    public static final    String              __VERSION__ = "2.0.2a";
-    public static final    game.utils.Reg<Item> VanillaItemReg  = new game.utils.Reg<>("vanilla");
+    private static URL[] T_URLS = new URL[1];
+    //TMP
+    public static final String               __VERSION__ = "2.0.4a";
+    public static final game.utils.Reg<Item> VanillaItemReg  = new game.utils.Reg<>("vanilla");
     // METAish
-    public static final Properties settings     = new Properties();
-    public static final Properties LangSettings = new Properties();
-    // Properties
-    public static JFrame     GameFrame   = new JFrame();
-    public static JTextArea  OutTextArea = new JTextArea();
-    public static JTextField InTextArea  = new JTextField("play");
-    // GUI
-
-    public static final File THIS_PATH  = new File(String.format("file:%s/vanilla.jar", game.main.Main.PLUGINS_PATH));
 
     static {
         VanillaItemReg.add(Item.valueOf(new game.utils.templates.ItemTemplate()
                 .setName("ALPHA"))
                 );
+            try {
+                T_URLS[0] = new URL(String.format("file:%s/vanilla.jar", game.main.Main.PLUGINS_PATH));
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.printStackTrace(System.out);
+            }
     }
+
+    public static final URL[]          THIS_URLS         = T_URLS;
+    public static final URLClassLoader THIS_CLASS_LOADER = new URLClassLoader(THIS_URLS);
+    // Loaders
 
     /**
      * The entry of this plugin.
      */
     public static void main(String[] args) throws Exception {
 
-        System.out.println(VanillaItemReg.get(0).Name);
-        System.out.println("2024.03.18 : Alpha success (1.1.0)");
-        System.out.println("2024.04.08 : Epic Rebirth  (1.2.3)");
-        System.out.println("Omni co., Ltd.");
+        output.log(VanillaItemReg.get(0).Name);
+        output.log("2024.03.18 : Alpha success (1.1.0)");
+        output.log("2024.04.08 : Epic Rebirth  (1.2.3)");
+        output.log("Omni co., Ltd.");
 
-        System.out.println("______________________________________");
-        System.out.println(" _");
-        System.out.println("/ \\ |/\\/\\ |/\\ .   _  _     |  _|_  _|");
-        System.out.println("\\_/ | | | | | |  |_ |_| ., |_  |  |_|.");
-        System.out.println("______________________________________");
+        output.log("______________________________________");
+        output.log(" _");
+        output.log("/ \\ |/\\/\\ |/\\ .   _  _     |  _|_  _|");
+        output.log("\\_/ | | | | | |  |_ |_| ., |_  |  |_|.");
+        output.log("______________________________________");
 
         // Happy coding and loading.
 
@@ -69,56 +66,10 @@ public class Main {
      */
     private static void CoreCmdSolver() throws Exception {
 
-        Thread VanillaCmdSolver = new Thread(new Runnable() {
-
-            private String buffer;
-
-            public void run() {
-
-                try {
-                    while (true) {
-                        buffer = GET();
-
-                        if (buffer.equals("cns")) {
-                            
-                            URL[] U = {new URL(THIS_PATH.toString())};
-                            URLClassLoader UCL = new URLClassLoader(U);
-
-                            game.io.output.log("CNS");
-
-                            UCL.loadClass("vanilla.init.CreateNewSave")
-                                .getMethod("Create")
-                                .invoke(null);
-
-                            UCL.close();
-
-                        }
-                        else if (buffer.equals("help")) {
-                            game.io.output.write(game.main.Main.LangSettings.getProperty("help"));
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    e.printStackTrace(System.out);
-                }
-            }
-
-        }
-
-                , "VCL");
+        Thread VanillaCmdSolver = new Thread(new VanillaCmdSolver(), "VCL");
 
         VanillaCmdSolver.start();
 
-    }
-
-
-    private static String GET() {
-        while (KeyDetect.PressedKey != '\n') ;
-        String tmp = game.io.input.read();
-        game.io.input.clear();
-        KeyDetect.PressedKey = '\0';
-
-        return tmp;
     }
 
 }

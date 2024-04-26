@@ -1,10 +1,11 @@
 package vanilla.net;
 
-import game.io.*;
-
 import vanilla.utils.*;
 
+import java.io.IOException;
 import java.net.*;
+
+import game.io.*;
 
 /**
  * Currently use for testing.
@@ -14,46 +15,27 @@ import java.net.*;
  */
 public class LClient implements Runnable {
 
-    public  static client S;
-    private static String buffer;
+    public  static socket S;
+    private static String Buffer;
 
-    public static volatile String SEND_CMD;
-    public static volatile String GOT_DATA;
+    public static int           PORT;
+    public static InetAddress   IP;
 
     public void run() {
 
         try {
 
-            output.log("Recv : " + writeNread("WOW, THIS STILL WORKS!!!"));
-            output.log("Recv : " + readNwrite("YES, IT WORKED!!!"));
+            LInit();
+            output.write(game.main.Main.LangSettings.getProperty("vanilla.EnterCMD"));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static String read() {
-        try {
-
-            LClient.S = new client(8080, Inet6Address.getLocalHost());
-            buffer = LClient.S.read();
-            LClient.S.close();
-            return buffer;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
-            return new String();
-        }
-
-    }
-
-    private static void write(String data) {
-        try {
-
-            LClient.S = new client(8080, Inet6Address.getLocalHost());
-            LClient.S.write(data);
-            LClient.S.close();
+            while (true) {
+                LClient.Buffer = input.GET();
+                write(LClient.Buffer);
+                output.log("Send cmd : " + LClient.Buffer);
+                LClient.Buffer = read();
+                output.log("Recv from server : " + LClient.Buffer);
+                output.write(LClient.Buffer);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,35 +43,23 @@ public class LClient implements Runnable {
         }
     }
 
-    private static String readNwrite(String data) {
-        try {
-
-            LClient.S = new client(8080, Inet6Address.getLocalHost());
-            buffer = LClient.S.read();
-            LClient.S.write(data);
-            LClient.S.close();
-            return buffer;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
-            return new String();
-        }
+    private static void write(String data) throws IOException {
+        S = new socket(PORT, IP);
+        S.connect(LServer.PORT, LServer.IP);
+        S.write(data);
+        S.close();
     }
 
-    private static String writeNread(String data) {
-        try {
+    private static String read() throws IOException {
+        S = new socket(PORT, IP);
+        LClient.Buffer = S.read();
+        S.close();
+        return LClient.Buffer;
 
-            LClient.S = new client(8080, Inet6Address.getLocalHost());
-            LClient.S.write(data);
-            buffer = LClient.S.read();
-            LClient.S.close();
-            return buffer;
+    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
-            return new String();
-        }
+    private static void LInit() throws UnknownHostException {
+        LClient.PORT = 9000;
+        LClient.IP   = Inet6Address.getLoopbackAddress();
     }
 }

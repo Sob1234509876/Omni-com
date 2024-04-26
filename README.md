@@ -58,7 +58,13 @@ alpha 1.2.5 :
 Trying to fix problems of vanilla plugin. (part 1) Fix all of the problems (and also left some poorly fixed problems that *might* be fixed in the future)(part 2). Fix the part of where the frame of plugin vanilla is white (part 3). Moved the resource file into the jar file game.jar (can work), renamed it to assets.(last part).
 
 alpha 1.2.6 :
-Fix some stuffs and made the LClient LServer work. (part 1) Fix the problem that the server and client recieves useless nulls, also redone the templates to match what I expected. (part 2)
+Fix some stuffs and made the LClient LServer work. (part 1) Fix the problem that the server and client recieves useless nulls, also redone the templates to match what I expected. (part 2) Tested the local server and client, change the protocal to UDP for simplification; Made a testing command "test" and a working command "play", one for ingame and one for in the main menu. The UDP socket might be changed for 
+some higher reliability throw changing the protocal. (last part).
+
+alpha 1.2.7 TODO :
+1. Add a BigNum class to plugin math and make sure it is faster than BigInteger.
+2. Make some simple ingame commands.
+3. Add some more pages on fandom wiki (see the description of this repo.)
 
 Chinese stuffs (Poorly written classical Chinese)
 ===
@@ -75,4 +81,4 @@ Chinese stuffs (Poorly written classical Chinese)
 元
 ===
   吾坊底细多而精，不可被外人知。但君已问，吾便列坊底细之小部也。
-  欲知底细如何，且听下版本分解。
+  欲知底细如何，且等吾有时。
