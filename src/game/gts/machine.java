@@ -24,4 +24,12 @@ public class Machine extends Item {
 
     }
 
+    @Override
+    public String toString() {
+        try {
+            return String.format("<%s:%s>", ParentOfThis.toString(), super.Name);
+        } catch (NullPointerException e) {
+            return String.format("<%s>", super.Name);
+        }
+    }
 }

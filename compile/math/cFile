@@ -1,1 +1,4 @@
 plugins/math/main/Main.java
+plugins/math/utils/util.java
+plugins/math/utils/cons.java
+plugins/math/binary.java

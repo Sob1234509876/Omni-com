@@ -1,6 +1,6 @@
 package game.utils;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * {@code reg<T>}, known as register array. The usage of it is to create a array
@@ -25,6 +25,10 @@ public class Reg<T> {
      */
     public Reg(String name) {
         this.name = name;
+    }
+
+    public Iterator<T> iterator() {
+        return list.iterator();
     }
 
     /**

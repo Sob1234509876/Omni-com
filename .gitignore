@@ -6,3 +6,10 @@
 *.class
 
 saves/*
+src/comp/*
+plugins/math-comp/*
+plugins/vanilla-comp/*
+
+!src/comp/README.txt
+!plugins/math-comp/README.txt
+!plugins/vanilla-comp/README.txt

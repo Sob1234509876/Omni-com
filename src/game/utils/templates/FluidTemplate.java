@@ -3,7 +3,8 @@ package game.utils.templates;
 import java.util.Map;
 
 import game.gts.*;
-import game.utils.Reg;
+import game.io.*;
+import game.utils.*;
 
 public class FluidTemplate extends ItemTemplate {
 
@@ -19,8 +20,7 @@ public class FluidTemplate extends ItemTemplate {
         try {
             NEW = (FluidTemplate)(super.clone());
         } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
+            output.log(e);
         }
         return NEW;
     }

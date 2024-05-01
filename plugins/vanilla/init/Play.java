@@ -2,6 +2,8 @@ package vanilla.init;
 
 import java.io.*;
 
+import game.io.*;
+
 public class Play {
 
     public static final int CLIENT_MODE = 0;
@@ -94,10 +96,11 @@ public class Play {
         SERVER_CLASS = vanilla.main.Main.THIS_CLASS_LOADER.loadClass("vanilla.net.LServer");
         CLIENT_CLASS = vanilla.main.Main.THIS_CLASS_LOADER.loadClass("vanilla.net.LClient");
 
-        SERVER_THREAD = new Thread(new Runnable() {public void run() {try {SERVER_CLASS.getMethod("run").invoke(SERVER_CLASS.getConstructor().newInstance());} catch (Exception e) {e.printStackTrace();e.printStackTrace(System.out);}}}, "server");
-        CLIENT_THREAD = new Thread(new Runnable() {public void run() {try {CLIENT_CLASS.getMethod("run").invoke(CLIENT_CLASS.getConstructor().newInstance());} catch (Exception e) {e.printStackTrace();e.printStackTrace(System.out);}}}, "client");
+        SERVER_THREAD = new Thread(new Runnable() {public void run() {try {SERVER_CLASS.getMethod("run").invoke(SERVER_CLASS.getConstructor().newInstance());} catch (Exception e) {output.log(e);}}}, "server");
+        CLIENT_THREAD = new Thread(new Runnable() {public void run() {try {CLIENT_CLASS.getMethod("run").invoke(CLIENT_CLASS.getConstructor().newInstance());} catch (Exception e) {output.log(e);}}}, "client");
 
-        SERVER_THREAD.setDaemon(true);
+        SERVER_THREAD.setPriority(Thread.MAX_PRIORITY);
+        CLIENT_THREAD.setPriority(Thread.MIN_PRIORITY);
         // I`m sorry but I have used everything that I know.
         // Class not define error is an absolute killer to me.
 

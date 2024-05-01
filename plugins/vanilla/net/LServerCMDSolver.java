@@ -1,5 +1,9 @@
 package vanilla.net;
 
+import java.util.*;
+
+import game.io.*;
+
 public class LServerCMDSolver implements Runnable {
     
     private static final String TEST = "test";
@@ -12,7 +16,7 @@ public class LServerCMDSolver implements Runnable {
 
                     if (LServer.GOT_CMD.equals(TEST)) {
                         LServer.GOT_CMD = null;
-                        LServer.SEND_DATA = "FINALLY!!!";
+                        LServer.SEND_DATA = new Date().toString();
                     }
                 }
 
@@ -20,8 +24,7 @@ public class LServerCMDSolver implements Runnable {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
+            output.log(e);
         }
     }
 }

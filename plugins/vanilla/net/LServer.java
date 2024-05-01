@@ -18,7 +18,8 @@ public class LServer implements Runnable {
     public static volatile socket S;
 
     private static String Buffer;
-    private static Thread SERVER_CMD_SOLVER_THREAD = new Thread(new LServerCMDSolver(), "local server cmd solver");
+    private static Thread SERVER_CMD_SOLVER_THREAD = new Thread(new LServerCMDSolver(), "local server cmd solver"),
+                          CMD_TIMER = new Thread(new LCMDTimer(), "local cmd timer");
 
     public static int PORT;
     public static InetAddress IP;
@@ -29,6 +30,7 @@ public class LServer implements Runnable {
     public void run() {
 
         SERVER_CMD_SOLVER_THREAD.start();
+        CMD_TIMER.start();
 
         try {
 
@@ -43,8 +45,7 @@ public class LServer implements Runnable {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
+            output.log(e);
         }
 
     }

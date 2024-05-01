@@ -17,6 +17,8 @@ public class input {
         Main.InTextArea.setText(null);
     }
     
+    // Change the way on how input gets things,
+    // make it less resource taking.
     public static String GET() {
         while (KeyDetect.PressedKey != '\n') ;
         String tmp = input.read();

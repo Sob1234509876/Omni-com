@@ -22,7 +22,7 @@ public class RecipeTemplate extends ItemTemplate {
             NEW = (RecipeTemplate)(super.clone());
         } catch (Exception e) {
             e.printStackTrace();
-            e.printStackTrace(System.out);
+            System.exit(1);
         }
         return NEW;
     }

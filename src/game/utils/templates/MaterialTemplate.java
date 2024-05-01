@@ -3,6 +3,7 @@ package game.utils.templates;
 import java.util.Map;
 
 import game.gts.*;
+import game.io.output;
 import game.utils.Reg;
 
 /**
@@ -28,8 +29,7 @@ public class MaterialTemplate extends ItemTemplate {
         try {
             NEW = (MaterialTemplate)(super.clone());
         } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
+            output.log(e);
         }
         return NEW;
     }

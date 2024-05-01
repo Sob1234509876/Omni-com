@@ -22,16 +22,17 @@ public class Main {
     // METAish
 
     static {
+
         VanillaItemReg.add(Item.valueOf(new game.utils.templates.ItemTemplate()
                 .setName("ALPHA"))
                 );
             try {
                 T_URLS[0] = new URL(String.format("file:%s/vanilla.jar", game.main.Main.PLUGINS_PATH));
             } catch (Exception e) {
-                e.printStackTrace();
-                e.printStackTrace(System.out);
+                output.log(e);
             }
     }
+    // Adds the item ALPHA to the register and also init. URLClassLoader`s damn URL set.
 
     public static final URL[]          THIS_URLS         = T_URLS;
     public static final URLClassLoader THIS_CLASS_LOADER = new URLClassLoader(THIS_URLS);

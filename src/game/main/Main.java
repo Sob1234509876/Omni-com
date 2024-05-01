@@ -175,11 +175,7 @@ public class Main {
                                 }
 
                         } catch (Exception e) {
-
-                                e.printStackTrace();
-                                e.printStackTrace(System.out);
-                                System.err.print('\n');
-
+                                output.log(e);
                         }
 
                 }

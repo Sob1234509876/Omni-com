@@ -1,5 +1,6 @@
 package vanilla.init;
 
+import game.*;
 import game.gts.*;
 import game.utils.templates.*;
 
@@ -15,6 +16,8 @@ public class InitGameResource {
         ItemTemplate TEST = new ItemTemplate()
         .setName("TEST");
 
+        TEST.ParentOfThis = Main.VanillaItemReg;
+
         Main.VanillaItemReg.add(Item.valueOf(TEST));
         TEST.setName("TEST2");
 
@@ -25,6 +28,7 @@ public class InitGameResource {
         TEST.setName("TEST4");
 
         Main.VanillaItemReg.add(Item.valueOf(TEST));
-        TEST.setName("TEST5");
+
+        data.Items.add(Main.VanillaItemReg);
     }
 }

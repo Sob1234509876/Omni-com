@@ -1,6 +1,7 @@
 package game.io;
 
-import game.main.Main;
+import game.main.*;
+import game.io.err.*;
 
 import java.util.Date;
 
@@ -8,13 +9,7 @@ import java.util.Date;
  * A little io system that is used for making cleaner code. Note : the
  * {@code clear()} method is used for cleaning the output of {@code System.out}.
  */
-
 public class output {
-
-    public static final int NORMAL = 0;
-    public static final int WARNING = 1;
-    public static final int ERROR = 2;
-    public static final int FATAL = 3;
 
     public static String ANSIFormat() {
         return "\033[0m";
@@ -37,17 +32,24 @@ public class output {
     }
 
     public static void log(Object message) {
-        log(message, NORMAL);
+        log(message, Levels.NORMAL);
     }
 
-    public static void log(Object message, int LEVEL) {
+    public static void log(Object message, Levels LEVEL) {
         log(message, "ANNOUNCE", LEVEL);
     }
 
-    public static void log(Object message, String type, int LEVEL) {
+    public static void log(Object message, String type, Levels LEVEL) {
+
+        if (message instanceof Throwable || LEVEL.equals(Levels.FATAL)) {
+            Throwable t = (Throwable)(message);
+            t.printStackTrace();
+            System.exit(1);
+        }
 
         switch (LEVEL) {
             case NORMAL:
+                System.out.print(ANSIFormat());
                 break;
 
             case WARNING:
@@ -67,6 +69,7 @@ public class output {
         System.err.printf("[%s/%s][%s] %s\n", new Date().toString(), type, Thread.currentThread().getName(), message);
 
         System.out.print(ANSIFormat());
+
     }
 
     public static void clear() {

@@ -38,8 +38,7 @@ public class LClient implements Runnable {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
+            output.log(e);
         }
     }
 

@@ -25,4 +25,12 @@ public class Item {
         return tmp;
     }
 
+    @Override
+    public String toString() {
+        try {
+            return String.format("<%s:%s>", ParentOfThis.toString(), this.Name);
+        } catch (NullPointerException e) {
+            return String.format("<%s>", this.Name);
+        }
+    }
 }

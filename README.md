@@ -62,9 +62,10 @@ Fix some stuffs and made the LClient LServer work. (part 1) Fix the problem that
 some higher reliability throw changing the protocal. (last part).
 
 alpha 1.2.7 TODO :
-1. Add a BigNum class to plugin math and make sure it is faster than BigInteger.
-2. Make some simple ingame commands.
-3. Add some more pages on fandom wiki (see the description of this repo.)
+Redone some small parts of compiling, tested some stuffs (part 1)
+1. Make some simple ingame commands.
+2. Add some more pages on fandom wiki (see the description of this repo.)
+3. Redo the game.io.input.GET() method for it to take less resource.
 
 Chinese stuffs (Poorly written classical Chinese)
 ===

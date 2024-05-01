@@ -2,8 +2,9 @@ package game.utils.templates;
 
 import java.util.Map;
 
-import game.gts.Element;
-import game.utils.Reg;
+import game.gts.*;
+import game.io.*;
+import game.utils.*;
 
 /**
  * The {@code elementFactory} class is used for creating elements, elements are
@@ -34,8 +35,7 @@ public class ElementTemplate extends ItemTemplate {
         try {
             NEW = (ElementTemplate)(super.clone());
         } catch (Exception e) {
-            e.printStackTrace();
-            e.printStackTrace(System.out);
+            output.log(e);
         }
         return NEW;
     }

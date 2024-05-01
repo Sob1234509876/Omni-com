@@ -1,5 +1,8 @@
 plugins/vanilla/main/Main.java
+
 plugins/vanilla/init/CreateNewSave.java
+
+plugins/vanilla/utils/socket.java
 
 plugins/vanilla/net/LClient.java
 plugins/vanilla/net/LServer.java

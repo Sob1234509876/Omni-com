@@ -42,6 +42,14 @@ public class Material extends Item {
         return tmp;
     } 
 
+    @Override
+    public String toString() {
+        try {
+            return String.format("<%s:%s>", ParentOfThis.toString(), super.Name);
+        } catch (NullPointerException e) {
+            return String.format("<%s>", super.Name);
+        }
+    }
 }
 
 
