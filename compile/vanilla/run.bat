@@ -9,7 +9,8 @@ rem Compiling
 echo Compiling finish
 
 rem Packing
-"%JAVA_HOME%/bin/jar" "-cfm" "plugins/vanilla.jar" "plugins/vanilla/MANIFEST.MF" "-C" "plugins/vanilla-comp" "vanilla"
+
+"%JAVA_HOME%/bin/jar" "-cfm" "plugins/vanilla.jar" "compile/vanilla/MANIFEST.MF" "-C" "plugins/vanilla-comp" "vanilla"
 
 rem Run src compile
 "compile/src/run"

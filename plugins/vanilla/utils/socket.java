@@ -5,6 +5,7 @@ import java.io.*;
 import java.net.*;
 
 import game.main.*;
+import game.io.*;
 
 /**
  * UDP without any changes.
@@ -12,7 +13,7 @@ import game.main.*;
 public class socket {
 
     public static final int DEF_DP_LEN  = 65536;
-    public static final int DEF_TIMEOUT = 32000;
+    public static final int DEF_TIMEOUT = 4000;
 
     private DatagramPacket DP;
     private DatagramSocket S;
@@ -27,6 +28,7 @@ public class socket {
      */
     public socket(int PORT, InetAddress IA) throws SocketException {
         S = new DatagramSocket(PORT, IA);
+        S.setSoTimeout(DEF_TIMEOUT);
     }
 
     /**
@@ -62,9 +64,17 @@ public class socket {
     public String read(int dp_len) throws IOException {
         Buffer = new byte[dp_len];
         DP = new DatagramPacket(Buffer, dp_len);
-        S.receive(DP);
-        
-        return new String(Buffer, Main.DEF_CHARSET).replace("\0", "");
+
+        try {
+
+            S.receive(DP);
+            return new String(Buffer, Main.DEF_CHARSET).replace("\0", "");
+            
+        } catch (SocketTimeoutException e) {
+            
+            return null;
+
+        }
     }
 
 

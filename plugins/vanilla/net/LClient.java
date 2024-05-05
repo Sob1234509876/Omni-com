@@ -18,10 +18,12 @@ public class LClient implements Runnable {
     public  static socket S;
     private static String Buffer;
 
-    public static int           PORT;
-    public static InetAddress   IP;
+    public static int         PORT;
+    public static InetAddress IP;
 
     public void run() {
+
+        output.log("CLIENT START");
 
         try {
 
@@ -30,10 +32,10 @@ public class LClient implements Runnable {
 
             while (true) {
                 LClient.Buffer = input.GET();
+
                 write(LClient.Buffer);
-                output.log("Send cmd : " + LClient.Buffer);
                 LClient.Buffer = read();
-                output.log("Recv from server : " + LClient.Buffer);
+
                 output.write(LClient.Buffer);
             }
 
@@ -43,22 +45,19 @@ public class LClient implements Runnable {
     }
 
     private static void write(String data) throws IOException {
-        S = new socket(PORT, IP);
         S.connect(LServer.PORT, LServer.IP);
         S.write(data);
-        S.close();
     }
 
     private static String read() throws IOException {
-        S = new socket(PORT, IP);
         LClient.Buffer = S.read();
-        S.close();
         return LClient.Buffer;
 
     }
 
-    private static void LInit() throws UnknownHostException {
+    private static void LInit() throws UnknownHostException, SocketException {
         LClient.PORT = 9000;
         LClient.IP   = Inet6Address.getLoopbackAddress();
+        S = new socket(PORT, IP);
     }
 }

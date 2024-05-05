@@ -4,7 +4,7 @@ import game.io.*;
 
 import vanilla.utils.*;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 
 /**
@@ -29,6 +29,8 @@ public class LServer implements Runnable {
 
     public void run() {
 
+        output.log("SERVER START");
+
         SERVER_CMD_SOLVER_THREAD.start();
         CMD_TIMER.start();
 
@@ -37,9 +39,10 @@ public class LServer implements Runnable {
             LInit();
 
             while (true) {
-                output.log("LISTENING...");
-                GOT_CMD = read();
-                while (SEND_DATA == null);
+                while (GOT_CMD == null) {
+                    GOT_CMD = read();
+                }
+                while (SEND_DATA == null) Thread.sleep(50);
                 write(SEND_DATA);
                 SEND_DATA = null;
             }
@@ -50,9 +53,10 @@ public class LServer implements Runnable {
 
     }
 
-    private static void LInit() throws UnknownHostException {
+    private static void LInit() throws UnknownHostException, SocketException {
         PORT = 9001;
         IP   = Inet6Address.getLoopbackAddress();
+        S = new socket(PORT, IP);
     }
 
     /**
@@ -61,9 +65,7 @@ public class LServer implements Runnable {
      */
     private static String read() throws IOException {
 
-        S = new socket(PORT, IP);
         LServer.Buffer = S.read();
-        S.close();
         return Buffer;
 
     }
@@ -74,10 +76,8 @@ public class LServer implements Runnable {
      */
     private static void write(String data) throws IOException {
 
-        S = new socket(PORT, IP);
         S.connect(LClient.PORT, LClient.IP);
         S.write(data);
-        S.close();
 
     }
 

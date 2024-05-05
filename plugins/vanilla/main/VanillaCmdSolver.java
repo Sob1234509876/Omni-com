@@ -30,6 +30,13 @@ public class VanillaCmdSolver implements Runnable {
                         .getMethod("Create")
                         .invoke(null);
 
+                    // Kills this thread
+                    // Pro. :
+                    // Makes the game cmd recieve more stable
+                    // Con. :
+                    // To change the current playing game folder, you need to reload the game.
+                    Thread.currentThread().interrupt();
+
                 } else if (buffer.equals(PLAY)) {
                     // Play the game with a specific game file 
                     output.write(LangSettings.getProperty("vanilla.GetSave"));
@@ -40,9 +47,18 @@ public class VanillaCmdSolver implements Runnable {
                         .getMethod("Start", File.class, Integer.class)
                         .invoke(null, new File(buffer), 2);
 
+                    // Kills this thread
+                    // Pro. :
+                    // Makes the game cmd recieve more stable
+                    // Con. :
+                    // To change the current playing game folder, you need to reload the game.
+                    Thread.currentThread().interrupt();
+
                 } else if (buffer.equals(HELP)) {
                     // Help (WIP)
                     output.write(LangSettings.getProperty("Help"));
+                } else {
+                    output.write("?");
                 }
             }
         } catch (Exception e) {

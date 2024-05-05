@@ -3,14 +3,13 @@
 echo _______________
 echo [COMPILING SRC]
 
-
 rem Compiling
 "%JAVA_HOME%/bin/javac" "-encoding" "utf-8" "-cp" "src; src/game/" "@compile/src/cFile" "-d" "src/comp"
 
 echo Compiling finish
 
 rem Packing
-"%JAVA_HOME%/bin/jar" "-cfm" "game.jar" "src/MANIFEST.MF" "-C" "src/comp" "game"
+"%JAVA_HOME%/bin/jar" "-cfm" "game.jar" "compile/src/MANIFEST.MF" "-C" "src/comp" "game"
 
 rem Run game
 echo ______________

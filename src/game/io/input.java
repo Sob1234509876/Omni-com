@@ -3,10 +3,6 @@ package game.io;
 import game.main.*;
 import game.gui.listeners.*;
 
-/*
- * todo : change it to match the gui game
- */
-
 public class input {
 
     public static String read() {
@@ -16,11 +12,8 @@ public class input {
     public static void clear() {
         Main.InTextArea.setText(null);
     }
-    
-    // Change the way on how input gets things,
-    // make it less resource taking.
     public static String GET() {
-        while (KeyDetect.PressedKey != '\n') ;
+        while (KeyDetect.PressedKey != '\n') try { Thread.sleep(50); } catch (InterruptedException e) {};
         String tmp = input.read();
         input.clear();
         KeyDetect.PressedKey = '\0';

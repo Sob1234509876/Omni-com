@@ -17,7 +17,7 @@ public class Main {
 
     private static URL[] T_URLS = new URL[1];
     //TMP
-    public static final String               __VERSION__ = "2.0.4a";
+    public static final String               __VERSION__ = "21a";
     public static final game.utils.Reg<Item> VanillaItemReg  = new game.utils.Reg<>("vanilla");
     // METAish
 
@@ -35,7 +35,7 @@ public class Main {
     // Adds the item ALPHA to the register and also init. URLClassLoader`s damn URL set.
 
     public static final URL[]          THIS_URLS         = T_URLS;
-    public static final URLClassLoader THIS_CLASS_LOADER = new URLClassLoader(THIS_URLS);
+    public static final URLClassLoader THIS_CLASS_LOADER = new URLClassLoader(THIS_URLS.clone());
     // Loaders
 
     /**

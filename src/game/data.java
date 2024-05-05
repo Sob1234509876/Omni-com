@@ -9,6 +9,8 @@ import game.gts.*;
  * For keeping all of the normal gts list.
  */
 public class data {
+
+    public static final List<String>        Plugins   = new ArrayList<>();
     
     public static final List<Reg<Item>>     Items     = new ArrayList<>();
     public static final List<Reg<Element>>  Elements  = new ArrayList<>();

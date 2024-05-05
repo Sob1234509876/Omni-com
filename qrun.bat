@@ -1,12 +1,7 @@
 @echo off
 
-echo ###############
-echo # For running #
-echo ###############
+echo ##########################
+echo # For changing core code #
+echo ##########################
 
-rem Enviroment varibles
-set COMP_PATH=compile
-set HOME=../..
-set PLUG_HOME=%HOME%/plugins
-
-"%COMP_PATH%/src/run"
+"v" "qrun"

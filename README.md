@@ -62,10 +62,9 @@ Fix some stuffs and made the LClient LServer work. (part 1) Fix the problem that
 some higher reliability throw changing the protocal. (last part).
 
 alpha 1.2.7 TODO :
-Redone some small parts of compiling, tested some stuffs (part 1)
+Redone some small parts of compiling, tested some stuffs (part 1). Renamed the in-game cmd "test" to "time" and added the cmd "info" for checking what plugins are loaded; Redone the part where the plugins are loaded, now plugin names can be anything. (part 2).
 1. Make some simple ingame commands.
 2. Add some more pages on fandom wiki (see the description of this repo.)
-3. Redo the game.io.input.GET() method for it to take less resource.
 
 Chinese stuffs (Poorly written classical Chinese)
 ===
