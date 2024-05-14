@@ -13,26 +13,32 @@ import java.io.*;
  * <pre>
  * META:null
  * </pre>
+ * 
  * That is everything in it.
  * <hr>
  * <h1>Saving Format</h1>
  * With a new save like this :
+ * 
  * <pre>
  * demo.item.a:1,1
  * demo.item.b:1,2
  * demo.machine.c:114,514
  * </pre>
- * It means the player has 1 whole and 1 fraction (which the factor can be any number) of the item {@code a},
- * 1 whole and 2 fractions of the item {@code b} and 114 whole and 514 fractions of the machine {@code c} in 
+ * 
+ * It means the player has 1 whole and 1 fraction (which the factor can be any
+ * number) of the item {@code a},
+ * 1 whole and 2 fractions of the item {@code b} and 114 whole and 514 fractions
+ * of the machine {@code c} in
  * the plugin {@code demo}.
  * <p>
- * The vanilla plugin uses {@code java.util.Properties} for getting the data in the save.
+ * The vanilla plugin uses {@code java.util.Properties} for getting the data in
+ * the save.
  */
 public class CreateNewSave {
 
     public static void Create() throws Exception {
-        
-        output.write(Main.LangSettings.getProperty("CreateSaveName"));
+
+        output.write(output.translate("CreateSaveName"));
 
         File TFOLDER = new File(Main.SAVES_PATH, GET());
         TFOLDER.mkdir();
@@ -50,7 +56,8 @@ public class CreateNewSave {
     }
 
     private static String GET() {
-        while (KeyDetect.PressedKey != '\n') ;
+        while (KeyDetect.PressedKey != '\n')
+            ;
         String tmp = input.read();
         input.clear();
         KeyDetect.PressedKey = '\0';

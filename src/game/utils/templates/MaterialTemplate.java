@@ -27,7 +27,7 @@ public class MaterialTemplate extends ItemTemplate {
     public MaterialTemplate clone() {
         MaterialTemplate NEW = null;
         try {
-            NEW = (MaterialTemplate)(super.clone());
+            NEW = (MaterialTemplate) (super.clone());
         } catch (Exception e) {
             output.log(e);
         }

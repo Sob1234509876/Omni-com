@@ -7,7 +7,7 @@ import game.utils.templates.ElementTemplate;
  * {@code Element} class, used in type fluid and material.
  */
 
-public class Element extends Item{
+public class Element extends Item {
 
     public static char[] ChemNumbers = "₀₁₂₃₄₅₆₇₈₉".toCharArray();
     public static char[] AtomicNumbers = "⁰¹²³⁴⁵⁶⁷⁸⁹".toCharArray();

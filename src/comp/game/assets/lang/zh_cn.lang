@@ -1,0 +1,13 @@
+title=天地工坊 %s
+default=输入“help”来获取帮助或输入“game”来进入游戏
+
+Help=不可能的（
+CreateSaveName=请输入新存档的名称
+
+vanilla.title=天地工坊集团
+vanilla.GetSave=输入存档名
+vanilla.EnterCMD=输入游戏命令
+vanilla.ParLftFrt=请输入参数（剩余%d个）
+
+vanilla.info.game.plug=加载的插件
+vanilla.info.game.memory=内存

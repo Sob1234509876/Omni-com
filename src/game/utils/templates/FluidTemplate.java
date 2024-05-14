@@ -18,13 +18,13 @@ public class FluidTemplate extends ItemTemplate {
     public FluidTemplate clone() {
         FluidTemplate NEW = null;
         try {
-            NEW = (FluidTemplate)(super.clone());
+            NEW = (FluidTemplate) (super.clone());
         } catch (Exception e) {
             output.log(e);
         }
         return NEW;
     }
-    
+
     public FluidTemplate setName(String Name) {
         FluidTemplate NEW = this.clone();
         NEW.Name = Name;
@@ -66,6 +66,5 @@ public class FluidTemplate extends ItemTemplate {
         NEW.Temperature = Temperature;
         return NEW;
     }
-
 
 }

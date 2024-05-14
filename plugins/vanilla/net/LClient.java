@@ -13,12 +13,12 @@ import game.io.*;
  * @version 1.1a
  * @since 1.2.0a
  */
-public class LClient implements Runnable {
+public class LClient extends Thread {
 
-    public  static socket S;
+    public static socket S;
     private static String Buffer;
 
-    public static int         PORT;
+    public static int PORT;
     public static InetAddress IP;
 
     public void run() {
@@ -28,9 +28,10 @@ public class LClient implements Runnable {
         try {
 
             LInit();
-            output.write(game.main.Main.LangSettings.getProperty("vanilla.EnterCMD"));
+            output.write(output.translate("vanilla.EnterCMD"));
 
             while (true) {
+
                 LClient.Buffer = input.GET();
 
                 write(LClient.Buffer);
@@ -45,7 +46,6 @@ public class LClient implements Runnable {
     }
 
     private static void write(String data) throws IOException {
-        S.connect(LServer.PORT, LServer.IP);
         S.write(data);
     }
 
@@ -57,7 +57,12 @@ public class LClient implements Runnable {
 
     private static void LInit() throws UnknownHostException, SocketException {
         LClient.PORT = 9000;
-        LClient.IP   = Inet6Address.getLoopbackAddress();
+        LClient.IP = Inet6Address.getLoopbackAddress();
         S = new socket(PORT, IP);
+        S.connect(LServer.PORT, LServer.IP);
+    }
+
+    public LClient() {
+        super.setName("Client");
     }
 }

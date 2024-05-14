@@ -40,7 +40,7 @@ public class Material extends Item {
         tmp.Elements = MF.Elements;
 
         return tmp;
-    } 
+    }
 
     @Override
     public String toString() {
@@ -51,5 +51,3 @@ public class Material extends Item {
         }
     }
 }
-
-

@@ -1,4 +1,4 @@
-package math.utils;
+package math.lib;
 
 /**
  * Provides some useful tools to cauculate physic and thermal dynamics (and
@@ -61,4 +61,5 @@ public class util {
     public static double s(double x) {
         return 1 / (1 + Math.exp(-x));
     }
+
 }

@@ -36,7 +36,7 @@ public class ItemTemplate implements Template, Cloneable {
     public ItemTemplate clone() {
         ItemTemplate NEW = null;
         try {
-            NEW = (ItemTemplate)(super.clone());
+            NEW = (ItemTemplate) (super.clone());
         } catch (Exception e) {
             output.log(e);
         }

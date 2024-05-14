@@ -3,19 +3,18 @@ package game.gts;
 import game.utils.Reg;
 import game.utils.templates.*;
 
-
 public class Recipe extends Item {
 
     public Item[] Input;
     public Item[] Output;
     public Runnable InputFun;
     public Runnable OutputFun;
-    
+
     public Reg<Recipe> ParentOfThis;
 
     public static Recipe valueOf(RecipeTemplate RF) {
         Recipe tmp = new Recipe();
-        
+
         tmp.Name = RF.Name;
         tmp.Description = RF.Description;
         tmp.Flags = RF.Flags;

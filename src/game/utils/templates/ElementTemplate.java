@@ -33,7 +33,7 @@ public class ElementTemplate extends ItemTemplate {
     public ElementTemplate clone() {
         ElementTemplate NEW = null;
         try {
-            NEW = (ElementTemplate)(super.clone());
+            NEW = (ElementTemplate) (super.clone());
         } catch (Exception e) {
             output.log(e);
         }
@@ -59,31 +59,31 @@ public class ElementTemplate extends ItemTemplate {
     }
 
     public ElementTemplate setFlagSettings(Map<String, String> FlagSettings) {
-        
+
         ElementTemplate NEW = this.clone();
         NEW.FlagSettings = FlagSettings;
         return this;
     }
+
     public ElementTemplate setAtomSymbol(String ChemSymbol) {
-        
+
         ElementTemplate NEW = this.clone();
         NEW.ChemSymbol = ChemSymbol;
         return this;
     }
 
     public ElementTemplate setProtonAmount(long ProtonAmount) {
-        
+
         ElementTemplate NEW = this.clone();
         NEW.ProtonAmount = ProtonAmount;
         return this;
     }
 
     public ElementTemplate setNeutronAmount(long NeutronAmount) {
-        
+
         ElementTemplate NEW = this.clone();
         NEW.NeutronAmount = NeutronAmount;
         return this;
     }
-
 
 }

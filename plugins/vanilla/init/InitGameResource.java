@@ -8,13 +8,14 @@ import vanilla.main.*;
 
 /**
  * Inits the resource of plugin {@code vanilla}.
+ * 
  * @since game:1.2.5a vanilla:2.0.2a
  */
 public class InitGameResource {
-    
+
     public static void Init() {
         ItemTemplate TEST = new ItemTemplate()
-        .setName("TEST");
+                .setName("TEST");
 
         TEST.ParentOfThis = Main.VanillaItemReg;
 

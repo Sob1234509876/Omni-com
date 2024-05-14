@@ -12,8 +12,15 @@ public class input {
     public static void clear() {
         Main.InTextArea.setText(null);
     }
+
     public static String GET() {
-        while (KeyDetect.PressedKey != '\n') try { Thread.sleep(50); } catch (InterruptedException e) {};
+
+        while (KeyDetect.PressedKey != '\n')
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+            }
+        ;
         String tmp = input.read();
         input.clear();
         KeyDetect.PressedKey = '\0';

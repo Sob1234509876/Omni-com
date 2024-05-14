@@ -16,7 +16,7 @@ public class MachineTemplate extends ItemTemplate {
     public MachineTemplate clone() {
         MachineTemplate NEW = null;
         try {
-            NEW = (MachineTemplate)(super.clone());
+            NEW = (MachineTemplate) (super.clone());
         } catch (Exception e) {
             output.log(e);
         }
@@ -35,7 +35,6 @@ public class MachineTemplate extends ItemTemplate {
         return NEW;
     }
 
-
     public MachineTemplate setFlags(String[] Flags) {
         MachineTemplate NEW = this.clone();
         NEW.Flags = Flags;
@@ -53,6 +52,5 @@ public class MachineTemplate extends ItemTemplate {
         NEW.BindedRecipes = BindedRecipes;
         return NEW;
     }
-
 
 }

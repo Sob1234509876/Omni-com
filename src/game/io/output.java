@@ -2,7 +2,9 @@ package game.io;
 
 import game.main.*;
 
-import java.util.Date;
+import java.text.*;
+
+import java.util.*;
 
 /**
  * A little io system that is used for making cleaner code. Note : the
@@ -14,7 +16,6 @@ public class output {
         log("");
     }
 
-
     public static void log(Object message) {
         log(message, "ANNOUNCE");
     }
@@ -22,13 +23,19 @@ public class output {
     public static void log(Object message, String type) {
 
         if (message instanceof Throwable) {
-            Throwable t = (Throwable)(message);
+            Throwable t = (Throwable) (message);
             t.printStackTrace();
             System.exit(1);
         }
 
-        System.out.printf("[%s/%s][%s] %s\n", new Date().toString(), type, Thread.currentThread().getName(), message);
-        System.err.printf("[%s/%s][%s] %s\n", new Date().toString(), type, Thread.currentThread().getName(), message);
+        if (message instanceof Object[]) {
+            message = Arrays.toString((Object[]) message);
+        }
+
+        System.out.printf("[%s/%s][%s] %s\n", new SimpleDateFormat("hh:mm:ss").format(new Date()), type,
+                Thread.currentThread().getName(), message);
+        System.err.printf("[%s/%s][%s] %s\n", new SimpleDateFormat("hh:mm:ss").format(new Date()), type,
+                Thread.currentThread().getName(), message);
 
     }
 
@@ -47,6 +54,10 @@ public class output {
             return;
         }
         Main.OutTextArea.setText(x.toString());
+    }
+
+    public static String translate(String key) {
+        return Main.LangSettings.getProperty(key);
     }
 
 }

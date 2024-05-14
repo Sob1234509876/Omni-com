@@ -19,7 +19,7 @@ public class RecipeTemplate extends ItemTemplate {
     public RecipeTemplate clone() {
         RecipeTemplate NEW = null;
         try {
-            NEW = (RecipeTemplate)(super.clone());
+            NEW = (RecipeTemplate) (super.clone());
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -38,6 +38,7 @@ public class RecipeTemplate extends ItemTemplate {
         NEW.Description = Description;
         return NEW;
     }
+
     public RecipeTemplate setFlags(String[] Flags) {
         RecipeTemplate NEW = this.clone();
         NEW.Flags = Flags;
@@ -49,6 +50,7 @@ public class RecipeTemplate extends ItemTemplate {
         NEW.FlagSettings = FlagSettings;
         return NEW;
     }
+
     public RecipeTemplate setParentOfThis(Reg<Recipe> ParentOfThis) {
         RecipeTemplate NEW = this.clone();
         NEW.ParentOfThis = ParentOfThis;
@@ -84,7 +86,5 @@ public class RecipeTemplate extends ItemTemplate {
         NEW.BindedMachine = BindedMachine;
         return NEW;
     }
-
-
 
 }

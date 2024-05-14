@@ -6,5 +6,4 @@ package game.utils.templates;
 
 public interface Template {
 
-
 }

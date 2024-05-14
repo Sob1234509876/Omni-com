@@ -1,2 +1,2 @@
 Main-Class: vanilla.main.Main
-Class-Path: ../../game.jar;
+Class-Path: ../../game.jar; math.jar

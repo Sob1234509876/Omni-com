@@ -13,26 +13,26 @@ import java.net.*;
  * @version 1.1a
  * @since 1.2.0a
  */
-public class LServer implements Runnable {
+public class LServer extends Thread {
 
     public static volatile socket S;
 
     private static String Buffer;
-    private static Thread SERVER_CMD_SOLVER_THREAD = new Thread(new LServerCMDSolver(), "local server cmd solver"),
-                          CMD_TIMER = new Thread(new LCMDTimer(), "local cmd timer");
 
     public static int PORT;
     public static InetAddress IP;
-    
+
     public static volatile String SEND_DATA;
     public static volatile String GOT_CMD;
+
+    public static volatile int FLOW_NUMBER;
 
     public void run() {
 
         output.log("SERVER START");
 
-        SERVER_CMD_SOLVER_THREAD.start();
-        CMD_TIMER.start();
+        new LServerCMDSolver().start();
+        new LCMDTimer().start();
 
         try {
 
@@ -42,9 +42,14 @@ public class LServer implements Runnable {
                 while (GOT_CMD == null) {
                     GOT_CMD = read();
                 }
-                while (SEND_DATA == null) Thread.sleep(50);
+                output.log("CMD: " + GOT_CMD);
+                while (SEND_DATA == null)
+                    Thread.sleep(50);
+                output.log("SEND: " + SEND_DATA);
                 write(SEND_DATA);
                 SEND_DATA = null;
+
+                FLOW_NUMBER ++;
             }
 
         } catch (Exception e) {
@@ -55,12 +60,14 @@ public class LServer implements Runnable {
 
     private static void LInit() throws UnknownHostException, SocketException {
         PORT = 9001;
-        IP   = Inet6Address.getLoopbackAddress();
+        IP = Inet6Address.getLoopbackAddress();
         S = new socket(PORT, IP);
+        S.connect(LClient.PORT, LClient.IP);
     }
 
     /**
      * Reads from the server socket.
+     * 
      * @return the client IS
      */
     private static String read() throws IOException {
@@ -72,13 +79,17 @@ public class LServer implements Runnable {
 
     /**
      * Writes to the client socket.
+     * 
      * @param data the data to the OS
      */
     private static void write(String data) throws IOException {
 
-        S.connect(LClient.PORT, LClient.IP);
         S.write(data);
 
+    }
+
+    public LServer() {
+        super.setName("Server");
     }
 
 }
