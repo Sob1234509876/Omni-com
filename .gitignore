@@ -1,0 +1,15 @@
+# Ignore .*
+.gradle
+.vscode
+
+# Ignore Gradle build output directory
+build
+
+# Ignore run test folders
+configs
+reports
+saves
+
+# Java compile outputs
+*.jar
+*.class
