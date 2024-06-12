@@ -4,7 +4,6 @@ import java.util.Map;
 
 import game.gts.*;
 import game.io.*;
-import game.utils.*;
 
 public class FluidTemplate extends ItemTemplate {
 
@@ -12,7 +11,6 @@ public class FluidTemplate extends ItemTemplate {
     public Material[] Component;
     public Element[] Elements;
     public long Temperature;
-    public Reg<Fluid> ParentOfThis;
 
     @Override
     public FluidTemplate clone() {

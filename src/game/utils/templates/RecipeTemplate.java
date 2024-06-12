@@ -3,7 +3,6 @@ package game.utils.templates;
 import java.util.Map;
 
 import game.gts.*;
-import game.utils.*;
 
 public class RecipeTemplate extends ItemTemplate {
 
@@ -12,8 +11,6 @@ public class RecipeTemplate extends ItemTemplate {
     public Runnable InputFun;
     public Runnable OutputFun;
     public Machine BindedMachine;
-
-    public Reg<Recipe> ParentOfThis;
 
     @Override
     public RecipeTemplate clone() {
@@ -48,12 +45,6 @@ public class RecipeTemplate extends ItemTemplate {
     public RecipeTemplate setFlagSettings(Map<String, String> FlagSettings) {
         RecipeTemplate NEW = this.clone();
         NEW.FlagSettings = FlagSettings;
-        return NEW;
-    }
-
-    public RecipeTemplate setParentOfThis(Reg<Recipe> ParentOfThis) {
-        RecipeTemplate NEW = this.clone();
-        NEW.ParentOfThis = ParentOfThis;
         return NEW;
     }
 

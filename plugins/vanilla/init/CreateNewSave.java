@@ -1,7 +1,7 @@
 package vanilla.init;
 
 import game.main.*;
-import game.gui.listeners.KeyDetect;
+import game.ui.listeners.KeyDetect;
 import game.io.*;
 
 import java.io.*;
@@ -35,6 +35,9 @@ import java.io.*;
  * the save.
  */
 public class CreateNewSave {
+
+    /**No instance constructing */
+    private CreateNewSave() {}
 
     public static void Create() throws Exception {
 

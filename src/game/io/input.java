@@ -1,16 +1,20 @@
 package game.io;
 
 import game.main.*;
-import game.gui.listeners.*;
+import game.ui.listeners.*;
 
 public class input {
+
+    /** No instance constructing */
+    private input() {
+    }
 
     public static String read() {
         return Main.InTextArea.getText();
     }
 
     public static void clear() {
-        Main.InTextArea.setText(null);
+        Main.InTextArea.setText("");
     }
 
     public static String GET() {
@@ -25,7 +29,11 @@ public class input {
         input.clear();
         KeyDetect.PressedKey = '\0';
 
-        return tmp;
+        if (tmp.equals("")) {
+            return " ";
+        } else {
+            return tmp;
+        }
     }
 
 }

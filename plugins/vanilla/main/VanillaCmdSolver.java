@@ -9,7 +9,7 @@ import vanilla.init.Play;
 
 public class VanillaCmdSolver extends Thread {
 
-    public static final Properties Settings = game.main.Main.Settings;
+    public static final Properties Settings = game.main.Main.SETTINGS;
 
     private String buffer;
 
@@ -42,7 +42,7 @@ public class VanillaCmdSolver extends Thread {
                     buffer = input.GET();
                     output.write();
 
-                    Play.Start(new File(buffer), 2);
+                    Play.Start(new File(game.main.Main.SAVES_PATH, buffer), 2);
 
                     // Kills this thread
                     // Pro. :

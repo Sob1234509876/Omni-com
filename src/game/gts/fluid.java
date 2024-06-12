@@ -1,6 +1,5 @@
 package game.gts;
 
-import game.utils.Reg;
 import game.utils.templates.FluidTemplate;
 
 /**
@@ -14,7 +13,6 @@ public class Fluid extends Item {
     public Element[] Elements;
     public long Temperature;
     public String ChemFormula;
-    public Reg<Fluid> ParentOfThis;
 
     public void loadChemFormula() {
         if (this.Component == null) {
@@ -34,7 +32,6 @@ public class Fluid extends Item {
         tmp.Description = FF.Description;
         tmp.Flags = FF.Flags;
         tmp.FlagSettings = FF.FlagSettings;
-        tmp.ParentOfThis = FF.ParentOfThis;
 
         tmp.Color = FF.Color;
         tmp.Temperature = FF.Temperature;
@@ -48,12 +45,4 @@ public class Fluid extends Item {
         return tmp;
     }
 
-    @Override
-    public String toString() {
-        try {
-            return String.format("<%s:%s>", ParentOfThis.toString(), super.Name);
-        } catch (NullPointerException e) {
-            return String.format("<%s>", super.Name);
-        }
-    }
 }

@@ -1,6 +1,5 @@
 package game.gts;
 
-import game.utils.Reg;
 import game.utils.templates.ElementTemplate;
 
 /**
@@ -17,7 +16,6 @@ public class Element extends Item {
     public Long NeutronAmount;
     public Long AtomicMass;
     public Long Amount;
-    public Reg<Element> ParentOfThis;
 
     public Element valueOf(ElementTemplate EF) {
 
@@ -27,7 +25,6 @@ public class Element extends Item {
         tmp.Description = EF.Description;
         tmp.Flags = EF.Flags;
         tmp.FlagSettings = EF.FlagSettings;
-        tmp.ParentOfThis = EF.ParentOfThis;
 
         tmp.ChemSymbol = EF.ChemSymbol;
         tmp.ProtonAmount = EF.ProtonAmount;
@@ -38,12 +35,4 @@ public class Element extends Item {
 
     }
 
-    @Override
-    public String toString() {
-        try {
-            return String.format("<%s:%s>", ParentOfThis.toString(), super.Name);
-        } catch (NullPointerException e) {
-            return String.format("<%s>", super.Name);
-        }
-    }
 }

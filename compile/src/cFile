@@ -1,5 +1,3 @@
-src/game/data.java
-
 src/game/main/Main.java
 
 src/game/gts/Item.java
@@ -10,8 +8,6 @@ src/game/gts/Machine.java
 src/game/gts/Recipe.java
 
 src/game/io/input.java
-
-src/game/utils/Reg.java
 
 src/game/utils/templates/Template.java
 src/game/utils/templates/ItemTemplate.java

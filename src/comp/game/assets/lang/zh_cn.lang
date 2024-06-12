@@ -7,7 +7,11 @@ CreateSaveName=请输入新存档的名称
 vanilla.title=天地工坊集团
 vanilla.GetSave=输入存档名
 vanilla.EnterCMD=输入游戏命令
+vanilla.TotalParFrt=共%d个参数
 vanilla.ParLftFrt=请输入参数（剩余%d个）
 
 vanilla.info.game.plug=加载的插件
 vanilla.info.game.memory=内存
+vanilla.info.this.item=物品
+vanilla.info.this.fluid=液体
+vanilla.info.this.element=元素

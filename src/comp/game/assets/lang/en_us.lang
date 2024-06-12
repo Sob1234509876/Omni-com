@@ -7,7 +7,11 @@ CreateSaveName=Please enter the name of your new save
 vanilla.title=Omni com. game
 vanilla.GetSave=Enter the save name
 vanilla.EnterCMD=Enter command
+vanilla.TotalParFrt=Total parameters: %d
 vanilla.ParLftFrt=Enter parameter (%d left)
 
 vanilla.info.game.plug=Loaded plugins
 vanilla.info.game.memory=Memory
+vanilla.info.this.item=Items
+vanilla.info.this.fluid=Fluids
+vanilla.info.this.element=Elements

@@ -2,9 +2,7 @@ package game.utils.templates;
 
 import java.util.Map;
 
-import game.gts.*;
 import game.io.*;
-import game.utils.*;
 
 /**
  * The {@code elementFactory} class is used for creating elements, elements are
@@ -27,7 +25,6 @@ public class ElementTemplate extends ItemTemplate {
     public String ChemSymbol = "Nl";
     public long ProtonAmount = 0;
     public long NeutronAmount = 0;
-    public Reg<Element> ParentOfThis;
 
     @Override
     public ElementTemplate clone() {

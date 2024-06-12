@@ -2,9 +2,7 @@ package game.utils.templates;
 
 import java.util.Map;
 
-import game.gts.*;
 import game.io.*;
-import game.utils.*;
 
 /**
  * This factory is used for creating items, items are stored in
@@ -30,7 +28,6 @@ public class ItemTemplate implements Template, Cloneable {
     public String Description;
     public String[] Flags;
     public Map<String, String> FlagSettings;
-    public Reg<Item> ParentOfThis;
 
     @Override
     public ItemTemplate clone() {

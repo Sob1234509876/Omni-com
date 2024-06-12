@@ -2,7 +2,6 @@ package game.gts;
 
 import java.util.*;
 
-import game.utils.*;
 import game.utils.templates.*;
 
 public class Item {
@@ -11,7 +10,6 @@ public class Item {
     public String Description;
     public String[] Flags;
     public Map<String, String> FlagSettings;
-    public Reg<Item> ParentOfThis;
 
     public static Item valueOf(ItemTemplate IF) {
         Item tmp = new Item();
@@ -20,17 +18,12 @@ public class Item {
         tmp.Description = IF.Description;
         tmp.Flags = IF.Flags;
         tmp.FlagSettings = IF.FlagSettings;
-        tmp.ParentOfThis = IF.ParentOfThis;
 
         return tmp;
     }
 
     @Override
     public String toString() {
-        try {
-            return String.format("<%s:%s>", ParentOfThis.toString(), this.Name);
-        } catch (NullPointerException e) {
-            return String.format("<%s>", this.Name);
-        }
+        return String.format("<%s>", this.Name);
     }
 }

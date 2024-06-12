@@ -4,13 +4,10 @@ import java.util.Map;
 
 import game.gts.*;
 import game.io.*;
-import game.utils.*;
 
 public class MachineTemplate extends ItemTemplate {
 
     public Recipe[] BindedRecipes;
-
-    public Reg<Machine> ParentOfThis;
 
     @Override
     public MachineTemplate clone() {

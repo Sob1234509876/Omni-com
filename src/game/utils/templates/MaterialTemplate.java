@@ -4,7 +4,6 @@ import java.util.Map;
 
 import game.gts.*;
 import game.io.output;
-import game.utils.Reg;
 
 /**
  * The {@code materialFactory} factory is used for generatting massive amount of
@@ -20,8 +19,6 @@ public class MaterialTemplate extends ItemTemplate {
     public String Color;
     public Material[] Component;
     public Element[] Elements;
-
-    public Reg<Material> ParentOfThis;
 
     @Override
     public MaterialTemplate clone() {
@@ -61,12 +58,6 @@ public class MaterialTemplate extends ItemTemplate {
     public MaterialTemplate setFlagSettings(Map<String, String> FlagSettings) {
         MaterialTemplate NEW = this.clone();
         NEW.FlagSettings = FlagSettings;
-        return NEW;
-    }
-
-    public MaterialTemplate setParentOfThis(Reg<Material> ParentOfThis) {
-        MaterialTemplate NEW = this.clone();
-        NEW.ParentOfThis = ParentOfThis;
         return NEW;
     }
 

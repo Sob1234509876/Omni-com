@@ -1,14 +1,11 @@
 package game.main;
 
+
+import game.reflect.*;
+import game.ui.*;
+
 //Tools
 import java.util.*;
-import java.util.jar.*;
-import java.net.*;
-
-import game.*;
-import game.gui.listeners.*;
-import game.io.*;
-import game.utils.*;
 
 //io
 import java.io.*;
@@ -16,7 +13,6 @@ import java.nio.charset.*;
 
 //GUI
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.*;
 
 /**
@@ -25,8 +21,8 @@ import java.awt.*;
  */
 public class Main {
 
-    public static final Properties Settings = new Properties();
-    public static final Properties LangSettings = new Properties();
+    public static final Properties SETTINGS = new Properties();
+    public static final Properties LANG = new Properties();
 
     public static final String __VERSION__ = "1.2.7a";
     public static final File GAME_PATH = new File(new File("").getAbsolutePath());
@@ -37,6 +33,7 @@ public class Main {
     public static final File REPORT_PATH = new File(GAME_PATH, "report");
     public static final Charset DEF_CHARSET = Charset.forName("UTF-8");
     public static final ClassLoader DEF_CLASS_LOADER = Main.class.getClassLoader();
+    public static final Runtime DEF_RUNTIME = Runtime.getRuntime();
 
     // Consts. & importants
 
@@ -47,125 +44,29 @@ public class Main {
 
     // gui & consts.
 
+    /** No instance constructing */
+    private Main() {
+    }
+
     public static void main(String[] args) throws Throwable {
 
         PrintStream t = new PrintStream(
                 new File(REPORT_PATH, String.format("REPORT %s.log", System.currentTimeMillis())), DEF_CHARSET);
         System.setErr(t);
         // Init Reports
-
-        Init();
-        LoadPlugins();
-    }
-
-    /**
-     * Graphics init. (That`s all)
-     */
-
-    private static void Init() throws Exception {
-
         ICON = new ImageIcon(DEF_CLASS_LOADER.getResource("game/assets/icon.png")).getImage();
 
-        Settings.load(new InputStreamReader(new FileInputStream(new File(CONFIGS_PATH, "Main.cfg")), DEF_CHARSET));
-        LangSettings.load(new InputStreamReader(
-                DEF_CLASS_LOADER.getResourceAsStream("game/assets/lang/" + Settings.getProperty("lang") + ".lang"),
+        SETTINGS.load(new InputStreamReader(new FileInputStream(new File(CONFIGS_PATH, "Main.cfg")), DEF_CHARSET));
+        LANG.load(new InputStreamReader(
+                DEF_CLASS_LOADER.getResourceAsStream("game/assets/lang/" + SETTINGS.getProperty("lang") + ".lang"),
                 DEF_CHARSET));
-        // Loads icon, settings and langs
+        //Loads in settings and lang files
 
-        GameFrame.add(InTextArea);
-        GameFrame.add(OutTextArea);
-
-        final Integer GUI_X = Integer.parseInt(Settings.getProperty("GUI.size").split("x")[0]);
-        final Integer GUI_Y = Integer.parseInt(Settings.getProperty("GUI.size").split("x")[1]);
-        final Integer SIZ = Integer.parseInt(Settings.getProperty("GUI.font_siz"));
-        final Integer BGCOLOR = Integer.parseInt(Settings.getProperty("GUI.BGColor"));
-        final Integer FGCOLOR = Integer.parseInt(Settings.getProperty("GUI.FGColor"));
-        final Font FONT = new Font(Settings.getProperty("GUI.font"), Font.PLAIN, SIZ);
-        final Border BORDER = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(FGCOLOR, false));
-
-        GameFrame.setTitle(String.format(LangSettings.getProperty("title"), __VERSION__));
-        GameFrame.setVisible(true);
-        GameFrame.setIconImage(ICON);
-        GameFrame.setLayout(null);
-        GameFrame.setSize(GUI_X + 12, GUI_Y + 35);
-        GameFrame.setResizable(false);
-        GameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        OutTextArea.setBounds(0,
-                0,
-                GUI_X,
-                GUI_Y - SIZ);
-        OutTextArea.setEditable(false);
-        OutTextArea.setFont(FONT);
-        OutTextArea.setBackground(new Color(BGCOLOR, false));
-        OutTextArea.setForeground(new Color(FGCOLOR, false));
-        OutTextArea.setBorder(BORDER);
-        OutTextArea.setLineWrap(true);
-        OutTextArea.setText(LangSettings.getProperty("default"));
-
-        InTextArea.setBounds(0,
-                GUI_Y - SIZ,
-                GUI_X,
-                SIZ);
-        InTextArea.setFont(FONT);
-        InTextArea.setBackground(new Color(BGCOLOR, false));
-        InTextArea.setForeground(new Color(FGCOLOR, false));
-        InTextArea.setBorder(BORDER);
-        InTextArea.setEditable(true);
-        InTextArea.addKeyListener(new KeyDetect());
-
-        new ShowData().start();
+        LoadPlugins.Load();
+        LoadUI.Load();
 
     }
 
-    private static void LoadPlugins() throws Throwable {
 
-        output.log("Start loading plugins");
-
-        File[] plugins = PLUGINS_PATH.listFiles(new FileFilter() {
-            public boolean accept(File f) {
-                return f.isFile();
-            }
-        });
-        // Only allows files not dirs
-
-        JarFile[] Jars = new JarFile[plugins.length];
-
-        for (int i = 0; i < Jars.length; i++) {
-            Jars[i] = new JarFile(plugins[i]);
-        }
-
-        String[] MainClasses = new String[plugins.length];
-
-        for (int i = 0; i < Jars.length; i++) {
-            MainClasses[i] = Jars[i].getManifest()
-                    .getMainAttributes()
-                    .getValue("Main-Class");
-        }
-        // This is going to be changed in the future
-
-        URL[] URLS = new URL[plugins.length];
-
-        for (int i = 0; i < URLS.length; i++) {
-            URLS[i] = new URL("file:" + plugins[i].toString());
-        }
-        // Get URLS
-
-        URLClassLoader UCL = new URLClassLoader(URLS);
-
-        for (int i = 0; i < MainClasses.length; i++) {
-            output.log("---" + MainClasses[i].split("\\.")[0] + "---");
-            
-            UCL.loadClass(MainClasses[i])
-                    .getDeclaredMethod("main", String[].class)
-                    .invoke(null, new Object[1]);
-
-            data.Plugins.add(plugins[i].getName().split("\\.")[0]);
-        }
-        output.log("----------------");
-        // Load
-
-        UCL.close();
-    }
 
 }

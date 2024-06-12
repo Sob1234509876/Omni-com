@@ -6,11 +6,18 @@ import java.text.*;
 
 import java.util.*;
 
+/*
+ * This should be changed to ones using java.util.logging
+ */
+
 /**
  * A little io system that is used for making cleaner code. Note : the
  * {@code clear()} method is used for cleaning the output of {@code System.out}.
  */
 public class output {
+
+    /**No instance constructing */
+    private output() {}
 
     public static void log() {
         log("");
@@ -57,7 +64,7 @@ public class output {
     }
 
     public static String translate(String key) {
-        return Main.LangSettings.getProperty(key);
+        return Main.LANG.getProperty(key);
     }
 
 }

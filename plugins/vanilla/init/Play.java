@@ -19,6 +19,10 @@ public class Play {
     public static File GameFile;
     // Some type of API
 
+    /** No instance constructing */
+    private Play() {
+    }
+
     /**
      * Starts a multi-player game.
      * There are 2 types of mode :
@@ -53,7 +57,7 @@ public class Play {
 
             case SERVER_MODE:
 
-                InitGameResource.Init();
+                InitGameResource.Load();
                 new LServer().start();
                 break;
         }
@@ -75,10 +79,12 @@ public class Play {
      * @throws Exception
      */
     public static void Start(File Game, Integer Mode) throws Exception {
-        InitGameResource.Init();
+        InitGameResource.Load();
 
         Play.Mode = Mode;
-        Play.GameFile = Game;
+        Play.GameFile = new File(Game, "data");
+
+        LoadSave.Load();
 
         new LServer().start();
         new LClient().start();

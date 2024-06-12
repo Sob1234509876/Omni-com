@@ -42,14 +42,14 @@ public class LServer extends Thread {
                 while (GOT_CMD == null) {
                     GOT_CMD = read();
                 }
-                output.log("CMD: " + GOT_CMD);
+                // output.log("CMD: " + GOT_CMD);
                 while (SEND_DATA == null)
                     Thread.sleep(50);
-                output.log("SEND: " + SEND_DATA);
+                // output.log("SEND: " + SEND_DATA);
                 write(SEND_DATA);
                 SEND_DATA = null;
 
-                FLOW_NUMBER ++;
+                FLOW_NUMBER++;
             }
 
         } catch (Exception e) {

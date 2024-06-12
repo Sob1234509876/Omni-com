@@ -1,10 +1,10 @@
 package vanilla.init;
 
-import game.*;
+import java.io.*;
+
+import game.api.*;
 import game.gts.*;
 import game.utils.templates.*;
-
-import vanilla.main.*;
 
 /**
  * Inits the resource of plugin {@code vanilla}.
@@ -13,23 +13,19 @@ import vanilla.main.*;
  */
 public class InitGameResource {
 
-    public static void Init() {
+    /**No instance constructing */
+    private InitGameResource() {}
+
+    /**
+     * Inits. items.
+     * @throws IOException {@link LoadSave#Load()}
+     */
+    public static void Load() throws IOException {
         ItemTemplate TEST = new ItemTemplate()
                 .setName("TEST");
+                
+        data.Items.add(Item.valueOf(TEST));
 
-        TEST.ParentOfThis = Main.VanillaItemReg;
-
-        Main.VanillaItemReg.add(Item.valueOf(TEST));
-        TEST.setName("TEST2");
-
-        Main.VanillaItemReg.add(Item.valueOf(TEST));
-        TEST.setName("TEST3");
-
-        Main.VanillaItemReg.add(Item.valueOf(TEST));
-        TEST.setName("TEST4");
-
-        Main.VanillaItemReg.add(Item.valueOf(TEST));
-
-        data.Items.add(Main.VanillaItemReg);
+        LoadSave.Load();
     }
 }

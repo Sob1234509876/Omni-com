@@ -1,6 +1,7 @@
 package game.utils;
 
 import game.io.*;
+import game.main.*;
 
 public class ShowData extends Thread {
 
@@ -9,9 +10,9 @@ public class ShowData extends Thread {
 
             while (true) {
                 output.log(String.format("FM : %d, TM : %d, MM : %d\nNext memory report in 120 seconds.",
-                        Runtime.getRuntime().freeMemory(),
-                        Runtime.getRuntime().totalMemory(),
-                        Runtime.getRuntime().maxMemory()));
+                        Main.DEF_RUNTIME.freeMemory(),
+                        Main.DEF_RUNTIME.totalMemory(),
+                        Main.DEF_RUNTIME.maxMemory()));
                 Thread.sleep(120000);
             }
 

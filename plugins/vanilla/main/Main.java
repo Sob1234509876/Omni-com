@@ -1,7 +1,14 @@
 package vanilla.main;
 
 import game.io.*;
+import game.utils.templates.*;
+
+import java.io.IOException;
+
+import game.api.Register;
 import game.gts.*;
+
+import vanilla.init.*;
 
 /**
  * The vanilla game of this game.
@@ -10,25 +17,24 @@ import game.gts.*;
  * 
  * @version 2.0.2a
  */
-
 public class Main {
 
     public static final String __VERSION__ = "2.1.1a";
-    public static final game.utils.Reg<Item> VanillaItemReg = new game.utils.Reg<>("vanilla");
     // METAish
 
     static {
 
-        VanillaItemReg.add(Item.valueOf(new game.utils.templates.ItemTemplate()
+        game.api.data.Items.add(Item.valueOf(new ItemTemplate()
                 .setName("ALPHA")));
 
         try {
 
+            Class.forName("vanilla.data");
+
             Class.forName("vanilla.init.CreateNewSave");
             Class.forName("vanilla.init.Play");
-            Class.forName("vanilla.init.Play$1");
-            Class.forName("vanilla.init.Play$2");
             Class.forName("vanilla.init.InitGameResource");
+            Class.forName("vanilla.init.Load");
 
             Class.forName("vanilla.net.LServer");
             Class.forName("vanilla.net.LClient");
@@ -36,8 +42,10 @@ public class Main {
             Class.forName("vanilla.net.LServerCMDSolver");
 
             Class.forName("vanilla.utils.socket");
+            Class.forName("vanilla.utils.search");
 
-            Class.forName("math.lib.binary");
+            Class.forName("vanilla.impl.StdEntry");
+            // Class.forName("math.lib.binary");
 
         } catch (Exception e) {
             output.log(e);
@@ -50,9 +58,10 @@ public class Main {
     /**
      * The entry of this plugin.
      */
+    @Register
     public static void main(String[] args) throws Exception {
 
-        output.log(VanillaItemReg.get(0).Name);
+        output.log("ALPHA");
         output.log("2024.03.18 : Alpha success (1.1.0)");
         output.log("2024.04.08 : Epic Rebirth  (1.2.3)");
         output.log("Omni co., Ltd.");
@@ -66,6 +75,10 @@ public class Main {
         // Happy coding and loading.
 
         new VanillaCmdSolver().start();
+    }
+
+    public static void Load() throws IOException {
+        InitGameResource.Load();
     }
 
 }
