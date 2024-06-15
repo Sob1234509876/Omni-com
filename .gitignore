@@ -6,6 +6,7 @@
 build
 
 # Ignore run test folders
+plugins
 configs
 reports
 saves

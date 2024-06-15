@@ -1,7 +1,7 @@
 package com.sob.core.templates;
 
 /** Create your own gt template using this interface */
-public abstract class Template {
+public abstract class template {
     /** The gt`s name */
     protected String name;
     /** The gt`s description */
@@ -42,7 +42,7 @@ public abstract class Template {
      * @param o the new name
      * @return returns this
      */
-    public Template setName(String o) {
+    public template setName(String o) {
         name = o;
         return this;
     }
@@ -53,7 +53,7 @@ public abstract class Template {
      * @param o the new description
      * @return returns this
      */
-    public Template setDescription(String o) {
+    public template setDescription(String o) {
         description = o;
         return this;
     }
@@ -64,7 +64,7 @@ public abstract class Template {
      * @param o the new flag array
      * @return returns this
      */
-    public Template setFlags(String... o) {
+    public template setFlags(String... o) {
         flags = o;
         return this;
     }

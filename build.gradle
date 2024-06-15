@@ -1,6 +1,7 @@
 plugins {
     id "application"
     id "java"
+    id "maven-publish"
 }
 
 java {
@@ -8,7 +9,8 @@ java {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
-version = "1.2.8a"
+version = "1.2.8a-SNAPSHOT"
+
 // Just for simpler layout.
 sourceSets {
     main {
@@ -22,7 +24,8 @@ sourceSets {
     }
 }
 
-// processSourceSetResources
+///////////////////////////////////////////////////////////////////////////////////
+// For compiling and running
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -38,4 +41,31 @@ application {
     mainClass = "com.sob.core.Main"
 }
 
+///////////////////////////////////////////////////////////////////////////////////
 
+// Java documents
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet "UTF-8"
+        author true
+        version true
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "localRepo"
+            url = "file://${buildDir}/repo"
+        }
+    }
+    publications {
+        myApp(MavenPublication) {
+            version = "1.2.7a-SNAPSHOT"
+            groupId = "com.sob"
+            artifactId = "my-app"
+            from components.java
+        }
+    }
+}

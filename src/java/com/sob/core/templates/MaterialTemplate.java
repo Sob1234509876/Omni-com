@@ -1,5 +1,5 @@
 package com.sob.core.templates;
 
-public class MaterialTemplate extends ItemTemplate {
+public class materialTemplate extends itemTemplate {
 
 }

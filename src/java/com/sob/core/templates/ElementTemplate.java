@@ -2,7 +2,7 @@ package com.sob.core.templates;
 
 import com.sob.core.gt.Material;
 
-public class ElementTemplate extends Template {
+public class elementTemplate extends template {
 
     /**
      * The atomic numbers, use like this :
@@ -55,7 +55,7 @@ public class ElementTemplate extends Template {
      * @param o the new chemical formula
      * @return returns this
      */
-    public ElementTemplate setChemFormula(String o) {
+    public elementTemplate setChemFormula(String o) {
         chemFormula = o;
         return this;
     }
