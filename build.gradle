@@ -1,6 +1,6 @@
 plugins {
-    id "application"
     id "java"
+    id "application"
     id "maven-publish"
 }
 
@@ -10,6 +10,9 @@ java {
     }
 }
 version = "1.2.8a-SNAPSHOT"
+
+def JOPT_VERSION = "4.9"
+def LOG4J_VERSION = "1.2.17"
 
 // Just for simpler layout.
 sourceSets {
@@ -22,10 +25,12 @@ sourceSets {
             srcDirs = ["src/resources"]
         }
     }
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
 // For compiling and running
+
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -33,12 +38,29 @@ repositories {
 }
 
 dependencies {
-    implementation "log4j:log4j:1.2.17"
+    implementation "net.sf.jopt-simple:jopt-simple:${JOPT_VERSION}"
+    implementation "log4j:log4j:${LOG4J_VERSION}"
 }
+
 
 application {
     // Define the main class for the application.
-    mainClass = "com.sob.core.Main"
+    mainClass = "top.sob.core.Main"
+}
+
+jar {
+    manifest {
+        attributes(
+            "Main-Class" : "top.sob.core.Main",
+            // "Class-Path" : "jopt-simple-${JOPT_VERSION}.jar; log4j-${LOG4J_VERSION}; ../libs/jopt-simple-${JOPT_VERSION}.jar; ../libs/log4j-${LOG4J_VERSION}"
+            "Class-Path" : "./"
+        )
+    }
+}
+
+run {
+    // Configures directories and the report file name
+    args "-saveDir=saves", "-plugDir=plugins", "-confDir=configs", "-repoDir=reports", "-uuid=114514", "-reportName=TEST.log"
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -53,18 +75,28 @@ javadoc {
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////////
+
+// Maven publish
 publishing {
     repositories {
         maven {
-            name = "localRepo"
-            url = "file://${buildDir}/repo"
+            name = "Test"
+            url = uri("https://maven.pkg.github.com/Sob1234509876/Omni-com")
+            credentials {
+                username = "Sob1234509876"
+                password = "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" // You can`t do anything with it
+            }
         }
     }
+
+    // Sorry, idk what does from components.java do
+    // VSCode is crap, only supports basic syntaxes
     publications {
         myApp(MavenPublication) {
-            version = "1.2.7a-SNAPSHOT"
-            groupId = "com.sob"
-            artifactId = "my-app"
+            version = "1.2.8a-SNAPSHOT"
+            groupId = "top.sob"
+            artifactId = "core"
             from components.java
         }
     }
