@@ -1,2 +1,0 @@
-Main-Class: game.main.Main
-Class-Path: ../plugins/;

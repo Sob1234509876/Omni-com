@@ -1,9 +1,0 @@
-{
-    "java.debug.settings.onBuildFailureProceed": true,
-    "java.project.sourcePaths": [
-        "plugins",
-        "src"
-    ],
-    "java.project.referencedLibraries": [],
-    "java.project.outputPath": "bin"
-}

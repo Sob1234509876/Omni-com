@@ -1,18 +1,21 @@
-# Logs
-*.log
+# Ignore .*
+.gradle
+.vscode
 
-# These are the compiled stuffs
+# Ignore Gradle build output directory
+build
+
+# Ignore run test folders
+plugins
+configs
+reports
+saves
+
+# Java compile outputs
 *.jar
 *.class
 
-saves/*
-src/comp/game/*
-!src/comp/game/assets
-plugins/math-comp/*
-plugins/vanilla-comp/*
+# But the classes of jopt and log4j shouldn`t be ignored
+!**/joptsimple/**/*.class
+!**/org/**/*.class
 
-!src/comp/README.txt
-!plugins/math-comp/README.txt
-!plugins/vanilla-comp/README.txt
-
-bin/

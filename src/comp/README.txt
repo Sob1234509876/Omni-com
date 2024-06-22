@@ -1,1 +1,0 @@
-This folder is a part of the compilation!
