@@ -37,10 +37,6 @@ public final class init {
      */
     static void run0() throws IOException, ClassNotFoundException {
 
-        Main.LOGGER.debug(Main.optSet);
-
-        // Class.forName("top.sob.core.api.meta");
-
         final File SAVES = new File(meta.SAVES_URI);
         final File PLUGS = new File(meta.PLUGINS_URI);
         final File CONFS = new File(meta.CONFIGS_URI);
@@ -73,7 +69,10 @@ public final class init {
      */
     static void run1() throws IOException {
         new File(meta.REPORT_URI.getPath()).createNewFile(); // Create file
-        Main.LOGGER.addAppender(new FileAppender(new SimpleLayout(), meta.REPORT_URI.getPath())); // Add apender
+        Main.LOGGER.addAppender(
+                new FileAppender(
+                        new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN),
+                        meta.REPORT_URI.getPath())); // Add appender
     }
 
     /**
@@ -93,7 +92,7 @@ public final class init {
         URLClassLoader ucl;
         // Vars
 
-        Main.LOGGER.debug(Arrays.toString(urls)); // Know where the urls are
+        Main.LOGGER.debug("ARRAY OF JAR URL FOUNDED: " + Arrays.toString(urls)); // Know where the urls are
 
         //// Get jar main class
         for (int i = 0; i < files.length; i++) {

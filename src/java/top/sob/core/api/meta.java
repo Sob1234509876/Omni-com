@@ -79,9 +79,6 @@ public final class meta {
 
     static {
 
-        // Log it
-        Main.LOGGER.info("Meta static init start");
-
         DEF_CHARSET = Charset.forName(((String) (Main.optSet.valueOf("charset"))));
         CONFIGS_URI = ((File) (Main.optSet.valueOf("confDir"))).toURI();
         PLUGINS_URI = ((File) (Main.optSet.valueOf("plugDir"))).toURI();

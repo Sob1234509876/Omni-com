@@ -52,7 +52,6 @@ jar {
     manifest {
         attributes(
             "Main-Class" : "top.sob.core.Main",
-            // "Class-Path" : "jopt-simple-${JOPT_VERSION}.jar; log4j-${LOG4J_VERSION}; ../libs/jopt-simple-${JOPT_VERSION}.jar; ../libs/log4j-${LOG4J_VERSION}"
             "Class-Path" : "./"
         )
     }
@@ -60,7 +59,7 @@ jar {
 
 run {
     // Configures directories and the report file name
-    args "-saveDir=saves", "-plugDir=plugins", "-confDir=configs", "-repoDir=reports", "-uuid=114514", "-reportName=TEST.log"
+    args "-saveDir=saves", "-plugDir=plugins", "-confDir=configs", "-repoDir=reports", "-uuid=114514";
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +84,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/Sob1234509876/Omni-com")
             credentials {
                 username = "Sob1234509876"
-                password = "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" // You can`t do anything with it
+                password = "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" // You can`t do anything with it
             }
         }
     }

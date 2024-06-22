@@ -3,13 +3,13 @@ package top.sob.core.api;
 import java.util.*;
 
 import top.sob.core.api.event.Event;
-import top.sob.core.api.event.EventListener;
+import top.sob.core.api.event.EventListener; // It has loonnnnnnnng names
 
 /** An API with utils to fire events and do stuffs about it. */
 public final class plugin {
 
     /** The list of event listeners, private because the class is final. */
-    private static List<EventListener> eventListeners = new LinkedList<>();
+    private static List<EventListener> eventListeners = new ArrayList<>();
 
     /**
      * Adds an event listener to the last of {@link #eventListeners}.
@@ -17,7 +17,7 @@ public final class plugin {
      * @see LinkedList#add(Object)
      * @param listener The event listener.
      */
-    public static void addEventListener(EventListener listener) {
+    public static synchronized void addEventListener(EventListener listener) {
         eventListeners.add(listener);
     }
 
@@ -28,7 +28,7 @@ public final class plugin {
      * @param listener The event listener.
      * @see LinkedList#add(int, Object)
      */
-    public static void addEventListener(int index, EventListener listener) {
+    public static synchronized void addEventListener(int index, EventListener listener) {
         eventListeners.add(index, listener);
     }
 
@@ -38,7 +38,7 @@ public final class plugin {
      * @param index The listener-that-will-be-deleted`s index.
      * @see LinkedList#remove(int)
      */
-    public static void removeEventListener(int index) {
+    public static synchronized void removeEventListener(int index) {
         eventListeners.remove(index);
     }
 
@@ -49,7 +49,7 @@ public final class plugin {
      * @param listener The listener that will be deleted.
      * @see LinkedList#remove(Object)
      */
-    public static void removeEventListener(EventListener listener) {
+    public static synchronized void removeEventListener(EventListener listener) {
         eventListeners.remove(listener);
     }
 
@@ -60,7 +60,7 @@ public final class plugin {
      * 
      * @param event The fired event.
      */
-    public static void fireEvent(Event event) {
+    public static synchronized void fireEvent(Event event) {
         Iterator<EventListener> iterator = eventListeners.iterator();
         while (iterator.hasNext()) {
             iterator.next().act(event);

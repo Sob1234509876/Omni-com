@@ -6,7 +6,9 @@ import java.io.*;
 import org.apache.log4j.*;
 
 import joptsimple.*;
-import top.sob.core.api.meta;
+
+import top.sob.core.api.*;
+import top.sob.core.api.event.*;
 
 /**
  * The main class of the core, also the entry.
@@ -61,9 +63,10 @@ public class Main {
 
                 LOGGER.debug("FINISH INIT");
                 LOGGER.debug("DEBUG INFO: ");
-                LOGGER.debug(meta.REPORT_URI); // The report file
                 LOGGER.debug(Arrays.toString(args)); // Get args
-                LOGGER.debug(new File("").getAbsolutePath()); // Get this path
+
+                plugin.fireEvent(new Event("GTInit"));
+                plugin.fireEvent(new Event("GameLogicInit"));
 
         }
 }

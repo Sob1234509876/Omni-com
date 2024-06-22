@@ -1,4 +1,4 @@
-package top.sob.core.api.event;
+package top.sob.core.api.event; // A bit too long
 
 /**
  * An event class that can be used as transmitting signals and broadcasts across
@@ -55,6 +55,12 @@ public class Event {
         this.type = type;
         this.newValue = newValue;
         this.oldValue = oldValue;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("top.sob.vanilla.core.api.Event<%s: %s, %s>", type, newValue.toString(),
+                oldValue.toString());
     }
 
 }
