@@ -84,7 +84,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/Sob1234509876/Omni-com")
             credentials {
                 username = "Sob1234509876"
-                password = "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" // You can`t do anything with it
+                password = "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" // You can`t do anything with it
             }
         }
     }
