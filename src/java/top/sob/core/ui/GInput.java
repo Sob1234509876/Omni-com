@@ -10,7 +10,8 @@ public class GInput extends JTextField {
     private String Enabled_Text;
     private String Disabled_Text;
     private boolean Has_Text = false;
-    private String Submit_Text;
+    private volatile String Submit_Text;
+
     private static final String NO_STR = new String(); // LOL
 
     /**
@@ -21,14 +22,20 @@ public class GInput extends JTextField {
 
         @Override
         public void keyPressed(KeyEvent event) {
+
             if (event.getKeyCode() == Submit_Key) {
-                if (Has_Text) {
-                    Submit_Text = getText();
-                } else if (!Has_Text) {
-                    Submit_Text = NO_STR;
+
+                checkHasText(); // Checks is there text.
+
+                if (GInput.this.Has_Text) {
+                    GInput.this.Submit_Text = getText();
+                } else if (!GInput.this.Has_Text) {
+                    GInput.this.Submit_Text = NO_STR;
                 }
                 setText(NO_STR);
+
             }
+
         }
 
     }
@@ -42,7 +49,7 @@ public class GInput extends JTextField {
 
         @Override
         public void focusLost(FocusEvent event) {
-            Has_Text = !getText().equals(NO_STR); // Checks does this has a string
+            checkHasText(); // Checks does this has a string
             if (!Has_Text) {
                 setText(Enabled_Text);
             }
@@ -120,7 +127,7 @@ public class GInput extends JTextField {
      * @return the submitted string.
      * @see #waitAndGetSubmit(int)
      */
-    public String waitAndGetSubmit() throws InterruptedException {
+    public synchronized String waitAndGetSubmit() {
         return waitAndGetSubmit(1); // If set to 0, the resource needed will be too high
     }
 
@@ -132,10 +139,15 @@ public class GInput extends JTextField {
      * @return the submitted string.
      * @throws InterruptedException when this thread been interrupted.
      */
-    public String waitAndGetSubmit(int milis) throws InterruptedException {
+    public String waitAndGetSubmit(int milis) {
         resetSubmitText(); // Dummy prevention
-        while (Submit_Text == null)
-            Thread.sleep(milis);
+        while (Submit_Text == null) {
+            try {
+                Thread.sleep(milis);
+            } catch (Exception e) {
+            }
+        }
+
         String tmp = Submit_Text;
         Submit_Text = null;
         return tmp;
@@ -172,6 +184,14 @@ public class GInput extends JTextField {
         String old = Disabled_Text;
         Disabled_Text = o;
         firePropertyChange("disableText", Disabled_Text, old);
+    }
+
+    /**
+     * Checks is there any text in this, equivalent to
+     * {@code Has_Text = !getText().equals(NO_STR);} .
+     */
+    private void checkHasText() {
+        Has_Text = !getText().equals(NO_STR);
     }
 
 }

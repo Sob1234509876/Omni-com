@@ -13,7 +13,7 @@ import top.sob.core.api.event.*;
 /**
  * The main class of the core, also the entry.
  */
-public class Main {
+public final class Main {
 
         static {
                 // Some init process
@@ -64,6 +64,7 @@ public class Main {
                 LOGGER.debug("FINISH INIT");
                 LOGGER.debug("DEBUG INFO: ");
                 LOGGER.debug(Arrays.toString(args)); // Get args
+                LOGGER.info("Game language: " + meta.LANGUAGE); // Get language
 
                 plugin.fireEvent(new Event("GTInit"));
                 plugin.fireEvent(new Event("GameLogicInit"));

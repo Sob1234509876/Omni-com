@@ -13,6 +13,7 @@ version = "1.2.8a-SNAPSHOT"
 
 def JOPT_VERSION = "4.9"
 def LOG4J_VERSION = "1.2.17"
+def GSON_VERSION = "2.8.7"
 
 // Just for simpler layout.
 sourceSets {
@@ -40,6 +41,7 @@ repositories {
 dependencies {
     implementation "net.sf.jopt-simple:jopt-simple:${JOPT_VERSION}"
     implementation "log4j:log4j:${LOG4J_VERSION}"
+    implementation "com.google.code.gson:gson:${GSON_VERSION}"
 }
 
 
@@ -80,11 +82,11 @@ javadoc {
 publishing {
     repositories {
         maven {
-            name = "Test"
+            name = "Github"
             url = uri("https://maven.pkg.github.com/Sob1234509876/Omni-com")
             credentials {
-                username = "Sob1234509876"
-                password = "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" // You can`t do anything with it
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
             }
         }
     }

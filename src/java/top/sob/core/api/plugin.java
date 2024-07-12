@@ -5,20 +5,30 @@ import java.util.*;
 import top.sob.core.api.event.Event;
 import top.sob.core.api.event.EventListener; // It has loonnnnnnnng names
 
-/** An API with utils to fire events and do stuffs about it. */
+/**
+ * An API with utils to fire events and do stuffs about it.
+ * 
+ * @see ArrayList
+ * @see List
+ */
 public final class plugin {
 
     /** The list of event listeners, private because the class is final. */
     private static List<EventListener> eventListeners = new ArrayList<>();
 
+    /** No instance constructing */
+    private plugin() {
+    }
+
     /**
      * Adds an event listener to the last of {@link #eventListeners}.
      * 
      * @see LinkedList#add(Object)
+     * @return true (See {@link Collection#add(Object)}).
      * @param listener The event listener.
      */
-    public static synchronized void addEventListener(EventListener listener) {
-        eventListeners.add(listener);
+    public static synchronized boolean addEventListener(EventListener listener) {
+        return eventListeners.add(listener);
     }
 
     /**
@@ -36,10 +46,11 @@ public final class plugin {
      * Removes the event listener at the index of {@link #eventListeners}.
      * 
      * @param index The listener-that-will-be-deleted`s index.
+     * @return The orignal event listener (See {@link List#remove(int)}).
      * @see LinkedList#remove(int)
      */
-    public static synchronized void removeEventListener(int index) {
-        eventListeners.remove(index);
+    public static synchronized EventListener removeEventListener(int index) {
+        return eventListeners.remove(index);
     }
 
     /**
@@ -47,10 +58,11 @@ public final class plugin {
      * {@code listner} from {@link #eventListeners}.
      * 
      * @param listener The listener that will be deleted.
+     * @return {@code true} if this contains the event listener.
      * @see LinkedList#remove(Object)
      */
-    public static synchronized void removeEventListener(EventListener listener) {
-        eventListeners.remove(listener);
+    public static synchronized boolean removeEventListener(EventListener listener) {
+        return eventListeners.remove(listener);
     }
 
     /**

@@ -3,7 +3,6 @@ package top.sob.core;
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
-import java.util.Arrays;
 import java.util.jar.*;
 
 import javax.swing.*;
@@ -32,7 +31,6 @@ public final class init {
     }
 
     /**
-     * No, you can`t run it outside the core of the game.
      * Creating folders and stuff, checks does it need to add
      */
     static void run0() throws IOException, ClassNotFoundException {
@@ -64,7 +62,6 @@ public final class init {
     }
 
     /**
-     * No, you can`t run it outside the core of the game.
      * Inits the report file.
      */
     static void run1() throws IOException {
@@ -76,7 +73,6 @@ public final class init {
     }
 
     /**
-     * No, you can`t run it outside the core of the game.
      * Inits the plugins.
      */
     static void run2() throws MalformedURLException,
@@ -85,14 +81,11 @@ public final class init {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-        File[] files = new File(meta.PLUGINS_URI.getPath()).listFiles(new IsFileFilter()); // Gets only the iles
+        File[] files = new File(meta.PLUGINS_URI.getPath()).listFiles(new IsFileFilter()); // Gets only the jar files.
         JarFile[] jars = new JarFile[files.length];
         String[] mainClasses = new String[files.length];
         URL[] urls = new URL[files.length];
-        URLClassLoader ucl;
         // Vars
-
-        Main.LOGGER.debug("ARRAY OF JAR URL FOUNDED: " + Arrays.toString(urls)); // Know where the urls are
 
         //// Get jar main class
         for (int i = 0; i < files.length; i++) {
@@ -100,17 +93,18 @@ public final class init {
             mainClasses[i] = jars[i].getManifest()
                     .getMainAttributes()
                     .getValue("Main-Class"); // Get main class
-            Main.LOGGER.debug(jars[i].getName() + " -> " + mainClasses[i]);
+            Main.LOGGER.debug(util.getFileName(files[i]) + " -> " + mainClasses[i]);
         }
 
         //// Get jar url
         for (int i = 0; i < files.length; i++) {
             urls[i] = new URL(String.format("file:%s", files[i].toString()));
-            Main.LOGGER.info(urls[i]);
         }
 
         //// Load jars
-        ucl = new URLClassLoader(urls);
+        @SuppressWarnings("resource")
+        URLClassLoader ucl = new URLClassLoader(urls); // This will never be closed
+
         for (String string : mainClasses) {
 
             // Prevent NPE
@@ -125,16 +119,29 @@ public final class init {
         }
         Main.LOGGER.info("------------");
 
-        ucl.close();
+        // I have thought this for a whole hour
+        // the price is to cause memory leak.
+        // Ten minutes later, determination
+        // tells me for the sake of the app,
+        // I`ll need to do a sacrifise. The
+        // sacrifise is:
+
+        // ucl.close();
+
+        // Advices:
+        // Don`t add heavy plugins, light ones
+        // won`t take too much memory. (The
+        // light means there are small amount of
+        // classes)
+
     }
 
     /**
-     * No, you can`t run it outside the core of the game.
      * Inits the ui.
      */
     static void run3() throws UnsupportedLookAndFeelException {
 
-        UIManager.setLookAndFeel(new MetalLookAndFeel()); // Unthinkable long names
+        UIManager.setLookAndFeel(new MetalLookAndFeel()); // Long names
 
         Graphic.FRAME.setSize(
                 Graphic.FRAME_WIDTH,
@@ -149,11 +156,17 @@ public final class init {
                 Graphic.FRAME_HEIGHT - Graphic.FONT_SIZE,
                 Graphic.FRAME_WIDTH,
                 Graphic.FONT_SIZE);
+        Graphic.INPUT.setBackground(Graphic.DEF_BG_COLOR);
+        Graphic.INPUT.setForeground(Graphic.DEF_FG_COLOR);
+        Graphic.INPUT.setBorder(Graphic.DEF_BORDER);
 
         Graphic.OUTPUT.setBounds(0,
                 0,
                 Graphic.FRAME_WIDTH,
                 Graphic.FRAME_HEIGHT - Graphic.FONT_SIZE);
+        Graphic.OUTPUT.setBackground(Graphic.DEF_BG_COLOR);
+        Graphic.OUTPUT.setForeground(Graphic.DEF_FG_COLOR);
+        Graphic.OUTPUT.setBorder(Graphic.DEF_BORDER);
     }
 
 }

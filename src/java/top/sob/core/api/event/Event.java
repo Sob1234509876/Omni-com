@@ -59,8 +59,41 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("top.sob.vanilla.core.api.Event<%s: %s, %s>", type, newValue.toString(),
-                oldValue.toString());
+        return String.format("%s<%s: %s, %s>",
+                getClass(),
+                type,
+                newValue == null ? "null" : newValue,
+                oldValue == null ? "null" : oldValue);
+    }
+
+    /**
+     * Returns the type of this event.
+     * 
+     * @return the type.
+     * @see #type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Returns the new value that exists if this is a property change event.
+     * 
+     * @return The new value or {@code null} if this isn`t a property change event.
+     * @see #newValue
+     */
+    public Object getNewValue() {
+        return newValue;
+    }
+
+    /**
+     * Returns the old value that exists if this is a property change event.
+     * 
+     * @return The old value or {@code null} if this isn`t a property change event.
+     * @see #oldValue
+     */
+    public Object getOldValue() {
+        return oldValue;
     }
 
 }

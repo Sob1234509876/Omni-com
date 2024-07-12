@@ -39,25 +39,6 @@ public final class meta {
         TOO_REAL
     }
 
-    /**
-     * The game base code enum. Used for knowing what are you doing at this game.
-     * The codes:
-     * <p>
-     * 
-     * <pre>
-     * NORMAL : Normal game;
-     * DEBUG : For debugging;
-     * </pre>
-     * 
-     * @since 1.2.8a
-     */
-    public enum bcode {
-        NORMAL,
-        DEBUG
-    }
-
-    /** The code for what are you doing during this game */
-    public static bcode G_INIT_CODE;
     /** The code after game mode selection */
     public static mcode G_MODE_CODE;
     /** The default encoding */
@@ -77,6 +58,9 @@ public final class meta {
     public static final URI SAVES_URI;
     // Some basic URIs
 
+    /** The language played in */
+    public static final String LANGUAGE;
+
     static {
 
         DEF_CHARSET = Charset.forName(((String) (Main.optSet.valueOf("charset"))));
@@ -86,6 +70,8 @@ public final class meta {
         SAVES_URI = ((File) (Main.optSet.valueOf("saveDir"))).toURI();
         REPORT_URI = new File(REPORTS_URI.getPath(), ((String) (Main.optSet.valueOf("reportName"))))
                 .toURI();
+
+        LANGUAGE = util.getProperty("base", "lang");
 
     }
 }
