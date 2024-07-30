@@ -7,7 +7,7 @@ public abstract class GTemplate {
     /** The gt`s description */
     protected String description;
     /** The gt`s flags */
-    protected String[] flags;
+    protected Object[] flags;
 
     /**
      * Returns the name of this.
@@ -32,7 +32,7 @@ public abstract class GTemplate {
      * 
      * @return the flags of this
      */
-    public String[] getFlags() {
+    public Object[] getFlags() {
         return flags;
     }
 
@@ -64,7 +64,7 @@ public abstract class GTemplate {
      * @param o the new flag array
      * @return returns this
      */
-    public GTemplate setFlags(String... o) {
+    public GTemplate setFlags(Object... o) {
         flags = o;
         return this;
     }

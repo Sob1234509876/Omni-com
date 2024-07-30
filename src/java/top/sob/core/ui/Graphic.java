@@ -14,15 +14,17 @@ public final class Graphic {
         public static final ImageIcon ICON = new ImageIcon(meta.THIS_CLASS_LOADER
                         .getResource("assets/icon.png"));
 
-        public static final JFrame FRAME = new JFrame("Omni com");
+        public static final JFrame DEF_FRAME = new JFrame("Omni com | Terminal");
+        public static final JFrame INFO_FRAME = new JFrame("Omni com | Info");
         public static final GInput INPUT = new GInput();
         public static final GOutput OUTPUT = new GOutput();
+        public static final GInfo INFO = new GInfo();
 
-        public static final int FRAME_HEIGHT = Integer.parseInt(util.getProperty("ui", "d", "height"));
-        public static final int FRAME_WIDTH = Integer.parseInt(util.getProperty("ui", "d", "width"));
+        public static final int FRAME_HEIGHT = Integer.parseInt(util.getConfig("ui", "d", "height"));
+        public static final int FRAME_WIDTH = Integer.parseInt(util.getConfig("ui", "d", "width"));
 
-        public static final int FONT_SIZE = Integer.parseInt(util.getProperty("ui", "font", "size"));
-        public static final String FONT_NAME = util.getProperty("ui", "font", "name");
+        public static final int FONT_SIZE = Integer.parseInt(util.getConfig("ui", "font", "size"));
+        public static final String FONT_NAME = util.getConfig("ui", "font", "name");
 
         public static final Font PLAIN_FONT = new Font(
                         FONT_NAME,
@@ -39,16 +41,17 @@ public final class Graphic {
                         Font.ITALIC,
                         FONT_SIZE);
 
-        public static final Color DEF_BG_COLOR = new Color(Integer.parseInt(util.getProperty("ui", "color", "bg")),
+        public static final Color DEF_BG_COLOR = new Color(Integer.parseInt(util.getConfig("ui", "color", "bg")),
                         false);
-        public static final Color DEF_FG_COLOR = new Color(Integer.parseInt(util.getProperty("ui", "color", "fg")),
+        public static final Color DEF_FG_COLOR = new Color(Integer.parseInt(util.getConfig("ui", "color", "fg")),
                         false);
 
         public static final Border DEF_BORDER = BorderFactory.createMatteBorder(1, 1, 1, 1, DEF_FG_COLOR);
 
         static {
-                FRAME.add(INPUT);
-                FRAME.add(OUTPUT);
+                DEF_FRAME.add(INPUT);
+                DEF_FRAME.add(OUTPUT);
+                INFO_FRAME.add(INFO);
         }
 
 }

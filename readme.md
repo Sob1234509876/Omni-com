@@ -22,6 +22,9 @@ See [here](https://omni-com-official.fandom.com/wiki/Change_log) at the fandom w
 
 Q&A :
 ===
+Q:How to play this?
+A:If you want to play vanilla, goto [here](https://github.com/Sob1234509876/Vanilla/packages/) to download the latest build of the vanilla plugin and write a script to run the core and blah blah blah (Will be updated).
+
 Q : Why did it crashed?<br>
 A : Send the log file to the author or see the wiki for help.
 

@@ -143,14 +143,22 @@ public final class init {
 
         UIManager.setLookAndFeel(new MetalLookAndFeel()); // Long names
 
-        Graphic.FRAME.setSize(
+        Graphic.DEF_FRAME.setSize(
                 Graphic.FRAME_WIDTH,
                 Graphic.FRAME_HEIGHT + 36);
-        Graphic.FRAME.setResizable(false);
-        Graphic.FRAME.setIconImage(Graphic.ICON.getImage());
-        Graphic.FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Graphic.FRAME.setLayout(null);
-        Graphic.FRAME.setVisible(true);
+        Graphic.DEF_FRAME.setResizable(false);
+        Graphic.DEF_FRAME.setIconImage(Graphic.ICON.getImage());
+        Graphic.DEF_FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Graphic.DEF_FRAME.setLayout(null);
+        Graphic.DEF_FRAME.setVisible(true);
+
+        Graphic.INFO_FRAME.setSize(
+                GInfo.DEF_WIDTH,
+                GInfo.DEF_HEIGHT + 36);
+        Graphic.INFO_FRAME.setResizable(false);
+        Graphic.INFO_FRAME.setIconImage(Graphic.ICON.getImage());
+        Graphic.INFO_FRAME.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Graphic.INFO_FRAME.setLayout(null);
 
         Graphic.INPUT.setBounds(0,
                 Graphic.FRAME_HEIGHT - Graphic.FONT_SIZE,
@@ -167,6 +175,19 @@ public final class init {
         Graphic.OUTPUT.setBackground(Graphic.DEF_BG_COLOR);
         Graphic.OUTPUT.setForeground(Graphic.DEF_FG_COLOR);
         Graphic.OUTPUT.setBorder(Graphic.DEF_BORDER);
+
+        Graphic.INFO.getLeftPageButton().setBackground(Graphic.DEF_BG_COLOR);
+        Graphic.INFO.getPageText().setBackground(Graphic.DEF_BG_COLOR);
+        Graphic.INFO.getRightPageButton().setBackground(Graphic.DEF_BG_COLOR);
+        Graphic.INFO.getLeftPageButton().setForeground(Graphic.DEF_FG_COLOR);
+        Graphic.INFO.getPageText().setForeground(Graphic.DEF_FG_COLOR);
+        Graphic.INFO.getRightPageButton().setForeground(Graphic.DEF_FG_COLOR);
+
+        Graphic.INFO.getContentPanel().setBackground(Graphic.DEF_BG_COLOR);
+        Graphic.INFO.getContentPanel().setForeground(Graphic.DEF_FG_COLOR);
+
+        // Graphic.INFO_FRAME.setVisible(true);
+
     }
 
 }

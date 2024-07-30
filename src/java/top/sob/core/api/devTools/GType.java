@@ -1,5 +1,7 @@
 package top.sob.core.api.devTools;
 
+import top.sob.core.api.*;
+
 /**
  * A game type, can be created from a {@link GTemplate}. A game type is like a
  * Java {@link Class}, you can make instances of a game type.
@@ -11,7 +13,7 @@ public class GType {
     /** The description of this game type. */
     protected String description;
     /** Flags of this game type. */
-    protected String[] flags;
+    protected Object[] flags;
 
     /**
      * Creates a new game type from a {@link GTemplate}. It will sets the game
@@ -24,6 +26,8 @@ public class GType {
         this.name = temp.getName();
         this.description = temp.getDescription();
         this.flags = temp.getFlags();
+
+        register.GT_LIST.add(this);
     }
 
     /**
@@ -76,7 +80,7 @@ public class GType {
      * 
      * @return The flags.
      */
-    public String[] getFlags() {
+    public Object[] getFlags() {
         return flags;
     }
 

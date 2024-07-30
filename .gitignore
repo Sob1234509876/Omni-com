@@ -16,6 +16,5 @@ saves
 *.class
 
 # But the classes of jopt and log4j shouldn`t be ignored
-!**/joptsimple/**/*.class
-!**/org/**/*.class
+!src/**
 

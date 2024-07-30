@@ -1,183 +1,146 @@
 package top.sob.core;
 
-import java.io.*;
-import java.nio.charset.*;
-import java.util.*;
-
-import top.sob.core.api.*;
 import static top.sob.core.Main.LOGGER;
+import static top.sob.core.api.meta.CONFIGS_URI;
 import static top.sob.core.api.meta.DEF_CHARSET;
 
+import java.io.*;
+import java.net.*;
+import java.nio.charset.*;
+
+import com.moandjiezana.toml.*;
+
+import top.sob.core.api.*;
+
 /**
- * Some useful tools for
+ * Some useful tools for something (Random tools).
  */
 public final class util {
 
-    private static String[] O_STR_ARG; // The last s argument
-    private static Properties O_PROP_ARG; // The last used property
-    private static String O_RESULT; // The result of the last usage
-    // Buffer for GetConfig
+    private static Toml O_TOML_ARG; // The last used property
+    private static File O_FILE_ARG; // The last file
+    // Buffer for getConfig
 
-    /**
-     * Returns the property of the {@link Properties} object that might exist in the
-     * reader`s stream (The parameter {@code r}) with the given string array
-     * {@code s} (which will first be processed with the method
-     * {@link #getFancyStr(String...)}).
-     * 
-     * @param r The reader and it`s source is the {@link Properties} object.
-     * @param s The string array that will be the key for the {@link Properties}
-     *          object.
-     * @return The value from the {@link Properties} object.
-     * 
-     * @see #getProperty(File, Charset, String...)
-     * @see #getProperty(InputStream, Charset, String...)
-     */
-    public static String getProperty(Reader r, String... s) {
-
+    public static String getConfig(String... args) {
         try {
-
-            Properties tmp = new Properties();
-            tmp.load(r);
-            return getProperty(tmp, s);
-
-        } catch (IOException e) {
-            LOGGER.error(
-                    String.format("With parameters : ReaderCLass=%s, Strings=%s",
-                            r.getClass(), // Since it is not possible to tell what reader is this
-                            Arrays.toString(s)),
-                    e);
-            // Error, not fatal because this is not so important
-            return null;
-        }
-
-    }
-
-    /**
-     * Gets the {@link Properties} object from the input stream {@code is} and uses
-     * the charset {@code cs}. Then gets the value from the {@link Properties}
-     * object using the key {@code s} (it will be processed using the method
-     * {@link #getFancyStr(String...)}).
-     * <p>
-     * This method is equivalent to
-     * 
-     * <pre>{@code
-     * 
-     * util.getProperty(new InputStreamReader(is, cs), s);
-     * }</pre>
-     * 
-     * @param is The {@link Properties} object`s input stream.
-     * @param cs The charset.
-     * @param s  The key.
-     * @return The value.
-     */
-    public static String getProperty(InputStream is, Charset cs, String... s) {
-        return getProperty(new InputStreamReader(is, cs), s);
-    }
-
-    /**
-     * Gets the property of the targeted file using the charset {@code cs} and the
-     * string array {@code s} as the key (Note that the key will be first processed
-     * through the method {@link #getFancyStr(String...)} then been searched).
-     * <p>
-     * This method is equivalent to
-     * 
-     * <pre>{@code
-     * util.getProperty(new FileReader(f, cs), s);
-     * }</pre>
-     * 
-     * @param f  The {@link Properties} ` file path.
-     * @param cs The charset.
-     * @param s  The key.
-     * @return The value.
-     */
-    public static String getProperty(File f, Charset cs, String... s) {
-
-        try {
-            return getProperty(new FileInputStream(f), cs, s);
+            return getConfig(new File(CONFIGS_URI.getPath(), "core.cfg"), args);
         } catch (FileNotFoundException e) {
-            LOGGER.error(String.format("With parameters: File=%s, Charset=%s, Strings=%s ",
-                    getFileName(f),
-                    cs,
-                    Arrays.toString(s)),
-                    e);
             return null;
         }
-
     }
 
     /**
-     * Gets property from the input stream {@code is} and get value using the key
      * 
-     * <pre>{@code
-     * util.getFancyStr(s);
-     * }</pre>
+     * Gets the configuration from a url connection and decodes with the
+     * {@link meta#DEF_CHARSET}, returns a string. If the string is not found, it
+     * will return null.
      * 
-     * where s is the string array parameter {@code s}. The charset used for this is
-     * from {@link meta#DEF_CHARSET}. This is equivalent to
-     * 
-     * <pre>{@code
-     * util.getProperty(is, meta.DEF_CHARSET, s);
-     * }</pre>
-     * 
-     * @param is The {@link Properties} object`s input stream.
-     * @param s  The key.
-     * @return The value.
+     * @param url  The url where the toml is.
+     * @param args The arguments
+     * @return The string.
+     * @throws IOException When an I/O exception occurs.
      */
-    public static String getProperty(InputStream is, String... s) {
-        return getProperty(is, DEF_CHARSET, s);
+    public static String getConfig(URL url, String... args) throws IOException {
+        return getConfig(url.openStream(), args);
     }
 
     /**
-     * Gets property from the file {@code f} and get value using the key
+     * Gets the configuration from a file and decodes with the
+     * {@link meta#DEF_CHARSET}, returns a string. If the string is not found, it
+     * will return null.
      * 
-     * <pre>{@code
-     * util.getFancyStr(s);
-     * }</pre>
-     * 
-     * where s is the string array parameter {@code s}. The charset used for this is
-     * from {@link meta#DEF_CHARSET}. This is equivalent to
-     * 
-     * <pre>{@code
-     * util.getProperty(f, meta.DEF_CHARSET, s);
-     * }</pre>
-     * 
-     * @param f The property file.
-     * @param s The key.
-     * @return The value.
+     * @param file The abstract path where the toml file is.
+     * @param args The arguments.
+     * @return The string.
+     * @throws FileNotFoundException When the file is not found or the abstract path
+     *                               given is a directory or any thing else but not
+     *                               a file.
      */
-    public static String getProperty(File f, String... s) {
-        return getProperty(f, DEF_CHARSET, s);
-    }
-
-    /**
-     * Gets the file {@code core.cfg} `s property with the key {@code s} (Will be
-     * processed using the method {@link #getFancyStr(String...)}). Equivalent to
-     * 
-     * <pre>{@code
-     * util.getProperty(new File(meta.CONFIGS_URI.getPath(), "core.cfg"), s);
-     * }</pre>
-     * 
-     * @param s The key.
-     * @return The value.
-     */
-    public static String getProperty(String... s) {
-        return getProperty(new File(meta.CONFIGS_URI.getPath(), "core.cfg"), s);
-    }
-
-    /**
-     * Gets the value of the key {@code s} processed with the method
-     * {@link #getFancyStr(String...)} in the arg {@code p}.
-     * 
-     * @param p The {@link Properties} object.
-     * @param s The keys.
-     * @return The value.
-     */
-    public static String getProperty(Properties p, String... s) {
-        if (p.equals(O_PROP_ARG) && Arrays.equals(s, O_STR_ARG)) {
-            return O_RESULT; // Buffered args and result
+    public static String getConfig(File file, String... args) throws FileNotFoundException {
+        if (file == null) {
+            throw new NullPointerException("Argument \"file\" is null");
+        } else if (file.equals(O_FILE_ARG)) {
+            return getConfig(O_TOML_ARG, args);
         } else {
-            return p.getProperty(getFancyStr(s));
+            return getConfig(new FileInputStream(file), args);
         }
+    }
+
+    /**
+     * Gets the configuration from a input stream and decodes with the
+     * {@link meta#DEF_CHARSET}, returns a string. If the string is not found, it
+     * will return null.
+     * 
+     * @param is   The input stream for the toml configuration.
+     * @param args The arguments.
+     * @return The string.
+     */
+    public static String getConfig(InputStream is, String... args) {
+        return getConfig(is, DEF_CHARSET, args);
+    }
+
+    /**
+     * Gets the configuration from a input stream and decodes with the charset
+     * given, returns a string. If the string is not found, it will return null.
+     * 
+     * @param is      The input stream for the toml configuration.
+     * @param charset The charset for the toml configuration.
+     * @param args    The arguments.
+     * @return The string.
+     */
+    public static String getConfig(InputStream is, Charset charset, String... args) {
+        return getConfig(new InputStreamReader(is, charset), args);
+    }
+
+    /**
+     * Gets the configuration from a reader, returns a string. If the string is
+     * not found, it will return null.
+     * 
+     * @param reader The input stream reader for the toml configuration.
+     * @param args   The arguments.
+     * @return The string.
+     */
+    public static String getConfig(Reader reader, String... args) {
+        Toml toml = new Toml().read(reader);
+        return getConfig(toml, args);
+    }
+
+    /**
+     * Gets the configuration from a toml file, returns a string. If the string is
+     * not found, it will return null.
+     * 
+     * @param cfg  The toml configuration file.
+     * @param args The arguments.
+     * @return The string.
+     */
+    public static String getConfig(Toml cfg, String... args) {
+        return getConfig(cfg, null, args);
+    }
+
+    /**
+     * Gets the configuration from a toml file, returns a string. If the string is
+     * not found, it will return the argument {@code def}.
+     * 
+     * @param cfg  The toml configuration file.
+     * @param def  The default value if the targetted string is not found.
+     * @param args The arguments.
+     * @return The string.
+     */
+    public static String getConfig(Toml cfg, String def, String... args) {
+        try {
+
+            for (int i = 0; i < args.length - 1; i++) {
+                cfg = cfg.getTable(args[i]);
+            }
+
+            return cfg.getString(args[args.length - 1], def);
+
+        } catch (NullPointerException e) {
+            LOGGER.warn("Something went wrong:", e); // Just for debug and info.
+
+            return def;
+        }
+
     }
 
     /**

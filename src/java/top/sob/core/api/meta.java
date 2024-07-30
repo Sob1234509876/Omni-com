@@ -71,7 +71,7 @@ public final class meta {
         REPORT_URI = new File(REPORTS_URI.getPath(), ((String) (Main.optSet.valueOf("reportName"))))
                 .toURI();
 
-        LANGUAGE = util.getProperty("base", "lang");
+        LANGUAGE = util.getConfig("base", "lang");
 
     }
 }
