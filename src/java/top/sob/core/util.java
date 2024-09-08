@@ -4,13 +4,20 @@ import static top.sob.core.Main.LOGGER;
 import static top.sob.core.api.meta.CONFIGS_URI;
 import static top.sob.core.api.meta.DEF_CHARSET;
 
-import java.io.*;
-import java.net.*;
-import java.nio.charset.*;
+import java.io.InputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.Reader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
-import com.moandjiezana.toml.*;
+import java.net.URL;
+import java.nio.charset.Charset;
 
-import top.sob.core.api.*;
+import com.moandjiezana.toml.Toml;
+
+import top.sob.core.api.meta;
 
 /**
  * Some useful tools for something (Random tools).
@@ -114,31 +121,18 @@ public final class util {
      * @return The string.
      */
     public static String getConfig(Toml cfg, String... args) {
-        return getConfig(cfg, null, args);
-    }
-
-    /**
-     * Gets the configuration from a toml file, returns a string. If the string is
-     * not found, it will return the argument {@code def}.
-     * 
-     * @param cfg  The toml configuration file.
-     * @param def  The default value if the targetted string is not found.
-     * @param args The arguments.
-     * @return The string.
-     */
-    public static String getConfig(Toml cfg, String def, String... args) {
         try {
 
             for (int i = 0; i < args.length - 1; i++) {
                 cfg = cfg.getTable(args[i]);
             }
 
-            return cfg.getString(args[args.length - 1], def);
+            return cfg.getString(args[args.length - 1]);
 
         } catch (NullPointerException e) {
             LOGGER.warn("Something went wrong:", e); // Just for debug and info.
 
-            return def;
+            return null;
         }
 
     }

@@ -1,8 +1,11 @@
 package top.sob.core.ui;
 
-import javax.swing.*;
+import javax.swing.JTextField;
 
-import java.awt.event.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 
 public class GInput extends JTextField {
 

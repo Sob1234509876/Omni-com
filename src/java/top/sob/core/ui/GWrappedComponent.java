@@ -1,10 +1,13 @@
 package top.sob.core.ui;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.BorderLayout;
 
-import java.util.*;
+import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  * A component that could be multi-paged.
@@ -142,23 +145,6 @@ public abstract class GWrappedComponent extends JPanel {
         pageText.setText(String.format(pageFormat, currentPage, pageAmount));
         pageText.setHorizontalAlignment(JTextField.CENTER);
         pageText.setEditable(false);
-
-        /*
-         * Should look like this:
-         * +--------------+
-         * |******************|
-         * |******************|
-         * |******************|
-         * |******************|
-         * |******************|
-         * +--------------+
-         * | < |.......... 0/0 .............| > |
-         * +--------------+
-         * 
-         * (Poor drawing) (Use the font "Minecraft" to view)
-         * The "*" and "." of the drawing represents to blank pixels.
-         * The "<" or ">" are buttons to switch pages.
-         */
 
     }
 

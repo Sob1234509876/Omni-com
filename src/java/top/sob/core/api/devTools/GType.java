@@ -1,6 +1,6 @@
 package top.sob.core.api.devTools;
 
-import top.sob.core.api.*;
+import top.sob.core.api.register;
 
 /**
  * A game type, can be created from a {@link GTemplate}. A game type is like a

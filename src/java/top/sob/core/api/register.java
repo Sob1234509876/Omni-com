@@ -1,12 +1,12 @@
 package top.sob.core.api;
 
-import java.util.*;
+import java.util.List;
+import java.util.LinkedList;
 
-import top.sob.core.api.devTools.*;
+import top.sob.core.api.devTools.GType;
 
 /**
- * An api stored with all the data in-game that are allowed to used to other
- * plugins. E.x : player inventory.
+ * An api stored with all the gt created.
  */
 public final class register {
 

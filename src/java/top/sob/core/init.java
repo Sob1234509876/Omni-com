@@ -1,17 +1,36 @@
 package top.sob.core;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.net.*;
-import java.util.jar.*;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-import javax.swing.*;
-import javax.swing.plaf.metal.*;
+import java.lang.reflect.InvocationTargetException;
 
-import org.apache.log4j.*;
+import java.net.URL;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URLClassLoader;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.jar.JarFile;
+import java.util.stream.Stream;
 
-import top.sob.core.api.*;
-import top.sob.core.ui.*;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import javax.swing.plaf.metal.MetalLookAndFeel;
+
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.PatternLayout;
+
+import top.sob.core.api.meta;
+
+import top.sob.core.ui.Graphic;
+import top.sob.core.ui.GInfo;
 
 /**
  * Packaged methods for game core init.
@@ -36,17 +55,22 @@ public final class init {
     static void run0() throws IOException, ClassNotFoundException {
 
         final File SAVES = new File(meta.SAVES_URI);
-        final File PLUGS = new File(meta.PLUGINS_URI);
+        final File[] PLUGS = new File[meta.PLUGINS_URI.length];
         final File CONFS = new File(meta.CONFIGS_URI);
         final File REPOS = new File(meta.REPORTS_URI);
         // Some folder files
 
         final File CORE_CFG = new File(CONFS, "core.cfg");
 
-        SAVES.mkdir();
-        PLUGS.mkdir();
-        CONFS.mkdir();
-        REPOS.mkdir();
+        SAVES.mkdirs();
+        for (int i = 0; i < PLUGS.length; i++) {
+            PLUGS[i] = new File(meta.PLUGINS_URI[i]);
+        }
+        Stream.of(PLUGS).forEach((F) -> {
+            F.mkdirs();
+        });
+        CONFS.mkdirs();
+        REPOS.mkdirs();
         // Make folder
 
         if (!CORE_CFG.exists()) {
@@ -81,7 +105,11 @@ public final class init {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-        File[] files = new File(meta.PLUGINS_URI.getPath()).listFiles(new IsFileFilter()); // Gets only the jar files.
+        var Lst = new LinkedList<File>();
+        for (URI file : meta.PLUGINS_URI) {
+            Lst.addAll(Arrays.asList(new File(file).listFiles(new IsFileFilter())));
+        }
+        File[] files = (File[]) (Lst.toArray()); // Gets only the jar files.
         JarFile[] jars = new JarFile[files.length];
         String[] mainClasses = new String[files.length];
         URL[] urls = new URL[files.length];

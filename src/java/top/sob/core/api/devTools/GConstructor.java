@@ -1,6 +1,6 @@
 package top.sob.core.api.devTools;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
 
 /**
  * Funny things that is use to copy java reflect`s {@link Constructor}, the only

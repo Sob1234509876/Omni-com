@@ -1,9 +1,8 @@
-package top.sob.core.api;
+package top.sob.core.api.event;
 
-import java.util.*;
-
-import top.sob.core.api.event.Event;
-import top.sob.core.api.event.EventListener; // It has loonnnnnnnng names
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * An API with utils to fire events and do stuffs about it.
@@ -11,13 +10,13 @@ import top.sob.core.api.event.EventListener; // It has loonnnnnnnng names
  * @see ArrayList
  * @see List
  */
-public final class plugin {
+public final class Events {
 
     /** The list of event listeners, private because the class is final. */
     private static List<EventListener> eventListeners = new ArrayList<>();
 
     /** No instance constructing */
-    private plugin() {
+    private Events() {
     }
 
     /**

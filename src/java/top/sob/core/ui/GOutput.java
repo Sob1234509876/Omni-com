@@ -1,6 +1,6 @@
 package top.sob.core.ui;
 
-import javax.swing.*;
+import javax.swing.JTextArea;
 
 /**
  * A {@link JTextArea} that can`t be editted by the user and is always

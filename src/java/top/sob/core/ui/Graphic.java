@@ -1,12 +1,16 @@
 package top.sob.core.ui;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 
-import top.sob.core.*;
-import top.sob.core.api.*;
+import javax.swing.border.Border;
+
+import top.sob.core.util;
+import top.sob.core.api.meta;
 
 /** Some basic graphical vars. */
 public final class Graphic {

@@ -1,14 +1,16 @@
 package top.sob.core;
 
-import java.util.*;
-import java.io.*;
+import java.util.Arrays;
+import java.io.File;
 
-import org.apache.log4j.*;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 
-import joptsimple.*;
-
-import top.sob.core.api.*;
-import top.sob.core.api.event.*;
+import joptsimple.OptionSet;
+import joptsimple.OptionParser;
+import top.sob.core.api.meta;
+import top.sob.core.api.event.Event;
+import top.sob.core.api.event.Events;
 
 /**
  * The main class of the core, also the entry.
@@ -25,20 +27,25 @@ public final class Main {
         static final OptionParser optParser = new OptionParser();
 
         public static void main(String[] args) throws Throwable {
-                optParser.accepts("saveDir", "The directory of save") // Save dir
+                optParser.acceptsAll(Arrays.asList("save", "saveDir"), "The directory of save")
                                 .withRequiredArg()
+                                .required()
                                 .ofType(File.class);
-                optParser.accepts("plugDir", "The directory of plugins") // Plugins dir
+                optParser.acceptsAll(Arrays.asList("plug", "plugin", "plugDir"), "The directories of plugins")
                                 .withRequiredArg()
+                                .required()
+                                .ofType(File.class)
+                                .withValuesSeparatedBy(';');
+                optParser.acceptsAll(Arrays.asList("conf", "configuration", "confDir"), "The directory of configs")
+                                .withRequiredArg()
+                                .required()
                                 .ofType(File.class);
-                optParser.accepts("confDir", "The directory of configs") // Configuration dir
+                optParser.acceptsAll(Arrays.asList("repo", "report", "repoDir"), "The directory of reports")
                                 .withRequiredArg()
-                                .ofType(File.class);
-                optParser.accepts("repoDir", "The directory of reports") // Report dir
-                                .withRequiredArg()
+                                .required()
                                 .ofType(File.class);
                 ////////////////
-                optParser.accepts("charset", "The standard charset of this")
+                optParser.acceptsAll(Arrays.asList("charset", "encoding"), "The standard charset/encoding of this")
                                 .withOptionalArg()
                                 .defaultsTo("utf-8")
                                 .ofType(String.class);
@@ -47,12 +54,14 @@ public final class Main {
                                 .defaultsTo(String.format("REPORT %d.log", System.currentTimeMillis()))
                                 .ofType(String.class);
                 ////////////////
-                optParser.accepts("username", "The username")
+                optParser.acceptsAll(Arrays.asList("username", "name"), "The username")
                                 .withOptionalArg()
                                 .ofType(String.class);
                 optParser.accepts("uuid", "The uuid")
                                 .withRequiredArg()
                                 .ofType(String.class);
+                optParser.acceptsAll(Arrays.asList("h", "help"))
+                                .forHelp();
 
                 optSet = optParser.parse(args);
 
@@ -66,8 +75,8 @@ public final class Main {
                 LOGGER.debug(Arrays.toString(args)); // Get args
                 LOGGER.info("Game language: " + meta.LANGUAGE); // Get language
 
-                plugin.fireEvent(new Event("GTInit"));
-                plugin.fireEvent(new Event("GameLogicInit"));
+                Events.fireEvent(new Event("GTInit"));
+                Events.fireEvent(new Event("GameLogicInit"));
 
         }
 }

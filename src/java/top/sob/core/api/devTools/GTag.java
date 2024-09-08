@@ -1,14 +1,21 @@
 package top.sob.core.api.devTools;
 
-import java.util.*;
+import java.util.Objects;
 
 import com.google.gson.Gson;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.InputStreamReader;
 
 /**
  * A tag tree node, the node could be the root of the tree, a normal node or a
- * leaf node, it could be telled with the functions {@link #} and {@link #}.
+ * leaf node, it could be telled with the functions {@link #isNode()},
+ * {@link #isRoot()} and {@link #isRoot()}.
  */
 public class GTag<T> {
 
@@ -83,6 +90,24 @@ public class GTag<T> {
      */
     public GTag<?>[] getChildren() {
         return children;
+    }
+
+    /**
+     * Gets the child of the tag, except it works more like finding an element from
+     * a tree graph.
+     * <p>
+     * Let the argument {@code indexes} be {0, 2, 1}, then it will return this tag`s
+     * 1st child`s 3rd child`s 2nd child.
+     * 
+     * @param indexes The index array of the requested child.
+     * @return See above.
+     */
+    public GTag<?> getChild(int... indexes) {
+        GTag<?> tag = this;
+        for (int i : indexes) {
+            tag = tag.getChildren()[i];
+        }
+        return tag;
     }
 
     /**

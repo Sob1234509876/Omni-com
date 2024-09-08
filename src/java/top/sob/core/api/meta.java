@@ -1,10 +1,13 @@
 package top.sob.core.api;
 
-import java.io.*;
-import java.net.*;
-import java.nio.charset.*;
+import java.io.File;
+import java.net.URI;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.stream.Stream;
 
-import top.sob.core.*;
+import top.sob.core.util;
+import top.sob.core.Main;
 
 /**
  * The game meta datas, e.x : dafault encoding
@@ -49,7 +52,7 @@ public final class meta {
     /** The URI for the configs dir */
     public static final URI CONFIGS_URI;
     /** The URI for the plugins dir */
-    public static final URI PLUGINS_URI;
+    public static final URI[] PLUGINS_URI;
     /** The URI for the reports dir */
     public static final URI REPORTS_URI;
     /** The URI for the report file */
@@ -65,7 +68,13 @@ public final class meta {
 
         DEF_CHARSET = Charset.forName(((String) (Main.optSet.valueOf("charset"))));
         CONFIGS_URI = ((File) (Main.optSet.valueOf("confDir"))).toURI();
-        PLUGINS_URI = ((File) (Main.optSet.valueOf("plugDir"))).toURI();
+        var tmp = Stream.of((File[]) (Main.optSet.valueOf("plugDir")));
+        var lst = new ArrayList<URI>();
+        for (File file : tmp.toList()) {
+            lst.add(file.toURI());
+        }
+        PLUGINS_URI = (URI[])(lst.toArray());
+
         REPORTS_URI = ((File) (Main.optSet.valueOf("repoDir"))).toURI();
         SAVES_URI = ((File) (Main.optSet.valueOf("saveDir"))).toURI();
         REPORT_URI = new File(REPORTS_URI.getPath(), ((String) (Main.optSet.valueOf("reportName"))))

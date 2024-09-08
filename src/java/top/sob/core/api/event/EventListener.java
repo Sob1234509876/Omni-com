@@ -9,7 +9,7 @@ public interface EventListener extends java.util.EventListener {
 
     /**
      * This method is been used when the listener had received an event that comes
-     * from the data bus or the method {@link plugin}.
+     * from the data bus or the method {@link Events}.
      * 
      * @param event The event.
      */

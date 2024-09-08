@@ -1,7 +1,8 @@
 package top.sob.core.api.devTools;
 
-import java.math.*;
-import java.util.function.*;
+import java.math.BigInteger;
+import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * A new game instance, use for storing inventory data or others. Similar to
@@ -21,27 +22,47 @@ public class GInstance {
     protected final Function<BigInteger[], String> GetStringFun;
 
     /**
-     * Creates a new instance of a game type with the given tag.
      * 
-     * @param tagTreeRoot The given tag.
-     * @param gType       The given type.
+     * Creates a new instance of the given type, but with a different function to
+     * represent the amount of items and some tags that carry information.
+     * 
+     * @param tagTreeRoot The root of the tags.
+     * @param gType       The type.
+     * @param fun         The function to represent the amount of item.
      */
     public GInstance(GTag<?> tagTreeRoot, GType gType, Function<BigInteger[], String> fun) {
+
+        Objects.requireNonNull(fun);
+
         this.tagTreeRoot = tagTreeRoot;
         this.gType = gType;
         this.GetStringFun = fun;
     }
 
     /**
-     * Creates a new instance of a game type.
+     * Creates a new instance of the given type, but with a different function to
+     * represent the amount of items. Equivalent to
      * 
-     * @param gType The given type.
+     * <pre>{@code
+     * GInstance(null, gType, fun);
+     * }</pre>
+     * 
+     * @param gType The type.
+     * @param fun   The function to represent the amount of item.
      */
     public GInstance(GType gType, Function<BigInteger[], String> fun) {
         this(null, gType, fun);
     }
 
-    // TODO: This doc
+    /**
+     * Creates a new instance of the given type, equivalent to
+     * 
+     * <pre>{@code
+     * GInstance(gType, (amount) -> String.format("%s whole %s fraction", amount[0], amount[1]));
+     * }</pre>
+     * 
+     * @param gType The type.
+     */
     public GInstance(GType gType) {
         this(gType, (amount) -> String.format("%s whole %s fraction", amount[0], amount[1]));
     }
