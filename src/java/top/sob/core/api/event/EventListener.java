@@ -8,11 +8,11 @@ package top.sob.core.api.event;
 public interface EventListener extends java.util.EventListener {
 
     /**
-     * This method is been used when the listener had received an event that comes
+     * This method has been used when the listener had received an event that comes
      * from the data bus or the method {@link Events}.
-     * 
+     *
      * @param event The event.
      */
-    public void act(Event event);
+    void act(Event event);
 
 }

@@ -1,6 +1,7 @@
 # Ignore .*
 .gradle
 .vscode
+.idea
 
 # Ignore Gradle build output directory
 build

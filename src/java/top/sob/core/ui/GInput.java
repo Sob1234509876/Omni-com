@@ -15,7 +15,7 @@ public class GInput extends JTextField {
     private boolean Has_Text = false;
     private volatile String Submit_Text;
 
-    private static final String NO_STR = new String(); // LOL
+    private static final String NO_STR = ""; // LOL
 
     /**
      * A key listener, listens for the user`s keys and changes the submit text when
@@ -32,7 +32,7 @@ public class GInput extends JTextField {
 
                 if (GInput.this.Has_Text) {
                     GInput.this.Submit_Text = getText();
-                } else if (!GInput.this.Has_Text) {
+                } else {
                     GInput.this.Submit_Text = NO_STR;
                 }
                 setText(NO_STR);
@@ -83,7 +83,7 @@ public class GInput extends JTextField {
     /**
      * Constructs a <code>GInput</code> with the enabled text modified. The disabled
      * text is set to "~".
-     * 
+     *
      * @param enable_text the enable text
      */
     public GInput(String enable_text) {
@@ -93,7 +93,7 @@ public class GInput extends JTextField {
     /**
      * Constructs a <code>GInput</code> with the enabled text and disabled text
      * modified.
-     * 
+     *
      * @param enable_text  the enabled text
      * @param disable_text the disabled text
      */
@@ -106,9 +106,9 @@ public class GInput extends JTextField {
     }
 
     /**
-     * Gets the submitted text from the user. If the user hadn`t submitted anything
-     * or the submit text had been resetted, it returns a null pointer.
-     * 
+     * Gets the submitted text from the user. If the user had not submitted anything
+     * or the submit text had been reset, it returns a null pointer.
+     *
      * @return the submitted text
      */
     public String getSubmitText() {
@@ -125,8 +125,8 @@ public class GInput extends JTextField {
 
     /**
      * Waits until the user submits a string. It`s check-rate is 1000hz (or every
-     * milisecond it checks for once)
-     * 
+     * millisecond it checks for once)
+     *
      * @return the submitted string.
      * @see #waitAndGetSubmit(int)
      */
@@ -136,18 +136,17 @@ public class GInput extends JTextField {
 
     /**
      * Waits until the user submits a string. It checks for the change of the submit
-     * text every <code>milis</code> miliseconds.
-     * 
-     * @param milis the check-rate
+     * text every <code>millis</code> milliseconds.
+     *
+     * @param millis the check-rate
      * @return the submitted string.
-     * @throws InterruptedException when this thread been interrupted.
      */
-    public String waitAndGetSubmit(int milis) {
+    public String waitAndGetSubmit(int millis) {
         resetSubmitText(); // Dummy prevention
         while (Submit_Text == null) {
             try {
-                Thread.sleep(milis);
-            } catch (Exception e) {
+                Thread.sleep(millis);
+            } catch (Exception ignored) {
             }
         }
 
@@ -158,7 +157,7 @@ public class GInput extends JTextField {
 
     /**
      * Sets the new submit key.
-     * 
+     *
      * @param o the new submission key
      */
     public void setSubmitKey(int o) {
@@ -169,7 +168,7 @@ public class GInput extends JTextField {
 
     /**
      * Sets the new enable text.
-     * 
+     *
      * @param o the new enable text
      */
     public void setEnableText(String o) {
@@ -180,7 +179,7 @@ public class GInput extends JTextField {
 
     /**
      * Sets the new disable text.
-     * 
+     *
      * @param o the new disable text
      */
     public void setDisableText(String o) {

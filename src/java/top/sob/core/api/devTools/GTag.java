@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.google.gson.Gson;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
@@ -14,25 +13,31 @@ import java.io.InputStreamReader;
 
 /**
  * A tag tree node, the node could be the root of the tree, a normal node or a
- * leaf node, it could be telled with the functions {@link #isNode()},
+ * leaf node, it could be told with the functions {@link #isNode()},
  * {@link #isRoot()} and {@link #isRoot()}.
  */
 public class GTag<T> {
 
-    /** The value of this tag node. */
+    /**
+     * The value of this tag node.
+     */
     protected T value;
-    /** The parent of this node tag. */
+    /**
+     * The parent of this node tag.
+     */
     protected GTag<?> parent;
-    /** The children of this node tag. */
+    /**
+     * The children of this node tag.
+     */
     protected GTag<?>[] children;
 
     /**
      * Tells that is this tag a root tag node, equivalent to
-     * 
+     *
      * <pre>{@code
      * Objects.isNull(parent);
      * }</pre>
-     * 
+     *
      * @return Is this a root node tag.
      */
     public boolean isRoot() {
@@ -41,11 +46,11 @@ public class GTag<T> {
 
     /**
      * Tells that is this tag a leaf tag node, equivalent to
-     * 
+     *
      * <pre>{@code
      * Objects.isNull(children) || children.length == 0;
      * }</pre>
-     * 
+     *
      * @return Is this a leaf node tag.
      */
     public boolean isLeaf() {
@@ -54,12 +59,12 @@ public class GTag<T> {
 
     /**
      * Tells that is this tag a normal node of a tag "tree", equivalent to
-     * 
+     *
      * <pre>{@code
      *  !(isLeaf() || isRoot());
      * }</pre>
-     * 
-     * @return
+     *
+     * @return Is it a node
      */
     public boolean isNode() {
         return !(isLeaf() || isRoot());
@@ -67,7 +72,7 @@ public class GTag<T> {
 
     /**
      * Gets the value of this node.
-     * 
+     *
      * @return The value of this node.
      */
     public T getValue() {
@@ -76,7 +81,7 @@ public class GTag<T> {
 
     /**
      * Gets the parent of this node.
-     * 
+     *
      * @return The parent of this node.
      */
     public GTag<?> getParent() {
@@ -85,7 +90,7 @@ public class GTag<T> {
 
     /**
      * Gets the children of this node.
-     * 
+     *
      * @return The children of this node.
      */
     public GTag<?>[] getChildren() {
@@ -98,7 +103,7 @@ public class GTag<T> {
      * <p>
      * Let the argument {@code indexes} be {0, 2, 1}, then it will return this tag`s
      * 1st child`s 3rd child`s 2nd child.
-     * 
+     *
      * @param indexes The index array of the requested child.
      * @return See above.
      */
@@ -112,7 +117,7 @@ public class GTag<T> {
 
     /**
      * Sets the value of this node.
-     * 
+     *
      * @param value The new value.
      * @return This tag.
      */
@@ -123,7 +128,7 @@ public class GTag<T> {
 
     /**
      * Sets the parent of this node.
-     * 
+     *
      * @param parent The new parent.
      * @return This tag.
      */
@@ -134,7 +139,7 @@ public class GTag<T> {
 
     /**
      * Sets the children of this node.
-     * 
+     *
      * @param children The new children.
      * @return This tag.
      */
@@ -143,15 +148,15 @@ public class GTag<T> {
         return this;
     }
 
-    public static GTag<Void> load(String file) throws FileNotFoundException, IOException {
+    public static GTag<Void> load(String file) throws IOException {
         return load(new File(file));
     }
 
-    public static GTag<Void> load(File file) throws FileNotFoundException, IOException {
+    public static GTag<Void> load(File file) throws IOException {
         return load(new FileInputStream(file));
     }
 
-    public static GTag<Void> load(InputStream stream) throws IOException {
+    public static GTag<Void> load(InputStream stream) {
         return load(new InputStreamReader(stream));
     }
 

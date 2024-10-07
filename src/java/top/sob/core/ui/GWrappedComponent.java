@@ -22,16 +22,26 @@ public abstract class GWrappedComponent extends JPanel {
     public final static int DEF_WIDTH = 300;
     public final static int DEF_HEIGHT = 350;
 
-    /** Label to put stuff */
+    /**
+     * Label to put stuff
+     */
     protected final JPanel buttonPanel = new JPanel();
-    /** Label to put information */
+    /**
+     * Label to put information
+     */
     protected final JPanel contentPanel = new JPanel();
 
-    /** The text to the page currently on */
+    /**
+     * The text to the page currently on
+     */
     protected final JTextField pageText = new JTextField();
-    /** The button to turn to the last page */
+    /**
+     * The button to turn to the last page
+     */
     protected final JButton rightPageButton = new JButton(">");
-    /** The button to turn to the next page */
+    /**
+     * The button to turn to the next page
+     */
     protected final JButton leftPageButton = new JButton("<");
 
     // Some layout stuff
@@ -43,14 +53,18 @@ public abstract class GWrappedComponent extends JPanel {
      * {@link #DEF_PAGE_FORMAT}
      */
     protected String pageFormat;
-    /** The amount of pages */
+    /**
+     * The amount of pages
+     */
     protected int pageAmount;
-    /** The current page on */
+    /**
+     * The current page on
+     */
     protected int currentPage;
 
     /**
      * Creates a wrapped component with {@link #DEF_PAGE_AMOUNT} amount of pages.
-     * 
+     *
      * @see #GWrappedComponent(int)
      */
     public GWrappedComponent() {
@@ -60,7 +74,7 @@ public abstract class GWrappedComponent extends JPanel {
     /**
      * Creates a wrapped component with the given amount of pages. The current page
      * will be set to the last page.
-     * 
+     *
      * @param pageAmount The amount of pages in this component
      * @see #GWrappedComponent(int, int)
      */
@@ -71,8 +85,8 @@ public abstract class GWrappedComponent extends JPanel {
     /**
      * Creates a wrapped component with the given amount of pages. The current page
      * will be set to the given page.
-     * 
-     * @param pageAmount The aount of pages in this component
+     *
+     * @param pageAmount The amount of pages in this component
      * @param defPage    The default page currently on
      * @see #GWrappedComponent(int, int, String)
      */
@@ -84,7 +98,7 @@ public abstract class GWrappedComponent extends JPanel {
      * Creates a wrapped component with the given amount of pages. Sets the format
      * of the text representing the current page on to the given argument. The
      * current page will be set to the last page.
-     * 
+     *
      * @param pageAmount The amount of pages
      * @param pageFormat The format of the text representing the current page on
      */
@@ -96,7 +110,7 @@ public abstract class GWrappedComponent extends JPanel {
      * Creates a wrapped component with the given amount of pages. Sets the format
      * of the text representing the current page on to the given argument. The
      * current page will be set to the given page.
-     * 
+     *
      * @param pageAmount The amount of pages
      * @param defPage    The default page currently on
      * @param pageFormat The format of the text representing the current page on
@@ -127,7 +141,7 @@ public abstract class GWrappedComponent extends JPanel {
         Objects.requireNonNull(pageFormat, "Page format is null");
     }
 
-    // Inits stuff.
+    // Initializes stuff.
     private void init() {
 
         addAtInit(contentPanel, BorderLayout.CENTER);
@@ -149,8 +163,8 @@ public abstract class GWrappedComponent extends JPanel {
     }
 
     /**
-     * This is not supported, if you whish to add components in this, please use
-     * 
+     * This is not supported, if you wish to add components in this, please use
+     *
      * <pre>{@code
      * GWrappedComponent.getContentLabel().add(...);
      * }</pre>
@@ -161,7 +175,7 @@ public abstract class GWrappedComponent extends JPanel {
                 "Illegal operation, use  GWrappedComponent.getContentLabel().add(...).");
     }
 
-    // Use for initalize
+    // Use for initialize
     private Component addAtInit(Component component, Object constrains) {
         super.addImpl(component, constrains, -1);
         return component;
@@ -170,7 +184,7 @@ public abstract class GWrappedComponent extends JPanel {
     /**
      * Returns the content label for adding contents and information. This thing
      * isn`t the buttons at the bottom of a default wrapped component.
-     * 
+     *
      * @return The content label
      */
     public JPanel getContentPanel() {
@@ -179,7 +193,7 @@ public abstract class GWrappedComponent extends JPanel {
 
     /**
      * Returns the button for turning the current page to the last page.
-     * 
+     *
      * @return The button
      */
     public JButton getLeftPageButton() {
@@ -188,7 +202,7 @@ public abstract class GWrappedComponent extends JPanel {
 
     /**
      * Returns the text field that shows the current page on.
-     * 
+     *
      * @return The text field
      */
     public JTextField getPageText() {
@@ -197,7 +211,7 @@ public abstract class GWrappedComponent extends JPanel {
 
     /**
      * Returns the button for turning the current page to the next page.
-     * 
+     *
      * @return The button
      */
     public JButton getRightPageButton() {

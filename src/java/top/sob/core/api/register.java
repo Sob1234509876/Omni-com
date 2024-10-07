@@ -10,11 +10,15 @@ import top.sob.core.api.devTools.GType;
  */
 public final class register {
 
-    /** No instance making */
+    /**
+     * No instance making
+     */
     private register() {
     }
 
-    /** The list of {@link GType}s. */
+    /**
+     * The list of {@link GType}s.
+     */
     public static final List<GType> GT_LIST = new LinkedList<>();
 
 }

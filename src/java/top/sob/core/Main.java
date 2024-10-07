@@ -3,7 +3,7 @@ package top.sob.core;
 import java.util.Arrays;
 import java.io.File;
 
-import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 
 import joptsimple.OptionSet;
@@ -17,14 +17,15 @@ import top.sob.core.api.event.Events;
  */
 public final class Main {
 
-        static {
-                // Some init process
-                BasicConfigurator.configure();
-        }
 
         public static final Logger LOGGER = Logger.getRootLogger();
         public static OptionSet optSet;
         static final OptionParser optParser = new OptionParser();
+
+        static {
+                // Some init process
+                LOGGER.addAppender(new ConsoleAppender(new util.DefLayout()));
+        }
 
         public static void main(String[] args) throws Throwable {
                 optParser.acceptsAll(Arrays.asList("save", "saveDir"), "The directory of save")
@@ -33,9 +34,8 @@ public final class Main {
                                 .ofType(File.class);
                 optParser.acceptsAll(Arrays.asList("plug", "plugin", "plugDir"), "The directories of plugins")
                                 .withRequiredArg()
-                                .required()
-                                .ofType(File.class)
-                                .withValuesSeparatedBy(';');
+                                .withValuesSeparatedBy(';')
+                                .ofType(File.class);
                 optParser.acceptsAll(Arrays.asList("conf", "configuration", "confDir"), "The directory of configs")
                                 .withRequiredArg()
                                 .required()

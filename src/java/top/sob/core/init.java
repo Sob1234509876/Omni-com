@@ -37,7 +37,9 @@ import top.sob.core.ui.GInfo;
  */
 public final class init {
 
-    /** A file filter that accepts files and not directories */
+    /**
+     * A file filter that accepts files and not directories
+     */
     private static class IsFileFilter implements FileFilter {
 
         public boolean accept(File file) {
@@ -45,14 +47,16 @@ public final class init {
         }
     }
 
-    /** No instance making */
+    /**
+     * No instance making
+     */
     private init() {
     }
 
     /**
      * Creating folders and stuff, checks does it need to add
      */
-    static void run0() throws IOException, ClassNotFoundException {
+    static void run0() throws IOException {
 
         final File SAVES = new File(meta.SAVES_URI);
         final File[] PLUGS = new File[meta.PLUGINS_URI.length];
@@ -66,9 +70,7 @@ public final class init {
         for (int i = 0; i < PLUGS.length; i++) {
             PLUGS[i] = new File(meta.PLUGINS_URI[i]);
         }
-        Stream.of(PLUGS).forEach((F) -> {
-            F.mkdirs();
-        });
+        Stream.of(PLUGS).forEach(File::mkdirs);
         CONFS.mkdirs();
         REPOS.mkdirs();
         // Make folder
@@ -79,27 +81,32 @@ public final class init {
                     .getClassLoader()
                     .getResourceAsStream("assets/backup/core.cfg"); // Get stream
             OutputStream OS = new FileOutputStream(CORE_CFG);
+            assert IS != null;
             OS.write(IS.readAllBytes()); // < 1kb size, your computer could handle, right?
             OS.close();
         }
-        // If this doesn`t exists then copy a default config from the jar package.
+        // If this does not exist then copy a default config from the jar package.
     }
 
     /**
-     * Inits the report file.
+     * Initializes the report file.
      */
     static void run1() throws IOException {
-        new File(meta.REPORT_URI.getPath()).createNewFile(); // Create file
+        var b = new File(meta.REPORT_URI.getPath()).createNewFile(); // Create file
         Main.LOGGER.addAppender(
                 new FileAppender(
-                        new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN),
+                        new util.DefLayout(),
                         meta.REPORT_URI.getPath())); // Add appender
+
+        if (b) {
+            Main.LOGGER.info("Report file created");
+        }
     }
 
     /**
-     * Inits the plugins.
+     * Initializes the plugins.
      */
-    static void run2() throws MalformedURLException,
+    static void run2() throws
             IOException,
             ClassNotFoundException,
             NoSuchMethodException,
@@ -109,7 +116,7 @@ public final class init {
         for (URI file : meta.PLUGINS_URI) {
             Lst.addAll(Arrays.asList(new File(file).listFiles(new IsFileFilter())));
         }
-        File[] files = (File[]) (Lst.toArray()); // Gets only the jar files.
+        File[] files = Lst.toArray(new File[0]); // Gets only the jar files.
         JarFile[] jars = new JarFile[files.length];
         String[] mainClasses = new String[files.length];
         URL[] urls = new URL[files.length];
@@ -136,7 +143,7 @@ public final class init {
         for (String string : mainClasses) {
 
             // Prevent NPE
-            if (ucl == null) {
+            if (string == null) {
                 continue;
             }
 
@@ -147,25 +154,10 @@ public final class init {
         }
         Main.LOGGER.info("------------");
 
-        // I have thought this for a whole hour
-        // the price is to cause memory leak.
-        // Ten minutes later, determination
-        // tells me for the sake of the app,
-        // I`ll need to do a sacrifise. The
-        // sacrifise is:
-
-        // ucl.close();
-
-        // Advices:
-        // Don`t add heavy plugins, light ones
-        // won`t take too much memory. (The
-        // light means there are small amount of
-        // classes)
-
     }
 
     /**
-     * Inits the ui.
+     * Initializes the ui.
      */
     static void run3() throws UnsupportedLookAndFeelException {
 

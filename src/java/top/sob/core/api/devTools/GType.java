@@ -8,18 +8,24 @@ import top.sob.core.api.register;
  */
 public class GType {
 
-    /** The name of this game type. */
+    /**
+     * The name of this game type.
+     */
     protected String name;
-    /** The description of this game type. */
+    /**
+     * The description of this game type.
+     */
     protected String description;
-    /** Flags of this game type. */
+    /**
+     * Flags of this game type.
+     */
     protected Object[] flags;
 
     /**
-     * Creates a new game type from a {@link GTemplate}. It will sets the game
+     * Creates a new game type from a {@link GTemplate}. It will set the game
      * type`s
      * name, description and flags using the template.
-     * 
+     *
      * @param temp The given template.
      */
     protected GType(GTemplate temp) {
@@ -34,10 +40,11 @@ public class GType {
      * Similar to the method {@link Class#getConstructor(Class...)}, but every game
      * type only has one constructor. The default constructor (The returned value of
      * {@link #getDefConstructor()}) has only one argument and should be a game
-     * type. The returned value is a game instance ({@link GInstance}) that is been
+     * type. The returned value is a game instance ({@link GInstance}) that is being
      * constructed through the constructor {@link GInstance#GInstance(GType)}.
-     * 
-     * @return
+     *
+     * @return Gets a default constructor if this method did not get override
+     * @see #getDefConstructor()
      */
     public GConstructor getConstructor() {
         return getDefConstructor();
@@ -59,7 +66,7 @@ public class GType {
 
     /**
      * Gets this game type`s name.
-     * 
+     *
      * @return The name.
      */
     public String getName() {
@@ -68,7 +75,7 @@ public class GType {
 
     /**
      * Gets this game type`s description.
-     * 
+     *
      * @return The description.
      */
     public String getDescription() {
@@ -77,7 +84,7 @@ public class GType {
 
     /**
      * Gets this game type`s flags.
-     * 
+     *
      * @return The flags.
      */
     public Object[] getFlags() {
