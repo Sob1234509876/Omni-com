@@ -1,0 +1,100 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven-publish'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+version = "1.2.8a-SNAPSHOT"
+
+def JUNIT_VERSION = "5.11.1"
+def JOPT_VERSION = "4.9"
+def LOG4J_VERSION = "1.2.17"
+def GSON_VERSION = '2.8.9'
+def TOML4J_VERSION = "0.7.2"
+def ANNOTATIONS_VERSION = "24.0.0"
+def GUAVA_VERSION = "33.3.1-jre"
+///////////////////////////////////////////////////////////////////////////////////
+// For compiling and running
+
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation "org.junit.jupiter:junit-jupiter:${JUNIT_VERSION}"
+
+    implementation "net.sf.jopt-simple:jopt-simple:${JOPT_VERSION}"
+    implementation "log4j:log4j:${LOG4J_VERSION}"
+    implementation "com.google.code.gson:gson:${GSON_VERSION}"
+    implementation "com.moandjiezana.toml:toml4j:${TOML4J_VERSION}"
+    implementation "org.jetbrains:annotations:${ANNOTATIONS_VERSION}"
+    implementation "com.google.guava:guava:${GUAVA_VERSION}" // Not really something i wanted
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'top.sob.core.Main'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'top.sob.core.Main',
+                'Class-Path': './'
+        )
+    }
+}
+
+run {
+    // Configures directories and the report file name
+    args '-saveDir=saves', '-plugDir=plugins', '-confDir=configs', '-repoDir=reports', '-uuid=114514'
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+// Java documents
+javadoc {
+    options {
+        encoding 'UTF-8'
+        version true
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+// Maven publish
+publishing {
+    repositories {
+        maven {
+            name = 'Github'
+            url = uri('https://maven.pkg.github.com/Sob1234509876/Omni-com')
+            credentials {
+                username = System.getenv('MAVEN_USERNAME')
+                password = System.getenv('MAVEN_PASSWORD')
+            }
+        }
+    }
+
+    // Sorry, idk what does from components.java do
+    // VSCode is crap, only supports basic syntaxes
+    publications {
+        myApp(MavenPublication) {
+            version = '1.2.8a-SNAPSHOT'
+            groupId = 'top.sob'
+            artifactId = 'core'
+            from components.java
+        }
+    }
+}

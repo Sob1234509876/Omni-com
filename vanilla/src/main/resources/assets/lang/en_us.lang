@@ -1,0 +1,28 @@
+# some gt template stuff
+[[vanilla.gt.template]]
+name = "Item"
+description = "A physical object that usually has a lower entropy, or it is usually used for producing lower entropy object with other items including energy (might only includes energy). Note that energy is a special type of item."
+
+[[vanilla.gt.template]]
+name = "Machine"
+description = "A physical object that could be used through different operations to produce new objects that have a lower entropy. Needs energy in the normal universe to produce the low entropy objects."
+
+# frame name
+[vanilla.ui.frameName]
+picFrame = "Omni com | Image"
+
+# cmd ask
+[vanilla.pre]
+paraHelp = "Help"
+help = "Not sure yet."
+cns = "Enter the name of your save."
+
+# server connection data asking
+[vanilla.pre.play]
+askMode = "Which mode are you playing? S for single-player and M for multi-player."
+
+askFile = "Enter the name of your save."
+
+askHost = "Please enter the host name."
+askPort = "Please enter the port(Default: %d)."
+askUsername = "Please enter your player name."

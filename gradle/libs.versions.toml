@@ -1,0 +1,37 @@
+[versions]
+
+junit-jupiter-v = "5.11.1"
+joptsimple-v = "4.9"
+jannotations-v = "24.0.0"
+
+log4J-v = "1.2.17"
+toml4J-v = "0.7.2"
+dom4J-v = "2.1.4"
+
+gson-v = "2.8.9"
+guava-v = "33.3.1-jre"
+
+api-v = "1.1.2"
+oshi-v = "6.6.5"
+maven-v = "3.3.0"
+
+[libraries]
+
+# Java first gen.
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter-v" }
+joptsimple = { module = "net.sf.jopt-simple:jopt-simple", version.ref = "joptsimple-v" }
+jannotations = { module = "org.jetbrains:annotations", version.ref = "jannotations-v" }
+
+# Java second gen.
+log4J = { module = "log4j:log4j", version.ref = "log4J-v" }
+toml4J = { module = "com.moandjiezana.toml:toml4j", version.ref = "toml4J-v" }
+dom4J = { module = "org.dom4j:dom4j", version.ref = "dom4J-v" }
+
+# Google
+gson = { module = "com.google.code.gson:gson", version.ref = "gson-v" }
+guava = {module = "com.google.guava:guava", version.ref = "guava-v"}
+
+# Others
+api = { module = "org.apiguardian:apiguardian-api", version.ref = "api-v"}
+oshi = {module = "com.github.oshi:oshi-core", version.ref = "oshi-v"}
+maven = {module = "org.apache.maven.shared:maven-invoker", version.ref = "maven-v"}
