@@ -1,0 +1,8 @@
+id = "Vanilla"
+MainClass = "top.sob.vanilla.Main"
+
+[desc]
+name = "The Vanilla"
+description = """
+This is the application core (not architecure core) of the game Omni Com.
+"""

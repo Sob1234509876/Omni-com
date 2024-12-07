@@ -1,0 +1,96 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven-publish'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+version = "1.2.8a-SNAPSHOT"
+
+///////////////////////////////////////////////////////////////////////////////////
+// For compiling and running
+
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+
+    // Java first gen.
+    implementation libs.junit.jupiter, libs.joptsimple, libs.jannotations
+
+    // Java second gen.
+    implementation libs.log4J, libs.toml4J, libs.dom4J
+
+    // Google
+    implementation libs.gson, libs.guava
+
+    // Others
+    implementation libs.api, libs.oshi, libs.maven
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'top.sob.core.Main'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'top.sob.core.Main',
+                'Class-Path': './'
+        )
+    }
+}
+
+run {
+    // Configures directories and the report file name
+    args '-saveDir=saves', '-plugDir=plugins', '-confDir=configs', '-repoDir=reports', '-uuid=114514'
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+// Java documents
+javadoc {
+    options {
+        encoding 'UTF-8'
+        version true
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+// Maven publish
+publishing {
+    repositories {
+        maven {
+            name = 'Github'
+            url = uri('https://maven.pkg.github.com/Sob1234509876/Omni-com')
+            credentials {
+                username = System.getenv('MAVEN_USERNAME')
+                password = System.getenv('MAVEN_PASSWORD')
+            }
+        }
+    }
+
+    // Sorry, idk what does from components.java do
+    // VSCode is crap, only supports basic syntaxes
+    publications {
+        myApp(MavenPublication) {
+            version = '1.2.8a-SNAPSHOT'
+            groupId = 'top.sob'
+            artifactId = 'core'
+            from components.java
+        }
+    }
+}

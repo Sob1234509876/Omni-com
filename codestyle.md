@@ -1,12 +1,20 @@
-Code styles
-===
-Note that this is especially for VSCode users.
+Concepts
+---
 
-### Code format
-It is best to use the VSCode command <code>Format Document</code> for formatting the codes.
+* _Model_ - Do not confuse with the Java module. It acts as a utility architecture and has some clean interfaces.
+  Contains
+  an interface class or abstract class as it\`s invocation entrance. One can get it\`s implementation class through the
+  invocation entrance. Here are some modes one can design :
+    * _Interface Provider Mode_ - Here is the format :
+      <br>
 
-### Varibles
-It is best to not use varibles that are temporary like<pre><code>int a;</code></pre>Instead, define them before usage and use <code>public</code> or <code>protected</code> or <code>private</code> tochange there access levels.
-
-### Documents
-You don`t need to use the <code>javadoc</code> command to create Java Docs. Just add the notes to every class or public methods
+```text
+{ModelName} * Package
++ {SpecificHandlerName} * Package
+| + {SpecificHandler} * Class
+| \ ...
++ ...
++ {ModelName} * Interface
++ {ModelName}impl * Class
+\ Specific{ModelName} * Interface
+```
