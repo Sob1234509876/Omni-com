@@ -1,7 +1,7 @@
 package top.sob.core.loading;
 
 import org.jetbrains.annotations.NotNull;
-import top.sob.core.annotations.api.Plugin;
+import top.sob.core.api.Plugin;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

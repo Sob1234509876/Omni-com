@@ -1,7 +1,7 @@
 package top.sob.vanilla.models.logic;
 
-import top.sob.vanilla.api.game.trans.Operation;
-import top.sob.vanilla.api.game.trans.Response;
+import top.sob.vanilla.game.trans.Operation;
+import top.sob.vanilla.game.trans.Response;
 
 public interface Logic {
 

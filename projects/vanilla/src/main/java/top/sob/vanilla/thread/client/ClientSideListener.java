@@ -12,10 +12,10 @@ import org.apache.log4j.Logger;
 
 
 import top.sob.core.utils.UIUtils;
-import top.sob.vanilla.api.game.trans.Operation;
-import top.sob.vanilla.api.game.trans.Response;
+import top.sob.vanilla.game.trans.Operation;
+import top.sob.vanilla.game.trans.Response;
 import top.sob.vanilla.Event;
-import top.sob.vanilla.exceptions.proof.WIPException;
+import top.sob.vanilla.proof.WIPException;
 import top.sob.vanilla.ui.Graphic;
 import top.sob.vanilla.utils.HttpUtils;
 import top.sob.vanilla.utils.CommonUtils;

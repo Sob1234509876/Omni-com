@@ -3,24 +3,14 @@ package top.sob.core.utils;
 import java.awt.*;
 import java.io.*;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.moandjiezana.toml.Toml;
 import org.apache.log4j.Category;
 import org.apache.log4j.Layout;
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LocationInfo;
 import org.apache.log4j.spi.LoggingEvent;
 
@@ -30,43 +20,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import org.jetbrains.annotations.Range;
-import top.sob.core.annotations.proof.NotSafe;
-import top.sob.core.annotations.proof.Singleton;
-import top.sob.core.annotations.proof.Static;
-import top.sob.core.loaders.ResourcePath;
-import top.sob.core.Meta;
-import top.sob.core.exceptions.IncompleteJarException;
-import top.sob.core.exceptions.MalformedResourceException;
+import top.sob.core.proof.NotSafe;
+import top.sob.core.proof.Singleton;
+import top.sob.core.proof.Static;
 
 /**
  * Some utilities that might or might not be useful and used commonly. Stupid getConfig method.
  */
-@SuppressWarnings("DeprecatedIsStillUsed")
 @Static
 @API(status = API.Status.STABLE, since = "1.2.8a")
 public final class CommonUtils {
 
     private CommonUtils() {
-    }
-
-    private static final Logger LOGGER = Logger.getLogger(CommonUtils.class);
-    private static final ResourcePath RESOURCE_PATHS = new ResourcePath();
-    private static final Cache<URI, Toml> CACHE = CacheBuilder.newBuilder().build();
-
-    static {
-
-        var CONF_URL = (URL) null;
-
-        try {
-            CONF_URL = Meta.CONFIGS_URI.toURL();
-        } catch (MalformedURLException e) {
-            throw new MalformedResourceException(Meta.CONFIGS_URI + "/core.cfg");
-        } catch (NullPointerException e) {
-            throw new IncompleteJarException("");
-        }
-
-        addResourceToConfPath(CONF_URL);
-
     }
 
     @API(status = API.Status.STABLE, since = "1.2.8a")
@@ -87,121 +52,6 @@ public final class CommonUtils {
             tmp |= b0;
 
         return tmp;
-    }
-
-    @Deprecated(since = "1.2.8a")
-    @API(status = API.Status.STABLE, since = "1.2.8a")
-    public static void addResourceToConfPath(@NotNull URL url) {
-
-        Objects.requireNonNull(url);
-
-        RESOURCE_PATHS.addResource(url);
-    }
-
-    @Deprecated(since = "1.2.8a")
-    @Nullable
-    @API(status = API.Status.STABLE, since = "1.2.8a")
-    public static String getConfig(@NotNull Toml toml, @NotNull String... args) {
-
-        Objects.requireNonNull(args);
-
-        var tmp = (String) null;
-
-        try {
-            for (int i = 0; i < args.length - 1; i++) {
-                toml = toml.getTable(args[i]);
-            }
-
-            tmp = toml.getString(args[args.length - 1]);
-        } catch (Throwable throwable) {
-            LOGGER.error("Exception in CommonUtils#getConfig(Toml, String...)", throwable);
-        }
-
-        return tmp;
-
-    }
-
-    @Deprecated(since = "1.2.8a")
-    @Nullable
-    @API(status = API.Status.STABLE, since = "1.2.8a")
-    public static String getConfig(@NotNull URL url, @NotNull String... args) {
-
-        Objects.requireNonNull(url);
-        Objects.requireNonNull(args);
-
-        try {
-            return getConfig(getToml(url), args);
-        } catch (URISyntaxException e) {
-            return null;
-        }
-    }
-
-    @Deprecated(since = "1.2.8a")
-    @Nullable
-    @API(status = API.Status.STABLE, since = "1.2.8a")
-    public static String getConfig(@NotNull File file, @NotNull String... args) {
-
-        try {
-            return getConfig(file.toURI().toURL(), args);
-        } catch (MalformedURLException e) {
-
-            LOGGER.error("Exception in CommonUtils#getConfig(File, String...) :", e);
-
-            return null;
-        }
-
-    }
-
-    @Deprecated(since = "1.2.8a")
-    @Nullable
-    @API(status = API.Status.STABLE, since = "1.2.8a")
-    public static String getConfig(@NotNull String name, @NotNull String[] args) {
-
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(args);
-
-        var url = RESOURCE_PATHS.findResource(name);
-
-        if (url == null) {
-
-            LOGGER.info("Can`t find" + name + " in CommonUtils#RESOURCE_PATH.");
-
-            return null;
-        }
-
-        return getConfig(url, args);
-    }
-
-    @Deprecated(since = "1.2.8a")
-    @Nullable
-    @API(status = API.Status.STABLE, since = "1.2.8a")
-    public static String getConfig(@NotNull String... args) {
-        Objects.requireNonNull(args);
-
-        try {
-
-            return getConfig(Meta.CONFIG_URI.toURL(), args);
-
-        } catch (Throwable e) {
-
-            LOGGER.error("Exception in CommonUtils#getConfig(String...) :", e);
-
-            return null;
-        }
-
-    }
-
-    @NotNull
-    @API(status = API.Status.STABLE, since = "1.2.8a")
-    public static Toml getToml(URL url) throws URISyntaxException {
-
-        Objects.requireNonNull(url);
-
-        try {
-            return CACHE.get(url.toURI(), () -> new Toml().read(new InputStreamReader(url.openStream(), Meta.DEF_CHARSET)));
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public static <P, R> List<R> castArray(P[] array, Function<P, R> castFun) {

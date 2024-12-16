@@ -1,7 +1,7 @@
 package top.sob.vanilla.models.auth;
 
-import top.sob.core.annotations.proof.Modifiable;
-import top.sob.vanilla.api.game.trans.Operation;
+import top.sob.core.proof.Modifiable;
+import top.sob.vanilla.game.trans.Operation;
 
 import java.util.List;
 

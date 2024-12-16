@@ -1,2 +1,22 @@
+pluginManagement {
+
+    repositories {
+        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
+    }
+
+    plugins {
+        id 'org.jetbrains.kotlin.jvm' version '2.0.20'
+        id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        maven { url = uri("https://maven.aliyun.com/repository/central") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+    }
+}
+
 rootProject.name = 'Omni com'
 include "projects:core", "projects:vanilla"

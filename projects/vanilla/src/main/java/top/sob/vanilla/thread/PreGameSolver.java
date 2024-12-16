@@ -8,7 +8,7 @@ import java.net.URL;
 import org.apache.log4j.Logger;
 
 import top.sob.core.utils.UIUtils;
-import top.sob.vanilla.exceptions.proof.WIPException;
+import top.sob.vanilla.proof.WIPException;
 import top.sob.vanilla.thread.client.Client;
 import top.sob.vanilla.thread.client.ClientEventBus;
 import top.sob.vanilla.thread.server.Server;

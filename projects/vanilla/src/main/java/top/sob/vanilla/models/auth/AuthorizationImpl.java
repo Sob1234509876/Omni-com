@@ -2,7 +2,7 @@ package top.sob.vanilla.models.auth;
 
 import top.sob.vanilla.models.auth.list.BlackListSA;
 import top.sob.vanilla.models.auth.passcode.PasscodeSA;
-import top.sob.vanilla.api.game.trans.Operation;
+import top.sob.vanilla.game.trans.Operation;
 
 import java.util.LinkedList;
 import java.util.List;

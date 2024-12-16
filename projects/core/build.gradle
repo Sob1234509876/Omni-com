@@ -1,7 +1,9 @@
 plugins {
     id 'java'
+    id 'java-library'
     id 'application'
     id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 java {
@@ -14,25 +16,21 @@ version = "1.2.8a-SNAPSHOT"
 ///////////////////////////////////////////////////////////////////////////////////
 // For compiling and running
 
-
 repositories {
-    mavenCentral()
-    google()
+    maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
+    maven { url = uri("https://maven.aliyun.com/repository/central") }
+    maven { url = uri("https://maven.aliyun.com/repository/public") }
+    maven { url = uri("https://maven.aliyun.com/repository/google") }
 }
 
 dependencies {
 
-    // Java first gen.
-    implementation libs.junit.jupiter, libs.joptsimple, libs.jannotations
+    testImplementation libs.junit.jupiter
 
-    // Java second gen.
-    implementation libs.log4J, libs.toml4J, libs.dom4J
+    implementation libs.joptsimple, libs.api
 
-    // Google
-    implementation libs.gson, libs.guava
+    api libs.jannotations, libs.log4J, libs.toml4J, libs.dom4J, libs.gson, libs.guava, libs.oshi, libs.kotlin
 
-    // Others
-    implementation libs.api, libs.oshi, libs.maven
 }
 
 test {
@@ -44,18 +42,9 @@ application {
     mainClass = 'top.sob.core.Main'
 }
 
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'top.sob.core.Main',
-                'Class-Path': './'
-        )
-    }
-}
-
 run {
     // Configures directories and the report file name
-    args '-saveDir=saves', '-plugDir=plugins', '-confDir=configs', '-repoDir=reports', '-uuid=114514'
+    args '-uuid=114514'
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -94,3 +83,6 @@ publishing {
         }
     }
 }
+//kotlin {
+//    jvmToolchain(17)
+//}

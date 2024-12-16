@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-import top.sob.core.annotations.api.Plugin;
+import top.sob.core.api.Plugin;
 
 import top.sob.core.exceptions.MissingResourceException;
 import top.sob.core.utils.io.tmp.TmpFile;

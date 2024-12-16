@@ -1,8 +1,8 @@
 package top.sob.vanilla.models.serialize;
 
 import org.jetbrains.annotations.NotNull;
-import top.sob.core.annotations.proof.Creates;
-import top.sob.vanilla.annotations.proof.Provider;
+import top.sob.core.proof.Creates;
+import top.sob.vanilla.proof.Provider;
 import top.sob.vanilla.utils.misc.Builder;
 
 @SuppressWarnings("unused")

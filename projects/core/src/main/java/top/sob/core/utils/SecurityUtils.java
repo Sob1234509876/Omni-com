@@ -1,6 +1,6 @@
 package top.sob.core.utils;
 
-import top.sob.core.annotations.api.Script;
+import top.sob.core.api.Script;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

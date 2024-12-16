@@ -1,8 +1,8 @@
 package top.sob.vanilla.models.serialize;
 
 import org.jetbrains.annotations.NotNull;
-import top.sob.core.annotations.proof.Singleton;
-import top.sob.vanilla.annotations.proof.Implementation;
+import top.sob.core.proof.Singleton;
+import top.sob.vanilla.proof.Implementation;
 
 import top.sob.vanilla.utils.misc.Builder;
 

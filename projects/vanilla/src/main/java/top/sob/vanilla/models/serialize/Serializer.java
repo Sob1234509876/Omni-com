@@ -1,8 +1,8 @@
 package top.sob.vanilla.models.serialize;
 
 import org.jetbrains.annotations.NotNull;
-import top.sob.core.annotations.proof.From;
-import top.sob.vanilla.annotations.proof.Template;
+import top.sob.core.proof.From;
+import top.sob.vanilla.proof.Template;
 import top.sob.vanilla.utils.misc.Builder;
 
 import java.io.IOException;

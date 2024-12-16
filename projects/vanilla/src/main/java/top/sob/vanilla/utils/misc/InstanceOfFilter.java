@@ -6,9 +6,9 @@ import com.google.common.cache.CacheBuilder;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Predicate;
 
-public class InstanceOfFilter implements Predicate<Object> {
+public class InstanceOfFilter<T> implements Predicate<T> {
 
-    public static final Cache<Class<?>, InstanceOfFilter> CACHE = CacheBuilder.newBuilder().build();
+    public static final Cache<Class<?>, InstanceOfFilter<?>> CACHE = CacheBuilder.newBuilder().build();
 
     private final Class<?> clazz;
 
@@ -16,20 +16,22 @@ public class InstanceOfFilter implements Predicate<Object> {
         this.clazz = clazz;
     }
 
-    public static InstanceOfFilter forClass(Class<?> clazz) {
+    @SuppressWarnings("unchecked")
+    public static <T> InstanceOfFilter<T> forClass(Class<T> clazz) {
         try {
-            return CACHE.get(clazz, () -> new InstanceOfFilter(clazz));
+            return (InstanceOfFilter<T>) CACHE.get(clazz, () -> new InstanceOfFilter<>(clazz));
         } catch (ExecutionException e) {
             throw new RuntimeException("IDK why :", e);
         }
     }
 
     @Override
-    public boolean test(Object object) {
+    public boolean test(T object) {
         return clazz.isInstance(object);
     }
 
-    public Class<?> getInstanceOfType() {
-        return clazz;
+    @SuppressWarnings("unchecked")
+    public Class<? super T> getInstanceOfType() {
+        return (Class<? super T>) clazz;
     }
 }

@@ -5,8 +5,8 @@ import com.sun.net.httpserver.HttpHandler;
 
 import org.apache.log4j.Logger;
 
-import top.sob.vanilla.api.game.trans.Response;
-import top.sob.vanilla.api.game.trans.abs.GameBaseProvider;
+import top.sob.vanilla.game.trans.Response;
+import top.sob.vanilla.game.trans.abs.GameBaseProvider;
 import top.sob.vanilla.utils.CommonUtils;
 
 import java.io.IOException;

@@ -2,8 +2,8 @@ package top.sob.core.models.transform;
 
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import top.sob.core.annotations.proof.From;
-import top.sob.core.annotations.proof.Modifiable;
+import top.sob.core.proof.From;
+import top.sob.core.proof.Modifiable;
 import top.sob.core.utils.ArrayUtils;
 import top.sob.core.models.transform.file.FileST;
 

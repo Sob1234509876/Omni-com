@@ -5,6 +5,7 @@ import java.util.stream.Stream
 plugins {
     id "java"
     id "maven-publish"
+//    id 'org.jetbrains.kotlin.jvm'
 }
 
 version = "1.0a-SNAPSHOT" // This might be forgotten to be changed to released name
@@ -38,7 +39,9 @@ dependencies {
     implementation project(':projects:core')
 
     // Java first gen.
-    implementation libs.junit.jupiter, libs.joptsimple, libs.jannotations
+    testImplementation libs.junit.jupiter
+
+    implementation libs.joptsimple, libs.jannotations
 
     // Java second gen.
     implementation libs.log4J, libs.toml4J, libs.dom4J
@@ -47,7 +50,7 @@ dependencies {
     implementation libs.gson, libs.guava
 
     // Others
-    implementation libs.api, libs.oshi, libs.maven
+    implementation libs.api, libs.oshi//, libs.kotlin
 }
 
 // Java documents
@@ -136,3 +139,6 @@ publishing {
         }
     }
 }
+//kotlin {
+//    jvmToolchain(17)
+//}

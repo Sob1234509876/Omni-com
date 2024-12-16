@@ -3,7 +3,7 @@ package top.sob.vanilla.models.auth.list;
 import org.jetbrains.annotations.NotNull;
 import top.sob.core.utils.misc.Wrapper;
 import top.sob.vanilla.models.auth.SpecificAuthorization;
-import top.sob.vanilla.api.game.trans.Operation;
+import top.sob.vanilla.game.trans.Operation;
 
 import java.net.InetAddress;
 import java.util.HashSet;

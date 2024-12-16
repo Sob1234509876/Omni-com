@@ -7,7 +7,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import top.sob.core.exceptions.MissingResourceException;
-import top.sob.core.ui.GWrappedComponent;
 import top.sob.vanilla.Meta;
 
 public final class GImg extends GWrappedComponent {

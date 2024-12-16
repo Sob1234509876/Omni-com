@@ -2,13 +2,13 @@ package top.sob.vanilla.models.auth.passcode;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import top.sob.core.annotations.proof.NotSafe;
-import top.sob.vanilla.api.game.trans.pars.Passcode;
-import top.sob.vanilla.api.game.trans.pars.Username;
+import top.sob.core.proof.NotSafe;
+import top.sob.vanilla.game.trans.pars.Passcode;
+import top.sob.vanilla.game.trans.pars.Username;
 import top.sob.vanilla.models.auth.SpecificAuthorization;
-import top.sob.vanilla.api.game.trans.Operation;
-import top.sob.vanilla.api.game.trans.pars.cmds.Login;
-import top.sob.vanilla.api.game.trans.pars.cmds.Register;
+import top.sob.vanilla.game.trans.Operation;
+import top.sob.vanilla.game.trans.pars.cmds.Login;
+import top.sob.vanilla.game.trans.pars.cmds.Register;
 
 import java.net.InetAddress;
 import java.util.concurrent.TimeUnit;

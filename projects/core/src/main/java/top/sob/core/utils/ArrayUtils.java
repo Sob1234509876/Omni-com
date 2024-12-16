@@ -1,6 +1,6 @@
 package top.sob.core.utils;
 
-import top.sob.core.annotations.proof.Modifiable;
+import top.sob.core.proof.Modifiable;
 
 import java.net.MalformedURLException;
 import java.net.URI;

@@ -2,8 +2,8 @@ package top.sob.vanilla.utils;
 
 import com.sun.net.httpserver.HttpExchange;
 import org.apache.log4j.Logger;
-import top.sob.vanilla.api.game.trans.Operation;
-import top.sob.vanilla.api.game.trans.Response;
+import top.sob.vanilla.game.trans.Operation;
+import top.sob.vanilla.game.trans.Response;
 import top.sob.vanilla.models.serialize.Serializer;
 
 import java.io.IOException;

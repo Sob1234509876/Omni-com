@@ -4,8 +4,8 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.moandjiezana.toml.Toml;
 import org.jetbrains.annotations.Nullable;
-import top.sob.core.annotations.api.Plugin;
-import top.sob.core.annotations.api.Script;
+import top.sob.core.api.Plugin;
+import top.sob.core.api.Script;
 import top.sob.core.Meta;
 import top.sob.core.utils.misc.Wrapper;
 import top.sob.core.exceptions.ResourceException;
@@ -35,7 +35,7 @@ public class CoreLoader extends URLClassLoader {
         tmp.asIterator().forEachRemaining(url -> {
             try {
 
-                var tmp3 = new Toml().read(new InputStreamReader(url.openStream(), Meta.DEF_CHARSET));
+                var tmp3 = new Toml().read(new InputStreamReader(url.openStream(), Meta.getDefCharset()));
 
                 var id = tmp3.getString("id");
 

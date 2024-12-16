@@ -3,7 +3,7 @@ package top.sob.vanilla.thread.server;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.sob.vanilla.exceptions.proof.WIPException;
+import top.sob.vanilla.proof.WIPException;
 
 public class GameDaemon extends Thread {
 

@@ -2,8 +2,8 @@ package top.sob.vanilla.models.serialize.raw;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.sob.core.annotations.proof.Singleton;
-import top.sob.vanilla.annotations.proof.Instance;
+import top.sob.core.proof.Singleton;
+import top.sob.vanilla.proof.Instance;
 import top.sob.vanilla.models.serialize.Serializer;
 
 import java.io.*;
@@ -53,7 +53,7 @@ public class RawSerializer implements Serializer {
             var stream = new ObjectInputStream(new ByteArrayInputStream(bytes));
             return stream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            return null;
+            throw new RuntimeException("", e);
         }
     }
 }

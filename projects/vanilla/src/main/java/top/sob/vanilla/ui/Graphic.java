@@ -1,7 +1,6 @@
 package top.sob.vanilla.ui;
 
-import top.sob.core.ui.GOutput;
-import top.sob.core.utils.io.swing.SwingPrintWriter;
+import top.sob.core.utils.io.swing.SwingWriter;
 import top.sob.vanilla.utils.TranslationUtils;
 
 import java.awt.Color;
@@ -26,7 +25,7 @@ public final class Graphic {
     public static final String WRAPPED_TEXT = "TEXT/WRAP";
     public static final String URL_IMG = "IMG/URL";
 
-    public static final SwingPrintWriter out = new SwingPrintWriter(INFO_TEXT);
+    public static final SwingWriter out = new SwingWriter(INFO_TEXT);
 
     static {
         INFO_TEXT.setBackground(DEF_BG_COLOR);

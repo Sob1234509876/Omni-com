@@ -1,5 +1,6 @@
 package top.sob.core;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.io.File;
 
@@ -8,9 +9,10 @@ import org.apache.log4j.Logger;
 
 import joptsimple.OptionSet;
 import joptsimple.OptionParser;
-import top.sob.core.annotations.proof.Static;
+import top.sob.core.proof.Static;
 import top.sob.core.api.Plugins;
 import top.sob.core.utils.CommonUtils;
+import top.sob.core.utils.io.tmp.TmpFile;
 
 @Static
 public final class Main {
@@ -29,40 +31,14 @@ public final class Main {
 
     public static void main(String[] args) throws Throwable {
 
-        optParser.acceptsAll(Arrays.asList("save", "saveDir"), "The directory of save")
-                .withRequiredArg()
-                .required()
-                .ofType(File.class);
-        optParser.acceptsAll(Arrays.asList("plug", "plugin", "plugDir"), "The directories of plugins")
-                .withRequiredArg()
-                .withValuesSeparatedBy(';')
-                .ofType(File.class);
-        optParser.acceptsAll(Arrays.asList("conf", "configuration", "confDir"), "The directory of configs")
-                .withRequiredArg()
-                .required()
-                .ofType(File.class);
-        optParser.acceptsAll(Arrays.asList("repo", "report", "repoDir"), "The directory of reports")
-                .withRequiredArg()
-                .required()
-                .ofType(File.class);
-        ////////////////
-        optParser.acceptsAll(Arrays.asList("charset", "encoding"), "The standard charset/encoding of this")
-                .withOptionalArg()
-                .defaultsTo("utf-8")
-                .ofType(String.class);
-        optParser.accepts("reportName", "The custom report name")
-                .withOptionalArg()
-                .defaultsTo(String.format("REPORT %s.log", System.currentTimeMillis()))
-                .ofType(String.class);
-        ////////////////
-        optParser.acceptsAll(Arrays.asList("username", "name"), "The username")
-                .withOptionalArg()
-                .ofType(String.class);
-        optParser.accepts("uuid", "The uuid")
-                .withRequiredArg()
-                .ofType(String.class);
-        optParser.acceptsAll(Arrays.asList("h", "help"))
-                .forHelp();
+        optParser.acceptsAll(Arrays.asList("plug", "plugin", "plugDir"), "The directories of plugins").withRequiredArg().withValuesSeparatedBy(';').ofType(File.class);
+        optParser.acceptsAll(Arrays.asList("save", "saveDir"), "The directory of save").withOptionalArg().defaultsTo(new TmpFile("saves").getAbsolutePath()).ofType(File.class);
+        optParser.acceptsAll(Arrays.asList("conf", "configuration", "confDir"), "The directory of configs").withOptionalArg().defaultsTo(new TmpFile("configs").getAbsolutePath()).ofType(File.class);
+        optParser.acceptsAll(Arrays.asList("repo", "report", "repoDir"), "The directory of reports").withOptionalArg().defaultsTo(new TmpFile("reports").getAbsolutePath()).ofType(File.class);
+        optParser.acceptsAll(Arrays.asList("charset", "encoding"), "The standard charset/encoding of this").withOptionalArg().defaultsTo("utf-8").ofType(String.class);
+        optParser.accepts("reportName", "The custom report name").withOptionalArg().defaultsTo(String.format("REPORT %s.log", System.currentTimeMillis())).ofType(String.class);
+        optParser.acceptsAll(Arrays.asList("username", "name"), "The username").withOptionalArg().defaultsTo("Jacob").ofType(String.class);
+        optParser.acceptsAll(Arrays.asList("h", "help")).forHelp();
 
         optSet = optParser.parse(args);
 
@@ -76,7 +52,7 @@ public final class Main {
         LOGGER.debug("FINISH INIT");
         LOGGER.debug("DEBUG INFO: ");
         LOGGER.debug(Arrays.toString(args)); // Get args
-        LOGGER.info("Game language: " + Meta.LANGUAGE); // Get language
+        LOGGER.info("Game language: " + Meta.getLanguage()); // Get language
 
         LOGGER.debug("Loaded plugins: " + Arrays.toString(Plugins.getRegistered().toArray()));
 
